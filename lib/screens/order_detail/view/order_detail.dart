@@ -10,16 +10,15 @@
 
 // ignore_for_file: file_names, implementation_imports
 
-
 import 'package:bagisto_app_demo/screens/order_detail/utils/index.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   final int? orderId;
 
   const OrderDetailScreen({
-    Key? key,
+    super.key,
     this.orderId,
-  }) : super(key: key);
+  });
 
   @override
   State<OrderDetailScreen> createState() => _OrderDetailScreenState();
@@ -60,24 +59,23 @@ class _OrderDetailScreenState extends State<OrderDetailScreen>
       listener: (BuildContext context, OrderDetailBaseState state) {
         if (state is CancelOrderState) {
           if (state.status == OrderDetailStatus.fail) {
-            ShowMessage.errorNotification(state.error ?? "",context);
+            ShowMessage.errorNotification(state.error ?? "", context);
           } else if (state.status == OrderDetailStatus.success) {
             ShowMessage.successNotification(
-                state.baseModel?.message ?? "",context);
+                state.baseModel?.message ?? "", context);
             Future.delayed(const Duration(seconds: 2)).then((value) {
               Navigator.pop(context);
             });
           }
-        }
-        else if(state is ReOrderState){
-          if(state.status == OrderDetailStatus.success){
-            ShowMessage.successNotification(state.model?.message ?? "",context);
+        } else if (state is ReOrderState) {
+          if (state.status == OrderDetailStatus.success) {
+            ShowMessage.successNotification(
+                state.model?.message ?? "", context);
             Future.delayed(const Duration(seconds: 2)).then((value) {
               Navigator.pushNamed(context, cartScreen);
             });
-          }
-          else{
-            ShowMessage.errorNotification(state.model?.message ?? "",context);
+          } else {
+            ShowMessage.errorNotification(state.model?.message ?? "", context);
           }
         }
       },

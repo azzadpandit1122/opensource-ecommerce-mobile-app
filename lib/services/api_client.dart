@@ -87,7 +87,7 @@ class ApiClient {
       data.putIfAbsent(
           "graphqlErrors",
           () =>
-              (result!.exception!.graphqlErrors!.isNotEmpty
+              (result.exception!.graphqlErrors.isNotEmpty
                   ? result.exception?.graphqlErrors.first.message
                   : null) ??
               "Some this went wrong connecting to server!");

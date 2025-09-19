@@ -4,7 +4,7 @@ import '../../data_model/currency_language_model.dart';
 import '../../main.dart';
 
 class Language extends StatefulWidget {
-  const Language({Key? key}) : super(key: key);
+  const Language({super.key});
 
   @override
   State<Language> createState() => _LanguageState();
@@ -28,25 +28,25 @@ class _LanguageState extends State<Language> {
         title: Text(StringConstants.language.localized()),
         centerTitle: false,
       ),
-      body:  ListView.builder(
+      body: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: languages?.length ?? 0,
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () async {
-                GlobalData.locale = languages?[index].code?? "";
-                appStoragePref.setCustomerLanguage(languages?[index].code ?? "");
+                GlobalData.locale = languages?[index].code ?? "";
+                appStoragePref
+                    .setCustomerLanguage(languages?[index].code ?? "");
                 GlobalData.locale = appStoragePref.getCustomerLanguage();
-                appStoragePref.setLanguageName(
-                    languages?[index].name ?? "");
+                appStoragePref.setLanguageName(languages?[index].name ?? "");
                 setState(() {
                   selectedCode = languages?[index].code ?? '';
                 });
                 Hive.deleteBoxFromDisk("getCategoriesDrawerData");
                 Hive.deleteBoxFromDisk("recentProducts");
 
-                if(mounted){
+                if (mounted) {
                   RestartWidget.restartApp(context);
                   Navigator.pushNamedAndRemoveUntil(
                       context, splash, (route) => false);
@@ -59,21 +59,19 @@ class _LanguageState extends State<Language> {
                   children: [
                     languages?[index].code == selectedCode
                         ? const Icon(
-                      Icons.radio_button_checked,
-                      size: 20,
-                    )
+                            Icons.radio_button_checked,
+                            size: 20,
+                          )
                         : const Icon(
-                      Icons.radio_button_off,
-                      size: 20,
-                    ),
+                            Icons.radio_button_off,
+                            size: 20,
+                          ),
                     const SizedBox(
                       width: 14,
                     ),
                     Text(languages?[index].name ?? "",
                         style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400
-                        )),
+                            fontSize: 16, fontWeight: FontWeight.w400)),
                   ],
                 ),
               ),
@@ -81,7 +79,6 @@ class _LanguageState extends State<Language> {
           }),
     );
   }
-
 
   void getCode() {
     var selectedCode1 = appStoragePref.getCustomerLanguage();

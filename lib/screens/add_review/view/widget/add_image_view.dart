@@ -25,11 +25,7 @@ class AddImageView extends StatefulWidget {
   final AddReviewBloc? addReviewBloc;
   final List<XFile?>? images;
 
-  AddImageView({
-    Key? key,
-    this.addReviewBloc,
-    required this.images
-  }) : super(key: key);
+  const AddImageView({super.key, this.addReviewBloc, required this.images});
 
   @override
   State<AddImageView> createState() => _AddImageViewState();
@@ -47,22 +43,21 @@ class _AddImageViewState extends State<AddImageView> {
         Wrap(
           children: [
             ...?widget.images?.map((image) => Stack(
-              children: [
-                SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Image.file(File(image?.path ?? "")),
-                ),
-                IconButton(
-                  onPressed: () {
-                    widget.addReviewBloc?.add(ImagePickerEvent(isDelete: true,
-                      deleteImage: image
-                    ));
-                  },
-                  icon: const Icon(Icons.cancel_outlined),
-                ),
-              ],
-            ))
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Image.file(File(image?.path ?? "")),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        widget.addReviewBloc?.add(ImagePickerEvent(
+                            isDelete: true, deleteImage: image));
+                      },
+                      icon: const Icon(Icons.cancel_outlined),
+                    ),
+                  ],
+                ))
           ],
         ),
         if (imageFile != null) const SizedBox(height: AppSizes.spacingWide),
@@ -71,12 +66,13 @@ class _AddImageViewState extends State<AddImageView> {
           width: MediaQuery.of(context).size.width,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                    color: Theme.of(context).colorScheme.onBackground)),
-            child: Text(StringConstants.addImage.localized().toUpperCase(),
+                side:
+                    BorderSide(color: Theme.of(context).colorScheme.onSurface)),
+            child: Text(
+              StringConstants.addImage.localized().toUpperCase(),
               style: TextStyle(
                   fontSize: AppSizes.spacingLarge,
-                  color: Theme.of(context).colorScheme.onBackground),
+                  color: Theme.of(context).colorScheme.onSurface),
             ),
             onPressed: () {
               _onPressAddImage(context);
@@ -92,7 +88,7 @@ class _AddImageViewState extends State<AddImageView> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             title: Text(
               StringConstants.pleaseChoose.localized(),
             ),
@@ -140,8 +136,7 @@ class _AddImageViewState extends State<AddImageView> {
     if (imageFile != null) {
       Uint8List imageBytes = await imageFile!.readAsBytes(); //convert to bytes
       base64string = base64.encode(imageBytes);
-      widget.addReviewBloc
-          ?.add(ImagePickerEvent(pickedFile: pickedFile));
+      widget.addReviewBloc?.add(ImagePickerEvent(pickedFile: pickedFile));
     }
 
     // ignore: use_build_context_synchronously
@@ -156,8 +151,7 @@ class _AddImageViewState extends State<AddImageView> {
     if (imageFile != null) {
       Uint8List imageBytes = await imageFile!.readAsBytes(); //convert to bytes
       base64string = base64.encode(imageBytes);
-      widget.addReviewBloc
-          ?.add(ImagePickerEvent(pickedFile: pickedFile));
+      widget.addReviewBloc?.add(ImagePickerEvent(pickedFile: pickedFile));
     }
 
     if (!mounted) return;

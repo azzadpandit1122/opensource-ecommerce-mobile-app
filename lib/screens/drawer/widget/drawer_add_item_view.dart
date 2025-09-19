@@ -8,8 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/drawer/utils/index.dart';
 
 class DrawerAddItemList extends StatelessWidget {
@@ -19,8 +17,7 @@ class DrawerAddItemList extends StatelessWidget {
   final void Function()? onTap;
 
   const DrawerAddItemList(
-      {Key? key, this.headingTitle, this.subTitle, this.onTap, this.icon})
-      : super(key: key);
+      {super.key, this.headingTitle, this.subTitle, this.onTap, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,7 @@ class DrawerAddItemList extends StatelessWidget {
             height: 40,
             child: ListTile(
                 title: Text(
-             " headingTitle?.localized().toUpperCase() "?? "",
+              " headingTitle?.localized().toUpperCase() " ?? "",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 16,

@@ -9,10 +9,11 @@
  */
 
 import 'package:bagisto_app_demo/screens/order_detail/utils/index.dart';
-class ShippingAndPaymentInfo extends StatelessWidget {
-  final  OrderDetail? orderDetailModel;
 
-  const ShippingAndPaymentInfo({Key? key, this.orderDetailModel}) : super(key: key);
+class ShippingAndPaymentInfo extends StatelessWidget {
+  final OrderDetail? orderDetailModel;
+
+  const ShippingAndPaymentInfo({super.key, this.orderDetailModel});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +33,7 @@ class ShippingAndPaymentInfo extends StatelessWidget {
         const Divider(),
         const SizedBox(height: AppSizes.spacingNormal),
         Container(
-          padding: const EdgeInsets.symmetric(
-              vertical: AppSizes.spacingNormal),
+          padding: const EdgeInsets.symmetric(vertical: AppSizes.spacingNormal),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -41,15 +41,11 @@ class ShippingAndPaymentInfo extends StatelessWidget {
               if (orderDetailModel?.shippingAddress != null)
                 getShippingAddress(orderDetailModel, context),
               const SizedBox(height: AppSizes.spacingMedium),
-              Text(
-                  StringConstants.billingAddress
-                      .localized()
-                      .toUpperCase(),
+              Text(StringConstants.billingAddress.localized().toUpperCase(),
                   style: Theme.of(context).textTheme.labelLarge),
               const SizedBox(height: AppSizes.spacingNormal),
               Text(
-                (orderDetailModel?.billingAddress?.companyName ??
-                    ""),
+                (orderDetailModel?.billingAddress?.companyName ?? ""),
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onPrimary,
@@ -72,8 +68,7 @@ class ShippingAndPaymentInfo extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: AppSizes.spacingSmall),
-              _getFormattedBillingAddress(
-                  orderDetailModel!, context),
+              _getFormattedBillingAddress(orderDetailModel!, context),
               const SizedBox(height: AppSizes.spacingSmall),
               Text(
                 "${StringConstants.contact.localized()} ${orderDetailModel?.billingAddress?.phone ?? ""}",
@@ -84,8 +79,8 @@ class ShippingAndPaymentInfo extends StatelessWidget {
         ),
         if (orderDetailModel?.shippingTitle != null)
           Container(
-            padding: const EdgeInsets.symmetric(
-                vertical: AppSizes.spacingMedium),
+            padding:
+                const EdgeInsets.symmetric(vertical: AppSizes.spacingMedium),
             alignment: GlobalData.locale == "ar"
                 ? Alignment.topRight
                 : Alignment.topLeft,
@@ -93,20 +88,15 @@ class ShippingAndPaymentInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                    StringConstants.shippingMethod
-                        .localized()
-                        .toUpperCase(),
-                    style:
-                    Theme.of(context).textTheme.labelLarge),
+                Text(StringConstants.shippingMethod.localized().toUpperCase(),
+                    style: Theme.of(context).textTheme.labelLarge),
                 const SizedBox(height: AppSizes.spacingNormal),
                 Text(orderDetailModel?.shippingTitle ?? ""),
               ],
             ),
           ),
         Container(
-          padding: const EdgeInsets.symmetric(
-              vertical: AppSizes.spacingNormal),
+          padding: const EdgeInsets.symmetric(vertical: AppSizes.spacingNormal),
           alignment: GlobalData.locale == "ar"
               ? Alignment.topRight
               : Alignment.topLeft,
@@ -115,9 +105,7 @@ class ShippingAndPaymentInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                StringConstants.paymentMethod
-                    .localized()
-                    .toUpperCase(),
+                StringConstants.paymentMethod.localized().toUpperCase(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(height: AppSizes.spacingNormal),
@@ -130,6 +118,7 @@ class ShippingAndPaymentInfo extends StatelessWidget {
       ],
     );
   }
+
   _getFormattedBillingAddress(
       OrderDetail orderDetailModel, BuildContext context) {
     return Text(
@@ -180,6 +169,7 @@ class ShippingAndPaymentInfo extends StatelessWidget {
       ],
     );
   }
+
   _getFormattedAddress(OrderDetail orderDetailModel, BuildContext context) {
     return Text(
       "${orderDetailModel.shippingAddress?.address1!.replaceAll("[", "").replaceAll("]", "") ?? ""}, ${orderDetailModel.shippingAddress?.city ?? ""}, ${orderDetailModel.shippingAddress?.state ?? ""}, ${orderDetailModel.shippingAddress?.country ?? ""}, ${orderDetailModel.shippingAddress?.postcode ?? ""}",

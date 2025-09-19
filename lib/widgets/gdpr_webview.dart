@@ -30,7 +30,7 @@ class GdprWebViewState extends State<GdprWebView> {
   Future<void> _prepareCookies() async {
     final defaultCookies = appStoragePref.getCookieGet();
     final authToken =
-        appStoragePref.getCustomerToken()?.replaceFirst('Bearer ', '') ?? '';
+        appStoragePref.getCustomerToken().replaceFirst('Bearer ', '') ?? '';
     String? bagistoSession;
     for (var cookie in defaultCookies.split(';')) {
       var parts = cookie.trim().split('=');
@@ -129,11 +129,12 @@ class GdprWebViewState extends State<GdprWebView> {
                     });
                   },
                   onReceivedError: (controller, request, error) {
-                    debugPrint('Page finished loading with error : ${error.description}');
+                    debugPrint(
+                        'Page finished loading with error : ${error.description}');
                   },
                   shouldOverrideUrlLoading:
                       (controller, navigationAction) async {
-                        debugPrint('allowing navigation to $navigationAction');
+                    debugPrint('allowing navigation to $navigationAction');
                     return NavigationActionPolicy.ALLOW;
                   },
                 ),

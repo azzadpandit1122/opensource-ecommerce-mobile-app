@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import '../../data_model/checkout_save_address_model.dart';
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
@@ -47,7 +46,7 @@ class CheckoutShippingPageView extends StatefulWidget {
   Function(PaymentMethods)? paymentCallback;
 
   CheckoutShippingPageView(
-      {Key? key,
+      {super.key,
       this.billingCompanyName,
       this.billingFirstName,
       this.billingLastName,
@@ -70,9 +69,13 @@ class CheckoutShippingPageView extends StatefulWidget {
       this.shippingCity,
       this.shippingPostCode,
       this.shippingPhone,
-      this.callBack, required this.shippingId, required this.billingId, this.isDownloadable = false,
-      this.callbackNavigate, this.paymentCallback, this.useForShipping})
-      : super(key: key);
+      this.callBack,
+      required this.shippingId,
+      required this.billingId,
+      this.isDownloadable = false,
+      this.callbackNavigate,
+      this.paymentCallback,
+      this.useForShipping});
 
   @override
   State<CheckoutShippingPageView> createState() =>
@@ -92,43 +95,48 @@ class _CheckoutShippingPageViewState extends State<CheckoutShippingPageView> {
     CheckOutShippingBloc checkOutShippingBloc =
         context.read<CheckOutShippingBloc>();
     checkOutShippingBloc.add(CheckOutFetchShippingEvent(
-      billingCompanyName: widget.billingCompanyName,
-      billingFirstName: widget.billingFirstName,
-      billingLastName: widget.billingLastName,
-      billingAddress: widget.billingAddress,
-      billingEmail: widget.billingEmail,
-      billingAddress2: widget.billingAddress2,
-      billingCountry: widget.billingCountry,
-      billingState: widget.billingState,
-      billingCity: widget.billingCity,
-      billingPostCode: widget.billingPostCode,
-      billingPhone: widget.billingPhone,
-      shippingCompanyName: widget.shippingCompanyName,
-      shippingFirstName: widget.shippingFirstName,
-      shippingLastName: widget.shippingLastName,
-      shippingAddress: widget.shippingAddress,
-      shippingEmail: widget.shippingEmail,
-      shippingAddress2: widget.shippingAddress2,
-      shippingCountry: widget.shippingCountry,
-      shippingState: widget.shippingState,
-      shippingCity: widget.shippingCity,
-      shippingPostCode: widget.shippingPostCode,
-      shippingPhone: widget.shippingPhone,
-      billingId: widget.billingId,
-      shippingId: widget.shippingId,
-      useForShipping: widget.useForShipping ?? true
-    ));
+        billingCompanyName: widget.billingCompanyName,
+        billingFirstName: widget.billingFirstName,
+        billingLastName: widget.billingLastName,
+        billingAddress: widget.billingAddress,
+        billingEmail: widget.billingEmail,
+        billingAddress2: widget.billingAddress2,
+        billingCountry: widget.billingCountry,
+        billingState: widget.billingState,
+        billingCity: widget.billingCity,
+        billingPostCode: widget.billingPostCode,
+        billingPhone: widget.billingPhone,
+        shippingCompanyName: widget.shippingCompanyName,
+        shippingFirstName: widget.shippingFirstName,
+        shippingLastName: widget.shippingLastName,
+        shippingAddress: widget.shippingAddress,
+        shippingEmail: widget.shippingEmail,
+        shippingAddress2: widget.shippingAddress2,
+        shippingCountry: widget.shippingCountry,
+        shippingState: widget.shippingState,
+        shippingCity: widget.shippingCity,
+        shippingPostCode: widget.shippingPostCode,
+        shippingPhone: widget.shippingPhone,
+        billingId: widget.billingId,
+        shippingId: widget.shippingId,
+        useForShipping: widget.useForShipping ?? true));
     return BlocConsumer<CheckOutShippingBloc, CheckOutShippingBaseState>(
       listener: (BuildContext context, CheckOutShippingBaseState state) {
-        if(state is CheckOutFetchShippingState){
-          if(state.checkOutSaveAddressModel?.jumpToSection == "payment" && widget.paymentCallback != null){
-            PaymentMethods payment = PaymentMethods(paymentMethods: state.checkOutSaveAddressModel?.paymentMethods,
+        if (state is CheckOutFetchShippingState) {
+          if (state.checkOutSaveAddressModel?.jumpToSection == "payment" &&
+              widget.paymentCallback != null) {
+            PaymentMethods payment = PaymentMethods(
+                paymentMethods: state.checkOutSaveAddressModel?.paymentMethods,
                 cart: state.checkOutSaveAddressModel?.cart);
             widget.paymentCallback!(payment);
           }
-          if((state.checkOutSaveAddressModel?.shippingMethods ?? []).isEmpty && widget.isDownloadable==false){
-            ShowMessage.showNotification(StringConstants.failed.localized(), StringConstants.noShippingMsg.localized(),
-                Colors.red, const Icon(Icons.cancel_outlined));
+          if ((state.checkOutSaveAddressModel?.shippingMethods ?? []).isEmpty &&
+              widget.isDownloadable == false) {
+            ShowMessage.showNotification(
+                StringConstants.failed.localized(),
+                StringConstants.noShippingMsg.localized(),
+                Colors.red,
+                const Icon(Icons.cancel_outlined));
           }
         }
         // if(widget.isDownloadable){
@@ -159,7 +167,6 @@ class _CheckoutShippingPageViewState extends State<CheckoutShippingPageView> {
       return SkeletonLoader(
           highlightColor: Theme.of(context).highlightColor,
           baseColor: Theme.of(context).scaffoldBackgroundColor,
-
           builder: Container(
               height: 100,
               padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
@@ -186,7 +193,8 @@ class _CheckoutShippingPageViewState extends State<CheckoutShippingPageView> {
             ),
             Card(
               elevation: 2,
-              margin: const EdgeInsets.fromLTRB(0, AppSizes.spacingNormal, 0, AppSizes.spacingSmall),
+              margin: const EdgeInsets.fromLTRB(
+                  0, AppSizes.spacingNormal, 0, AppSizes.spacingSmall),
               child: RadioButtonGroup(
                   activeColor: Theme.of(context).colorScheme.onPrimary,
                   key: const Key('Shipping'),

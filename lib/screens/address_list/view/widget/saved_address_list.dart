@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/address_list/utils/index.dart';
 
 class SavedAddressList extends StatelessWidget {
@@ -16,8 +15,12 @@ class SavedAddressList extends StatelessWidget {
   final VoidCallback? reload;
   final bool isFromDashboard;
   final AddressBloc? addressBloc;
-  const SavedAddressList({Key? key, this.addressModel, this.reload, this.isFromDashboard = false,
-    this.addressBloc}) : super(key: key);
+  const SavedAddressList(
+      {super.key,
+      this.addressModel,
+      this.reload,
+      this.isFromDashboard = false,
+      this.addressBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,8 @@ class SavedAddressList extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.spacingMedium),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSizes.spacingMedium),
                   child: Text(
                     "${addressModel?.firstName ?? ""} ${addressModel?.lastName ?? ""}",
                     maxLines: 3,
@@ -46,29 +50,36 @@ class SavedAddressList extends StatelessWidget {
                   ),
                 ),
               ),
-              if(isFromDashboard == false)
-              GestureDetector(
-                child: Container(
-                  padding: const EdgeInsets.only(left: AppSizes.spacingMedium, right: AppSizes.spacingMedium,
-                  top: 8, bottom: 8),
-                  margin: const EdgeInsets.only(right: AppSizes.spacingMedium),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.onPrimary
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                    color: (addressModel?.isDefault ?? true) ?
-                    Theme.of(context).brightness==Brightness.light ? AppColors.lightWhiteColor : null : null
+              if (isFromDashboard == false)
+                GestureDetector(
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        left: AppSizes.spacingMedium,
+                        right: AppSizes.spacingMedium,
+                        top: 8,
+                        bottom: 8),
+                    margin:
+                        const EdgeInsets.only(right: AppSizes.spacingMedium),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                        borderRadius: BorderRadius.circular(16),
+                        color: (addressModel?.isDefault ?? true)
+                            ? Theme.of(context).brightness == Brightness.light
+                                ? AppColors.lightWhiteColor
+                                : null
+                            : null),
+                    child: Text((addressModel?.isDefault ?? true)
+                        ? StringConstants.defaultAddress.localized()
+                        : StringConstants.setDefault.localized()),
                   ),
-                  child: Text((addressModel?.isDefault ?? true) ? StringConstants.defaultAddress.localized()
-                      : StringConstants.setDefault.localized()),
-                ),
-                onTap: (){
-                  if(addressModel?.isDefault == false){
-                    addressBloc.add(SetDefaultAddressEvent(addressModel?.id ?? "0"));
-                  }
-                },
-              )
+                  onTap: () {
+                    if (addressModel?.isDefault == false) {
+                      addressBloc
+                          .add(SetDefaultAddressEvent(addressModel?.id ?? "0"));
+                    }
+                  },
+                )
             ],
           ),
           const SizedBox(
@@ -118,7 +129,9 @@ class SavedAddressList extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, addAddressScreen,
                               arguments: AddressNavigationData(
-                                  isEdit: true, addressModel: addressModel, isCheckout: false))
+                                  isEdit: true,
+                                  addressModel: addressModel,
+                                  isCheckout: false))
                           .then((value) {
                         if (reload != null) {
                           reload!();
@@ -126,8 +139,8 @@ class SavedAddressList extends StatelessWidget {
                       });
                     },
                     child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: AppSizes.spacingMedium),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.spacingMedium),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -179,7 +192,7 @@ class SavedAddressList extends StatelessWidget {
                         ),
                         Text(
                           StringConstants.remove.localized(),
-                          style:Theme.of(context).textTheme.labelMedium,
+                          style: Theme.of(context).textTheme.labelMedium,
                         )
                       ],
                     ),
@@ -216,8 +229,7 @@ class SavedAddressList extends StatelessWidget {
             TextButton(
                 onPressed: () {
                   Navigator.of(context, rootNavigator: true).pop();
-                  addressBloc.add(
-                      RemoveAddressEvent(addressModel?.id ?? ""));
+                  addressBloc.add(RemoveAddressEvent(addressModel?.id ?? ""));
                 },
                 child: Text(StringConstants.yes.localized(),
                     style: Theme.of(context).textTheme.bodyMedium))
@@ -233,8 +245,8 @@ class SavedAddressList extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(AppSizes.spacingMedium, 0, 0, 0),
       child: Text(
         "${addressModel?.address1!.replaceAll("[", "").replaceAll("]", "") ?? ""}, ${addressModel?.city ?? ""}, ${addressModel?.stateName ?? (addressModel?.state ?? "")}, ${addressModel?.countryName ?? (addressModel?.country ?? "")}, ${addressModel?.postcode ?? ""}",
-        style: TextStyle(
-            fontSize: AppSizes.spacingLarge, color: Colors.grey[600]),
+        style:
+            TextStyle(fontSize: AppSizes.spacingLarge, color: Colors.grey[600]),
       ),
     );
   }

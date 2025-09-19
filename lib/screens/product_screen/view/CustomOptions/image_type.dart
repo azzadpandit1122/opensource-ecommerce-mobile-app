@@ -10,11 +10,9 @@
 
 // ignore_for_file: file_names, must_be_immutable
 
-
 import '../../../../data_model/product_model/product_screen_model.dart';
 import '../../../../widgets/image_view.dart';
 import '../../../../utils/index.dart';
-
 
 class ImageType extends StatefulWidget {
   Attributes? variation;
@@ -25,13 +23,12 @@ class ImageType extends StatefulWidget {
   List? optionArray;
 
   ImageType(
-      {Key? key,
+      {super.key,
       this.variation,
       this.callback,
       this.options,
       this.seletedId,
-      this.optionArray})
-      : super(key: key);
+      this.optionArray});
 
   @override
   State<StatefulWidget> createState() => _ImageTypeState();
@@ -48,8 +45,7 @@ class _ImageTypeState extends State<ImageType> {
                 return GestureDetector(
                     onTap: () {
                       if (widget.callback != null) {
-                        widget.callback!(
-                            int.parse(widget.variation?.id ?? "") ,
+                        widget.callback!(int.parse(widget.variation?.id ?? ""),
                             int.parse(item.id ?? ''));
                       }
                     },
@@ -64,7 +60,8 @@ class _ImageTypeState extends State<ImageType> {
                         ),
                       ),
                       child: ImageView(
-                        url: StringConstants.imageUrl + (item.swatchValue ?? ''),
+                        url:
+                            StringConstants.imageUrl + (item.swatchValue ?? ''),
                       ),
                     ));
               }).toList() ??

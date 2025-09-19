@@ -15,8 +15,7 @@ class BundleOptionsView extends StatefulWidget {
   final Function(List)? callBack;
   final List<BundleOptions>? options;
 
-  const BundleOptionsView({Key? key, this.options, this.callBack})
-      : super(key: key);
+  const BundleOptionsView({super.key, this.options, this.callBack});
 
   @override
   State<StatefulWidget> createState() {
@@ -58,7 +57,6 @@ class _BundleOptionsViewState extends State<BundleOptionsView> {
               (item.product?.priceHtml?.finalPrice ?? "").isEmpty
                   ? (item.product?.priceHtml?.regularPrice ?? "0")
                   : (item.product?.priceHtml?.finalPrice ?? "0");
-
 
           double price = double.parse(formattedPrice) * (item.qty ?? 1);
           selectedPrices[element.id ?? ""] = price;
@@ -358,13 +356,13 @@ class _BundleOptionsViewState extends State<BundleOptionsView> {
     BundleOptionProducts? defaultItem;
     String? defaultProductName = "";
     String? dropDownName;
-    var product;
+    BundleOptionProducts? product;
     if (!dropDownChange) {
       dropDownName = "";
     }
 
     String selectedProductAmount = '';
-    var bundleOption;
+    BundleOptionProducts? bundleOption;
 
     option?.bundleOptionProducts
             ?.map((e) => {
@@ -433,18 +431,31 @@ class _BundleOptionsViewState extends State<BundleOptionsView> {
                 (bundleData['bundleOptionQuantity'] as Map<String, dynamic>?)?[
                     option?.id.toString() ?? ""] = product?.qty.toString();
 
+                // double selectedAmount =
+                //     ((selectedProductQty.containsKey(selectedProductName)
+                //             ? selectedProductQty[selectedProductName]
+                //             : product?.qty ?? 1) *
+                //         double.parse(
+                //             product?.product?.priceHtml?.finalPrice ?? "0"));
                 double selectedAmount =
-                    ((selectedProductQty.containsKey(selectedProductName)
-                            ? selectedProductQty[selectedProductName]
-                            : product?.qty ?? 1) *
+                    (selectedProductQty.containsKey(selectedProductName)
+                                ? (selectedProductQty[selectedProductName] ?? 1)
+                                : (product?.qty ?? 1))
+                            .toDouble() *
                         double.parse(
-                            product?.product?.priceHtml?.finalPrice ?? "0"));
+                            product?.product?.priceHtml?.finalPrice ?? "0");
 
+                // addDataToMap(
+                //     option?.id?.toString() ?? "",
+                //     product.productId ?? "0",
+                //     selectedAmount,
+                //     product?.qty ?? 1);
                 addDataToMap(
-                    option?.id?.toString() ?? "",
-                    product.productId ?? "0",
-                    selectedAmount,
-                    product?.qty ?? 1);
+                  option?.id?.toString() ?? "",
+                  product?.productId ?? "0",
+                  selectedAmount,
+                  product?.qty ?? 1,
+                );
 
                 selectedProductAmount = selectedAmount.toString();
                 dropDownTotal = selectedAmount;
@@ -474,7 +485,6 @@ class _BundleOptionsViewState extends State<BundleOptionsView> {
                       ?.toString() ??
                   '',
               callBack: (qty) {
-
                 double selectedAmount = ((qty) *
                     double.parse(selectedRadio[option?.id ?? "0"]
                             ?.product

@@ -8,10 +8,7 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/downloadable_products/utils/index.dart';
-
 
 class DownloadProductItem extends StatelessWidget {
   final int available;
@@ -20,16 +17,14 @@ class DownloadProductItem extends StatelessWidget {
   final NewProducts? product;
 
   const DownloadProductItem(
-      {Key? key,
+      {super.key,
       this.linkPurchases,
       this.downloadableProductsBloc,
       required this.available,
-      this.product})
-      : super(key: key);
+      this.product});
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       elevation: 4,
       child: Row(
@@ -42,13 +37,16 @@ class DownloadProductItem extends StatelessWidget {
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(AppSizes.spacingNormal)),
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(AppSizes.spacingNormal)),
                 ),
                 child: Stack(
                   children: [
-                    ((linkPurchases?.orderItem?.product?.images?.length ?? 0) > 0)
+                    ((linkPurchases?.orderItem?.product?.images?.length ?? 0) >
+                            0)
                         ? ImageView(
-                            url: linkPurchases?.orderItem?.product?.images?.firstOrNull?.url,
+                            url: linkPurchases
+                                ?.orderItem?.product?.images?.firstOrNull?.url,
                             width: MediaQuery.of(context).size.width / 2.9,
                           )
                         : ImageView(
@@ -84,19 +82,22 @@ class DownloadProductItem extends StatelessWidget {
                       const SizedBox(height: AppSizes.spacingNormal),
                       Text((available == 0)
                           ? StringConstants.expired.localized()
-                          : (linkPurchases?.order?.status?.toLowerCase() != StringConstants.pending.toLowerCase()
+                          : (linkPurchases?.order?.status?.toLowerCase() !=
+                                  StringConstants.pending.toLowerCase()
                               ? StringConstants.available.localized()
                               : StringConstants.pending.localized())),
                       const SizedBox(height: AppSizes.spacingNormal),
-                      Text("${StringConstants.remainingDownloads.localized()} $available"),
+                      Text(
+                          "${StringConstants.remainingDownloads.localized()} $available"),
                       const SizedBox(height: AppSizes.spacingLarge),
-                      if(linkPurchases?.order?.status?.toLowerCase() != StringConstants.pending.toLowerCase()
-                      && available>0)
+                      if (linkPurchases?.order?.status?.toLowerCase() !=
+                              StringConstants.pending.toLowerCase() &&
+                          available > 0)
                         DownloadButton(
-                        available: available,
-                        downloadableProductsBloc: downloadableProductsBloc,
-                        linkPurchases: linkPurchases,
-                      )
+                          available: available,
+                          downloadableProductsBloc: downloadableProductsBloc,
+                          linkPurchases: linkPurchases,
+                        )
                     ],
                   ),
                 ],

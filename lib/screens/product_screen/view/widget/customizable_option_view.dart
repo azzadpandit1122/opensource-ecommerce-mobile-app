@@ -21,10 +21,10 @@ class CustomizableOptionView extends StatefulWidget {
   final Function(Map<String, dynamic>) onOptionSelected;
 
   const CustomizableOptionView({
-    Key? key,
+    super.key,
     required this.customizableOptions,
     required this.onOptionSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomizableOptionView> createState() => _CustomizableOptionViewState();
@@ -177,7 +177,7 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
               });
             },
           );
-        }).toList(),
+        }),
         CommonWidgets().getHeightSpace(AppSizes.spacingNormal),
         CommonWidgets().divider(),
         CommonWidgets().getHeightSpace(AppSizes.spacingNormal)
@@ -202,9 +202,9 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
             ),
             value: priceOption.id!,
             groupValue: selected,
-            activeColor: Theme.of(context).colorScheme.onBackground,
+            activeColor: Theme.of(context).colorScheme.onSurface,
             selected: selected == priceOption.id,
-            selectedTileColor: theme.colorScheme.onBackground
+            selectedTileColor: theme.colorScheme.onSurface
                 .withOpacity(0.1), // subtle highlight
             onChanged: (value) {
               _setSelectedValue(option.id!, {
@@ -214,7 +214,7 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
               });
             },
           );
-        }).toList(),
+        }),
         CommonWidgets().getHeightSpace(AppSizes.spacingNormal),
         CommonWidgets().divider(),
         CommonWidgets().getHeightSpace(AppSizes.spacingNormal)
@@ -357,7 +357,8 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
                       primary: MobiKulTheme.accentColor,
                     ),
                     datePickerTheme: Theme.of(context).datePickerTheme,
-                    dialogBackgroundColor: MobiKulTheme.primaryColor,
+                    dialogTheme: DialogThemeData(
+                        backgroundColor: MobiKulTheme.primaryColor),
                   ),
                   child: child ?? const Text(""),
                 );
@@ -423,7 +424,8 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
                       primary: MobiKulTheme.accentColor,
                     ),
                     datePickerTheme: Theme.of(context).datePickerTheme,
-                    dialogBackgroundColor: MobiKulTheme.primaryColor,
+                    dialogTheme: DialogThemeData(
+                        backgroundColor: MobiKulTheme.primaryColor),
                   ),
                   child: child ?? const Text(""),
                 );
@@ -447,7 +449,8 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
                                 dayPeriodTextColor:
                                     MobiKulTheme.darkTheme.dividerTheme.color,
                               ),
-                      dialogBackgroundColor: MobiKulTheme.primaryColor,
+                      dialogTheme: DialogThemeData(
+                          backgroundColor: MobiKulTheme.primaryColor),
                     ),
                     child: child ?? const Text(""),
                   );
@@ -523,7 +526,8 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
                           dayPeriodTextColor:
                               MobiKulTheme.darkTheme.dividerTheme.color,
                         ),
-                    dialogBackgroundColor: MobiKulTheme.primaryColor,
+                    dialogTheme: DialogThemeData(
+                        backgroundColor: MobiKulTheme.primaryColor),
                   ),
                   child: child ?? const Text(""),
                 );
@@ -571,16 +575,16 @@ class _CustomizableOptionViewState extends State<CustomizableOptionView> {
                   option.id!, {'optionId': option.id, 'value': pickedFile});
             }
           },
-          child: Text(ApplicationLocalizations.of(context)
-                  ?.translate(StringConstants.chooseFile) ??
-              ""),
           style: ElevatedButton.styleFrom(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4.0))),
             elevation: 0.0,
-            backgroundColor: Theme.of(context).colorScheme.onBackground,
-            foregroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.onSurface,
+            foregroundColor: Theme.of(context).colorScheme.surface,
           ),
+          child: Text(ApplicationLocalizations.of(context)
+                  ?.translate(StringConstants.chooseFile) ??
+              ""),
         ),
         if (file != null)
           Padding(

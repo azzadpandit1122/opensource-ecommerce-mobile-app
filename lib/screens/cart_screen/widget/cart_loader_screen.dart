@@ -11,7 +11,7 @@
 import '../utils/cart_index.dart';
 
 class CartLoaderView extends StatelessWidget {
-  const CartLoaderView({Key? key}) : super(key: key);
+  const CartLoaderView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class CartLoaderView extends StatelessWidget {
                 SkeletonLoader(
                     highlightColor: Theme.of(context).highlightColor,
                     baseColor: Theme.of(context).scaffoldBackgroundColor,
-
                     builder: const SizedBox(
                         height: 270,
                         child: Card(
@@ -39,7 +38,6 @@ class CartLoaderView extends StatelessWidget {
                 SkeletonLoader(
                     highlightColor: Theme.of(context).highlightColor,
                     baseColor: Theme.of(context).scaffoldBackgroundColor,
-
                     builder: const SizedBox(
                         height: 125,
                         child: Card(
@@ -61,7 +59,6 @@ class CartLoaderView extends StatelessWidget {
                 SkeletonLoader(
                     highlightColor: Theme.of(context).highlightColor,
                     baseColor: Theme.of(context).scaffoldBackgroundColor,
-
                     builder: const SizedBox(
                         height: 170,
                         child: Card(

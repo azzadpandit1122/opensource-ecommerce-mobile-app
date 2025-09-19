@@ -11,8 +11,8 @@
 import 'package:bagisto_app_demo/screens/address_list/utils/index.dart';
 
 class AddressLoader extends StatelessWidget {
-  final bool ? isFromDashboard;
-  const AddressLoader({Key? key, this.isFromDashboard}) : super(key: key);
+  final bool? isFromDashboard;
+  const AddressLoader({super.key, this.isFromDashboard});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,17 @@ class AddressLoader extends StatelessWidget {
         children: [
           (isFromDashboard ?? false)
               ? const SizedBox()
-              :  SkeletonLoader(
-              highlightColor: Theme.of(context).highlightColor,
-              baseColor: Theme.of(context).scaffoldBackgroundColor,
-              builder: const SizedBox(height: 90,child: Card(color: Colors.red,))),
-          const SizedBox(height: 8,),
+              : SkeletonLoader(
+                  highlightColor: Theme.of(context).highlightColor,
+                  baseColor: Theme.of(context).scaffoldBackgroundColor,
+                  builder: const SizedBox(
+                      height: 90,
+                      child: Card(
+                        color: Colors.red,
+                      ))),
+          const SizedBox(
+            height: 8,
+          ),
           Padding(
             padding: const EdgeInsets.all(4),
             child: SkeletonLoader(
@@ -33,8 +39,11 @@ class AddressLoader extends StatelessWidget {
               baseColor: Theme.of(context).scaffoldBackgroundColor,
               items: 6,
               builder: Card(
-                child: Container(height: 155,),
-              ),),
+                child: Container(
+                  height: 155,
+                ),
+              ),
+            ),
           ),
         ],
       ),

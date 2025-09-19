@@ -11,7 +11,7 @@
 import 'package:bagisto_app_demo/screens/add_edit_address/utils/index.dart';
 
 class AddEditLoaderView extends StatelessWidget {
-  const AddEditLoaderView({Key? key}) : super(key: key);
+  const AddEditLoaderView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class AddEditLoaderView extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               items: 12,
               builder: Padding(
                 padding: const EdgeInsets.fromLTRB(10.0, 12, 10, 0),

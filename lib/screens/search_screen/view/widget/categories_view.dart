@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -9,14 +8,12 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/search_screen/utils/index.dart';
 
 class CategoriesView extends StatelessWidget {
   final List<HomeCategories>? data;
 
-  const CategoriesView({Key? key, this.data}) : super(key: key);
+  const CategoriesView({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +40,16 @@ class CategoriesView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          if((data?[index].children ?? []).isNotEmpty){
-                            Navigator.pushNamed(context, drawerSubCategoryScreen, arguments:
-                            CategoriesArguments(categorySlug: data?[index].slug,
-                                title: data?[index].name, id: data?[index].id.toString(),
-                                image: data?[index].bannerUrl ?? "", parentId: "1"));
-                          }
-                          else{
+                          if ((data?[index].children ?? []).isNotEmpty) {
+                            Navigator.pushNamed(
+                                context, drawerSubCategoryScreen,
+                                arguments: CategoriesArguments(
+                                    categorySlug: data?[index].slug,
+                                    title: data?[index].name,
+                                    id: data?[index].id.toString(),
+                                    image: data?[index].bannerUrl ?? "",
+                                    parentId: "1"));
+                          } else {
                             Navigator.pushNamed(context, categoryScreen,
                                 arguments: CategoriesArguments(
                                     metaDescription: data?[index].description,
@@ -68,8 +68,8 @@ class CategoriesView extends StatelessWidget {
                               vertical: AppSizes.spacingNormal,
                               horizontal: AppSizes.spacingMedium),
                           decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(AppSizes.spacingWide)),
+                            borderRadius: const BorderRadius.all(
+                                Radius.circular(AppSizes.spacingWide)),
                             color: Theme.of(context).colorScheme.onBackground,
                           ),
                           child: Center(
@@ -77,9 +77,11 @@ class CategoriesView extends StatelessWidget {
                             data?[index].name ?? '',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.secondaryContainer
-                            ),
+                                .bodyMedium
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer),
                           )),
                         ),
                       );

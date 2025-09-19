@@ -22,8 +22,7 @@ class ProductScreen extends StatefulWidget {
   final String? title;
   final String? urlKey;
 
-  const ProductScreen({Key? key, this.title, this.productId, this.urlKey})
-      : super(key: key);
+  const ProductScreen({super.key, this.title, this.productId, this.urlKey});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();

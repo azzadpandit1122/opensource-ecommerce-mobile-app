@@ -22,14 +22,13 @@ class CommonDatePicker extends StatefulWidget {
   final int? save;
 
   const CommonDatePicker(
-      {Key? key,
-        this.controller,
-        this.save,
-        this.hintText,
-        this.labelText,
-        this.helperText,
-        this.isRequired = false})
-      : super(key: key);
+      {super.key,
+      this.controller,
+      this.save,
+      this.hintText,
+      this.labelText,
+      this.helperText,
+      this.isRequired = false});
 
   @override
   State<CommonDatePicker> createState() => _CommonDatePickerState();
@@ -43,20 +42,18 @@ class _CommonDatePickerState extends State<CommonDatePicker> {
   @override
   void initState() {
     if (widget.controller?.text != null &&
-        (widget.controller?.text ?? "" ).isNotEmpty && widget.controller?.text != 'null') {
+        (widget.controller?.text ?? "").isNotEmpty &&
+        widget.controller?.text != 'null') {
       String? text = widget.controller?.text ?? selectedDate.toString();
 
       DateTime tempDate = DateFormat('yyyy-MM-dd').parse(text);
       selectedDate = tempDate;
-    }
-    else{
+    } else {
       widget.controller?.text = "";
-
     }
     if (widget.save == 1 && initDate.isNotEmpty) {
-
       initDate = appStoragePref.getDate();
-        selectedDate = DateTime.parse(initDate);
+      selectedDate = DateTime.parse(initDate);
     }
     super.initState();
   }
@@ -81,8 +78,8 @@ class _CommonDatePickerState extends State<CommonDatePicker> {
         initialDate: (widget.controller?.text ?? "").isNotEmpty
             ? selectedDate
             : (widget.save == 1
-            ? selectedDate.add(const Duration(days: 0))
-            : DateTime.now().add(const Duration(days: 0))),
+                ? selectedDate.add(const Duration(days: 0))
+                : DateTime.now().add(const Duration(days: 0))),
         firstDate: widget.save == 1
             ? selectedDate.add(const Duration(days: 0))
             : DateTime(1950 - 01 - 01),
@@ -123,7 +120,7 @@ class _CommonDatePickerState extends State<CommonDatePicker> {
                   FocusScope.of(context).requestFocus(FocusNode());
                   if (widget.save == 1) {
                     initDate = appStoragePref.getDate();
-                    if(initDate.isNotEmpty) {
+                    if (initDate.isNotEmpty) {
                       selectedDate = DateTime.parse(initDate);
                     }
                   }

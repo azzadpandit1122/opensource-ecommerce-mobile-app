@@ -53,7 +53,7 @@ class RadioButtonGroup extends StatefulWidget {
   final EdgeInsetsGeometry margin;
 
   const RadioButtonGroup({
-    Key? key,
+    super.key,
     @required this.labels,
     this.picked,
     this.disabled,
@@ -64,7 +64,7 @@ class RadioButtonGroup extends StatefulWidget {
     this.itemBuilder,
     this.padding = const EdgeInsets.all(0.0),
     this.margin = const EdgeInsets.all(0.0),
-  }) : super(key: key);
+  });
 
   @override
   State<RadioButtonGroup> createState() => _RadioButtonGroupState();
@@ -89,9 +89,7 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
     List<Widget> content = [];
     for (int i = 0; i < (widget.labels?.length ?? 0); i++) {
       Radio rb = Radio(
-        activeColor: Theme.of(context)
-            .colorScheme
-            .onPrimary,
+        activeColor: Theme.of(context).colorScheme.onPrimary,
         groupValue: widget.labels?.indexOf(_selected ?? ''),
         value: i,
 
@@ -117,20 +115,17 @@ class _RadioButtonGroupState extends State<RadioButtonGroup> {
       Text t = Text(widget.labels?.elementAt(i) ?? '',
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.labelMedium
-          );
+          style: Theme.of(context).textTheme.labelMedium);
 
       //use user defined method to build
       if (widget.itemBuilder != null) {
         content.add(widget.itemBuilder!(rb, t, i));
       } else {
-
         content.add(Row(children: <Widget>[
           const SizedBox(width: 8.0),
           rb,
           Expanded(child: t),
         ]));
-
       }
     }
 

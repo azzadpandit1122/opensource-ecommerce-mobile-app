@@ -13,8 +13,7 @@ import '../utils/cart_index.dart';
 class PriceDetailView extends StatelessWidget {
   final CartModel cartDetailsModel;
 
-  const PriceDetailView({Key? key, required this.cartDetailsModel})
-      : super(key: key);
+  const PriceDetailView({super.key, required this.cartDetailsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +63,9 @@ class PriceDetailView extends StatelessWidget {
                     ),
                     Text(
                       cartDetailsModel.formattedPrice?.discountAmount != null
-                          ? cartDetailsModel.formattedPrice?.discountAmount.toString() ?? ""
+                          ? cartDetailsModel.formattedPrice?.discountAmount
+                                  .toString() ??
+                              ""
                           : "${GlobalData.currencySymbol}0.0",
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -135,7 +136,7 @@ class PriceDetailView extends StatelessWidget {
                                     ),
                                   ],
                                 );
-                              }).toList(),
+                              }),
                             ],
                           ),
                         ],

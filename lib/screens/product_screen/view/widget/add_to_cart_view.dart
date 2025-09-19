@@ -23,7 +23,7 @@ class AddToCartView extends StatelessWidget {
   final int? qty;
   final Map<String, dynamic>? bookingParams;
   const AddToCartView(
-      {Key? key,
+      {super.key,
       this.productData,
       this.price,
       required this.configurableParams,
@@ -34,12 +34,11 @@ class AddToCartView extends StatelessWidget {
       required this.downloadLinks,
       this.configurableProductId,
       required this.qty,
-      this.bookingParams})
-      : super(key: key);
+      this.bookingParams});
 
   @override
   Widget build(BuildContext context) {
-    return  Card(
+    return Card(
       elevation: 10,
       child: SizedBox(
         height: 80,
@@ -159,7 +158,6 @@ class AddToCartView extends StatelessWidget {
         return;
       }
     } else if (productData?.type == StringConstants.configurable) {
-
       String? id = getId(productData, configurableParams);
 
       if (configurableProductId == null) {

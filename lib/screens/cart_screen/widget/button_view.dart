@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -15,20 +14,23 @@ class ButtonView extends StatelessWidget {
   final CartScreenBloc? cartScreenBloc;
   final List<Map<dynamic, String>> selectedItems;
 
-  const ButtonView({Key? key, this.cartScreenBloc, required this.selectedItems})
-      : super(key: key);
+  const ButtonView(
+      {super.key, this.cartScreenBloc, required this.selectedItems});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizes.spacingLarge, vertical: AppSizes.spacingSmall),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.spacingLarge,
+              vertical: AppSizes.spacingSmall),
           child: SizedBox(
-            height: AppSizes.spacingWide*2,
-            child:  MaterialButton(
+            height: AppSizes.spacingWide * 2,
+            child: MaterialButton(
               shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(AppSizes.spacingNormal)),
+                borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSizes.spacingNormal)),
                 side: BorderSide(
                     width: 1,
                     color: Theme.of(context).colorScheme.onBackground),
@@ -41,11 +43,10 @@ class ButtonView extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacementNamed(context, home);
               },
-
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Icon(
+                  Icon(
                     Icons.arrow_forward,
                     color: Theme.of(context).colorScheme.onBackground,
                     size: AppSizes.spacingWide,
@@ -66,12 +67,15 @@ class ButtonView extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizes.spacingLarge, vertical: AppSizes.spacingSmall),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.spacingLarge,
+              vertical: AppSizes.spacingSmall),
           child: SizedBox(
             height: AppSizes.buttonHeight,
             child: MaterialButton(
               shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(AppSizes.spacingNormal)),
+                borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSizes.spacingNormal)),
                 side: BorderSide(
                     width: 1,
                     color: Theme.of(context).colorScheme.onBackground),
@@ -87,10 +91,10 @@ class ButtonView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                   Icon(
+                  Icon(
                     Icons.delete_forever,
-                    color:Theme.of(context).colorScheme.onBackground,
-                    size: AppSizes.spacingMedium*2,
+                    color: Theme.of(context).colorScheme.onBackground,
+                    size: AppSizes.spacingMedium * 2,
                   ),
                   const SizedBox(
                     width: AppSizes.spacingLarge,
@@ -99,7 +103,7 @@ class ButtonView extends StatelessWidget {
                     StringConstants.emptyCart.localized().toUpperCase(),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color:Theme.of(context).colorScheme.onBackground,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                   ),
                 ],
@@ -108,12 +112,15 @@ class ButtonView extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizes.spacingLarge, vertical: AppSizes.spacingSmall),
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.spacingLarge,
+              vertical: AppSizes.spacingSmall),
           child: SizedBox(
             height: AppSizes.buttonHeight,
             child: MaterialButton(
               shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(AppSizes.spacingNormal)),
+                borderRadius: const BorderRadius.all(
+                    Radius.circular(AppSizes.spacingNormal)),
                 side: BorderSide(
                     width: 1,
                     color: Theme.of(context).colorScheme.onBackground),
@@ -126,14 +133,13 @@ class ButtonView extends StatelessWidget {
               onPressed: () {
                 cartScreenBloc?.add(UpdateCartEvent(selectedItems));
               },
-
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                   Icon(
+                  Icon(
                     Icons.update,
-                    color:Theme.of(context).colorScheme.onBackground,
-                    size: AppSizes.spacingMedium*2,
+                    color: Theme.of(context).colorScheme.onBackground,
+                    size: AppSizes.spacingMedium * 2,
                   ),
                   const SizedBox(
                     width: AppSizes.spacingLarge,
@@ -142,7 +148,7 @@ class ButtonView extends StatelessWidget {
                     StringConstants.updateCart.localized().toUpperCase(),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color:Theme.of(context).colorScheme.onBackground,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                   ),
                 ],
@@ -180,7 +186,7 @@ class ButtonView extends StatelessWidget {
                   cartScreenBloc?.add(RemoveAllCartItemEvent());
                 },
                 child: Text(StringConstants.yes.localized(),
-                style: Theme.of(context).textTheme.bodyMedium))
+                    style: Theme.of(context).textTheme.bodyMedium))
           ],
         );
       },

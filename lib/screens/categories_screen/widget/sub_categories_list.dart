@@ -17,8 +17,7 @@ class SubCategoriesList extends StatelessWidget {
   CategoryBloc? subCategoryBloc;
 
   SubCategoriesList(
-      {Key? key, this.isLogin, required this.data, this.subCategoryBloc})
-      : super(key: key);
+      {super.key, this.isLogin, required this.data, this.subCategoryBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -192,8 +191,7 @@ class SubCategoriesList extends StatelessWidget {
                                                 data?.type ==
                                                     StringConstants.virtual) &&
                                             ((data?.customizableOptions ?? [])
-                                                    .length ==
-                                                0)) {
+                                                .isEmpty)) {
                                           CategoryBloc subCategories =
                                               context.read<CategoryBloc>();
 

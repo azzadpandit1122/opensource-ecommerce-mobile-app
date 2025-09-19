@@ -59,7 +59,7 @@ class _EventScreenState extends State<EventScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(StringConstants.eventOn.localized() + ":",
+                Text("${StringConstants.eventOn.localized()}:",
                     style: Theme.of(context).textTheme.titleSmall),
                 Text(
                   "${widget.bookingOptions?.availableFrom ?? ''} - ${widget.bookingOptions?.availableTo ?? ''}",

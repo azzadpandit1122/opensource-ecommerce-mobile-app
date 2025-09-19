@@ -18,8 +18,7 @@ class SubCategoriesGridView extends StatelessWidget {
   CategoryBloc? subCategoryBloc;
 
   SubCategoriesGridView(
-      {this.isLogin, this.data, this.subCategoryBloc, Key? key})
-      : super(key: key);
+      {this.isLogin, this.data, this.subCategoryBloc, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -270,8 +269,8 @@ class SubCategoriesGridView extends StatelessWidget {
                                 if ((data?.type == StringConstants.simple ||
                                         data?.type ==
                                             StringConstants.virtual) &&
-                                    ((data?.customizableOptions ?? []).length ==
-                                        0)) {
+                                    ((data?.customizableOptions ?? [])
+                                        .isEmpty)) {
                                   var dict = <String, dynamic>{};
                                   dict['product_id'] = data?.id ?? '';
                                   dict['quantity'] = 1;

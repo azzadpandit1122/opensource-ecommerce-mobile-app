@@ -25,14 +25,13 @@ class DrawerSubCategoryView extends StatefulWidget {
   final String? parentId;
 
   const DrawerSubCategoryView(
-      {Key? key,
+      {super.key,
       this.title,
       this.id,
       this.image,
       this.categorySlug,
       this.metaDescription,
-      this.parentId})
-      : super(key: key);
+      this.parentId});
 
   @override
   State<DrawerSubCategoryView> createState() => _DrawerSubCategoryViewState();
@@ -172,115 +171,40 @@ class _DrawerSubCategoryViewState extends State<DrawerSubCategoryView> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ...?categoriesData?.data
-                                    ?.map((parent) => InkWell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(
-                                                AppSizes.spacingMedium),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                CircleAvatar(
-                                                  foregroundImage: NetworkImage(
-                                                      parent.logoUrl ?? ""),
-                                                  radius: 30,
-                                                  backgroundImage:
-                                                      const AssetImage(
-                                                          AssetConstants
-                                                              .placeHolder),
-                                                ),
-                                                const SizedBox(height: 12),
-                                                SizedBox(
-                                                  width:
-                                                      AppSizes.screenWidth / 4,
-                                                  child: Text(parent.name ?? "",
-                                                      style: const TextStyle(
-                                                          fontSize: 12),
-                                                      maxLines: 2,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      softWrap: true),
-                                                ),
-                                              ],
+                                ...?categoriesData?.data?.map((parent) =>
+                                    InkWell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(
+                                            AppSizes.spacingMedium),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            CircleAvatar(
+                                              foregroundImage: NetworkImage(
+                                                  parent.logoUrl ?? ""),
+                                              radius: 30,
+                                              backgroundImage: const AssetImage(
+                                                  AssetConstants.placeHolder),
                                             ),
-                                          ),
-                                          onTap: () {
-                                            if ((parent.children ?? [])
-                                                .isNotEmpty) {
-                                              Navigator.pushNamed(context,
-                                                  drawerSubCategoryScreen,
-                                                  arguments:
-                                                      CategoriesArguments(
-                                                          categorySlug:
-                                                              parent.slug,
-                                                          title: parent.name,
-                                                          id: parent.id
-                                                              .toString(),
-                                                          image:
-                                                              parent.bannerUrl,
-                                                          parentId: parent.id
-                                                              .toString()));
-                                            } else {
-                                              Navigator.pushNamed(
-                                                context,
-                                                categoryScreen,
-                                                arguments: CategoriesArguments(
-                                                    metaDescription:
-                                                        parent.description,
-                                                    categorySlug: parent.slug,
-                                                    title: parent.name,
-                                                    id: parent.id.toString(),
-                                                    image: parent.bannerUrl),
-                                              );
-                                            }
-                                          },
-                                        ))
-                                    .toList(),
-                              ],
-                            ),
-                          ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ...?allParents?.children
-                                  ?.map((parent) => InkWell(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(
-                                              AppSizes.spacingMedium),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              CircleAvatar(
-                                                foregroundImage: NetworkImage(
-                                                    parent.logoUrl ?? ""),
-                                                radius: 30,
-                                                backgroundImage:
-                                                    const AssetImage(
-                                                        AssetConstants
-                                                            .placeHolder),
-                                              ),
-                                              const SizedBox(height: 12),
-                                              SizedBox(
-                                                width: AppSizes.screenWidth / 4,
-                                                child: Text(parent.name ?? "",
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                    maxLines: 2,
-                                                    textAlign: TextAlign.center,
-                                                    softWrap: true),
-                                              ),
-                                            ],
-                                          ),
+                                            const SizedBox(height: 12),
+                                            SizedBox(
+                                              width: AppSizes.screenWidth / 4,
+                                              child: Text(parent.name ?? "",
+                                                  style: const TextStyle(
+                                                      fontSize: 12),
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.center,
+                                                  softWrap: true),
+                                            ),
+                                          ],
                                         ),
-                                        onTap: () {
+                                      ),
+                                      onTap: () {
+                                        if ((parent.children ?? [])
+                                            .isNotEmpty) {
                                           Navigator.pushNamed(
                                               context, drawerSubCategoryScreen,
                                               arguments: CategoriesArguments(
@@ -290,9 +214,70 @@ class _DrawerSubCategoryViewState extends State<DrawerSubCategoryView> {
                                                   image: parent.bannerUrl,
                                                   parentId:
                                                       parent.id.toString()));
-                                        },
-                                      ))
-                                  .toList()
+                                        } else {
+                                          Navigator.pushNamed(
+                                            context,
+                                            categoryScreen,
+                                            arguments: CategoriesArguments(
+                                                metaDescription:
+                                                    parent.description,
+                                                categorySlug: parent.slug,
+                                                title: parent.name,
+                                                id: parent.id.toString(),
+                                                image: parent.bannerUrl),
+                                          );
+                                        }
+                                      },
+                                    )),
+                              ],
+                            ),
+                          ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ...?allParents?.children?.map((parent) => InkWell(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(
+                                          AppSizes.spacingMedium),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          CircleAvatar(
+                                            foregroundImage: NetworkImage(
+                                                parent.logoUrl ?? ""),
+                                            radius: 30,
+                                            backgroundImage: const AssetImage(
+                                                AssetConstants.placeHolder),
+                                          ),
+                                          const SizedBox(height: 12),
+                                          SizedBox(
+                                            width: AppSizes.screenWidth / 4,
+                                            child: Text(parent.name ?? "",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                                maxLines: 2,
+                                                textAlign: TextAlign.center,
+                                                softWrap: true),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, drawerSubCategoryScreen,
+                                          arguments: CategoriesArguments(
+                                              categorySlug: parent.slug,
+                                              title: parent.name,
+                                              id: parent.id.toString(),
+                                              image: parent.bannerUrl,
+                                              parentId: parent.id.toString()));
+                                    },
+                                  ))
                             ],
                           ),
                         )
@@ -600,9 +585,8 @@ class _DrawerSubCategoryViewState extends State<DrawerSubCategoryView> {
                                                                   StringConstants
                                                                       .virtual) &&
                                                           ((val?.customizableOptions ??
-                                                                      [])
-                                                                  .length ==
-                                                              0)) {
+                                                                  [])
+                                                              .isEmpty)) {
                                                         bloc?.add(
                                                             AddToCartEvent(
                                                                 int.parse(

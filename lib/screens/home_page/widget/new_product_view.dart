@@ -76,7 +76,7 @@ class _NewProductViewState extends State<NewProductView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: AppSizes.screenWidth / 1.5,
                 child: Text(
                   widget.title,
@@ -347,9 +347,8 @@ class _NewProductViewState extends State<NewProductView> {
                                                             StringConstants
                                                                 .virtual) &&
                                                     ((val?.customizableOptions ??
-                                                                [])
-                                                            .length ==
-                                                        0)) {
+                                                            [])
+                                                        .isEmpty)) {
                                                   homepageEvent(
                                                       val,
                                                       HomePageAction.addToCart,

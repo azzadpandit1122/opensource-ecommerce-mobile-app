@@ -8,24 +8,26 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-import  'package:bagisto_app_demo/screens/review/utils/index.dart';
+import 'package:bagisto_app_demo/screens/review/utils/index.dart';
 
 class ReviewLoader extends StatelessWidget {
-  const ReviewLoader({Key? key}) : super(key: key);
+  const ReviewLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0,8,8,8),
+        padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 8),
         child: SkeletonLoader(
           highlightColor: Theme.of(context).highlightColor,
           baseColor: Theme.of(context).scaffoldBackgroundColor,
           items: 6,
           builder: Card(
-            child: Container(height: 125,),
-          ),),
+            child: Container(
+              height: 125,
+            ),
+          ),
+        ),
       ),
     );
   }

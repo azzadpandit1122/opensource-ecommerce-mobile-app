@@ -9,9 +9,10 @@
  */
 
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
+
 class QuantityView extends StatefulWidget {
   final String title;
-  final bool showTitle ;
+  final bool showTitle;
   final String qty;
   final Widget? subTitle;
   final int minimum;
@@ -19,14 +20,14 @@ class QuantityView extends StatefulWidget {
   final ValueChanged<int>? callBack;
 
   const QuantityView(
-      {Key? key,
+      {super.key,
       this.minimum = 1,
       this.callBack,
-      this.showTitle= false,
+      this.showTitle = false,
       this.title = StringConstants.quantity,
       this.subTitle,
-      this.qty = "1", this.setQuantity = false})
-      : super(key: key);
+      this.qty = "1",
+      this.setQuantity = false});
 
   @override
   State<StatefulWidget> createState() {
@@ -48,7 +49,6 @@ class _QuantityViewState extends State<QuantityView> {
   //   });
   // }
 
-
   @override
   void didUpdateWidget(covariant QuantityView oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -58,7 +58,7 @@ class _QuantityViewState extends State<QuantityView> {
   @override
   Widget build(BuildContext context) {
     // _updateQty();
-    if(widget.setQuantity){
+    if (widget.setQuantity) {
       controller.text = widget.qty;
     }
 
@@ -66,16 +66,15 @@ class _QuantityViewState extends State<QuantityView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        if(widget.showTitle == true)
-        Expanded(
-          child: Text(
-            widget.title.localized(),
-            maxLines: 2,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+        if (widget.showTitle == true)
+          Expanded(
+            child: Text(
+              widget.title.localized(),
+              maxLines: 2,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        if(widget.subTitle != null)
-        widget.subTitle ?? const SizedBox.shrink(),
+        if (widget.subTitle != null) widget.subTitle ?? const SizedBox.shrink(),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[

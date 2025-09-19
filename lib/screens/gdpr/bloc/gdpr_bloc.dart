@@ -8,14 +8,12 @@
  *   @link https://store.webkul.com/license.html
  */
 
-import 'dart:developer';
 import 'package:bagisto_app_demo/data_model/gdpr_models/gdpr_pdf_model.dart';
 import 'package:bagisto_app_demo/data_model/gdpr_models/gdpr_request_model.dart';
 import 'package:bagisto_app_demo/data_model/gdpr_models/gdpr_request_search_model.dart';
 import 'package:bagisto_app_demo/screens/gdpr/bloc/gdpr_event.dart';
 import 'package:bagisto_app_demo/screens/gdpr/bloc/gdpr_state.dart';
 import 'package:bagisto_app_demo/utils/index.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'gdpr_repository.dart';
 
 class GdprBloc extends Bloc<GdprEvent, GdprState> {

@@ -23,7 +23,6 @@ class Availability extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ]),
-
         if (bookingOptions?.type == "appointment")
           Padding(
             padding: const EdgeInsets.only(left: 48.0),
@@ -32,7 +31,6 @@ class Availability extends StatelessWidget {
               children: _buildAppointmentSlots(),
             ),
           ),
-
         if (bookingOptions?.type == "table")
           Padding(
             padding: const EdgeInsets.only(
@@ -68,19 +66,19 @@ class Availability extends StatelessWidget {
       return validSlots
           .map((slot) => Text("${slot.from} - ${slot.to}"))
           .toList();
-    }
-
-    else if (appointmentSlot?.sameSlotAllDays == false) {
+    } else if (appointmentSlot?.sameSlotAllDays == false) {
       final weekdayIndex = DateTime.now().weekday;
       final slotList = appointmentSlot?.slotOneDay;
 
-      if (slotList == null || weekdayIndex < 0 || weekdayIndex >= slotList.length) {
+      if (slotList == null ||
+          weekdayIndex < 0 ||
+          weekdayIndex >= slotList.length) {
         return [const Text("Closed")];
       }
 
       final todaySlots = slotList[weekdayIndex];
 
-      if (todaySlots == null || todaySlots.isEmpty) {
+      if (todaySlots.isEmpty) {
         return [const Text("Closed")];
       }
 
@@ -97,10 +95,8 @@ class Availability extends StatelessWidget {
           .toList();
     }
 
-
     return [const Text("Closed")];
   }
-
 
   List<Widget> _buildTableSlots() {
     final tableSlot = bookingOptions?.tableSlot;
@@ -113,7 +109,8 @@ class Availability extends StatelessWidget {
       }
 
       // Filter out any invalid slots (optional)
-      final validSlots = slots.where((slot) => slot.from != null && slot.to != null).toList();
+      final validSlots =
+          slots.where((slot) => slot.from != null && slot.to != null).toList();
 
       if (validSlots.isEmpty) {
         return [const Text("Closed")];
@@ -122,19 +119,19 @@ class Availability extends StatelessWidget {
       return validSlots
           .map((slot) => Text("${slot.from} - ${slot.to}"))
           .toList();
-    }
-
-    else if (tableSlot?.sameSlotAllDays == false) {
+    } else if (tableSlot?.sameSlotAllDays == false) {
       final weekdayIndex = DateTime.now().weekday;
       final slotList = tableSlot?.slotOneDay;
 
-      if (slotList == null || weekdayIndex < 0 || weekdayIndex >= slotList.length) {
+      if (slotList == null ||
+          weekdayIndex < 0 ||
+          weekdayIndex >= slotList.length) {
         return [const Text("Closed")];
       }
 
       final todaySlots = slotList[weekdayIndex];
 
-      if (todaySlots == null || todaySlots.isEmpty) {
+      if (todaySlots.isEmpty) {
         return [const Text("Closed")];
       }
 
@@ -153,6 +150,4 @@ class Availability extends StatelessWidget {
 
     return [const Text("Closed")];
   }
-
-
 }

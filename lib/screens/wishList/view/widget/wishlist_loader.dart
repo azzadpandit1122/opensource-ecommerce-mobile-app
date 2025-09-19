@@ -8,23 +8,27 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/wishList/utils/index.dart';
 
-
 class WishListLoader extends StatelessWidget {
-  const WishListLoader({Key? key}) : super(key: key);
+  const WishListLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0,0,8,0),
+        padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
         child: SkeletonGridLoader(
           highlightColor: Theme.of(context).highlightColor,
           baseColor: Theme.of(context).scaffoldBackgroundColor,
           items: 10,
-          builder:const Card(color: Colors.red,margin: EdgeInsets.zero,),childAspectRatio:0.6,mainAxisSpacing: 8,),
+          builder: const Card(
+            color: Colors.red,
+            margin: EdgeInsets.zero,
+          ),
+          childAspectRatio: 0.6,
+          mainAxisSpacing: 8,
+        ),
       ),
     );
   }

@@ -23,23 +23,24 @@ class ImageView extends StatelessWidget {
   final String? placeHolder;
 
   const ImageView(
-      {Key? key,
+      {super.key,
       this.url,
       this.width = 0.0,
       this.height = 0.0,
-        this.placeHolder,
-      this.fit=BoxFit.fill })
-      : super(key: key);
+      this.placeHolder,
+      this.fit = BoxFit.fill});
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      width:  width != 0.0 ?  width : null,
-      height: height != 0.0 ?  height : null,
+      width: width != 0.0 ? width : null,
+      height: height != 0.0 ? height : null,
       fit: fit ?? BoxFit.scaleDown,
-      imageUrl: url??"",
-      placeholder: (context, url) => Image.asset(placeHolder ?? AssetConstants.placeHolder),
-      errorWidget: (context, url, error) => Image.asset(placeHolder ?? AssetConstants.placeHolder),
+      imageUrl: url ?? "",
+      placeholder: (context, url) =>
+          Image.asset(placeHolder ?? AssetConstants.placeHolder),
+      errorWidget: (context, url, error) =>
+          Image.asset(placeHolder ?? AssetConstants.placeHolder),
     );
   }
 }

@@ -319,7 +319,7 @@ class GdprScreenState extends State<GdprScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-      child: Text(label, style: Theme.of(context).textTheme?.bodyMedium),
+      child: Text(label, style: Theme.of(context).textTheme.bodyMedium),
     );
   }
 

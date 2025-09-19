@@ -13,11 +13,11 @@ class StaticContentWidget extends StatefulWidget {
   final List<LinkModel>? links;
 
   const StaticContentWidget({
-    Key? key,
+    super.key,
     required this.html,
     this.css,
     this.links,
-  }) : super(key: key);
+  });
 
   @override
   State<StaticContentWidget> createState() => _StaticContentWidgetState();
@@ -151,7 +151,7 @@ class _StaticContentWidgetState extends State<StaticContentWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    log("Building StaticContentWidget with HTML: ${_fullHtml}");
+    log("Building StaticContentWidget with HTML: $_fullHtml");
 
     return Column(
       children: [

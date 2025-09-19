@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:flutter/material.dart';
 import '../../../../data_model/product_model/product_screen_model.dart';
 
@@ -22,13 +21,12 @@ class CollectionListType extends StatefulWidget {
   List? optionArray;
 
   CollectionListType(
-      {Key? key,
+      {super.key,
       this.variation,
       this.callback,
       this.options,
       this.seletedId,
-      this.optionArray})
-      : super(key: key);
+      this.optionArray});
 
   @override
   State<StatefulWidget> createState() => _CollectionListTypeState();
@@ -86,5 +84,3 @@ class _CollectionListTypeState extends State<CollectionListType> {
     return val;
   }
 }
-
-

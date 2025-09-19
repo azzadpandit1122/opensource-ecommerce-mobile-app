@@ -8,10 +8,7 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
-
 
 class ProductReviewSummaryView extends StatefulWidget {
   final List<Reviews>? review;
@@ -23,15 +20,14 @@ class ProductReviewSummaryView extends StatefulWidget {
   final bool? isLogin;
 
   const ProductReviewSummaryView(
-      {Key? key,
+      {super.key,
       this.review,
       this.productName,
       this.productImage,
       this.averageRating,
       this.percentage,
       this.productId,
-      this.isLogin})
-      : super(key: key);
+      this.isLogin});
 
   @override
   State<StatefulWidget> createState() {
@@ -50,17 +46,20 @@ class ProductReviewSummaryViewState extends State<ProductReviewSummaryView> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data:Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         iconColor: Theme.of(context).colorScheme.onPrimary,
-        tilePadding:const EdgeInsets.symmetric(horizontal: AppSizes.spacingLarge) ,
+        tilePadding:
+            const EdgeInsets.symmetric(horizontal: AppSizes.spacingLarge),
         title: Text(
           StringConstants.customerRating.localized(),
-          style: TextStyle(color: Colors.grey.shade600, fontWeight: FontWeight.w600,fontSize: AppSizes.spacingLarge),
+          style: TextStyle(
+              color: Colors.grey.shade600,
+              fontWeight: FontWeight.w600,
+              fontSize: AppSizes.spacingLarge),
         ),
         initiallyExpanded: true,
         children: [
@@ -89,16 +88,19 @@ class ProductReviewSummaryViewState extends State<ProductReviewSummaryView> {
                               RatingBar(
                                 starCount: 5,
                                 color: Theme.of(context).colorScheme.onPrimary,
-                                rating: num.tryParse(widget.averageRating.toString())?.toDouble() ??0.0,
+                                rating: num.tryParse(
+                                            widget.averageRating.toString())
+                                        ?.toDouble() ??
+                                    0.0,
                               ),
-
                               const SizedBox(height: 6),
                               Text(
                                   "${widget.averageRating?.toString() ?? ''} Rating & "
                                   "${widget.review?.length.toString() ?? ''} Reviews",
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: 12
-                                  )),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(fontSize: 12)),
                               const SizedBox(height: 8),
                             ]),
                           ),
@@ -106,8 +108,8 @@ class ProductReviewSummaryViewState extends State<ProductReviewSummaryView> {
                         ],
                       ),
                     Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            8, ((widget.review?.length ?? 0) > 0 ? 8 : 0), 0, 0),
+                        padding: EdgeInsets.fromLTRB(8,
+                            ((widget.review?.length ?? 0) > 0 ? 8 : 0), 0, 0),
                         child: TextButton(
                             style: ButtonStyle(
                                 padding: MaterialStateProperty.all<EdgeInsets>(
@@ -117,22 +119,24 @@ class ProductReviewSummaryViewState extends State<ProductReviewSummaryView> {
                                     Theme.of(context).colorScheme.onBackground),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                         side: BorderSide(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onBackground)))),
+                                            color:
+                                                Theme.of(context).colorScheme.onBackground)))),
                             onPressed: () {
                               widget.isLogin ?? false
-                                  ? Navigator.pushNamed(context, addReviewScreen,
+                                  ? Navigator.pushNamed(
+                                      context, addReviewScreen,
                                       arguments: AddReviewDetail(
                                           imageUrl: widget.productImage,
                                           productId: widget.productId,
                                           productName: widget.productName))
                                   : ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
-                                      content:
-                                          Text(StringConstants.pleaseLoginReview.localized()),
+                                      content: Text(StringConstants
+                                          .pleaseLoginReview
+                                          .localized()),
                                       duration: const Duration(seconds: 3),
                                     ));
                             },

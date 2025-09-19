@@ -20,8 +20,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int? index;
   final bool isInCartScreen;
   const CommonAppBar(this.title,
-      {Key? key, this.index, this.isInCartScreen = false})
-      : super(key: key);
+      {super.key, this.index, this.isInCartScreen = false});
 
   @override
   Widget build(BuildContext context) {
