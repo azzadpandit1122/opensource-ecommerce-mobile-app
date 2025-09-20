@@ -9,7 +9,6 @@
  */
 
 import 'dart:async';
-import 'dart:io';
 import 'package:bagisto_app_demo/screens/home_page/utils/index.dart';
 import 'data_model/theme_customization.dart';
 

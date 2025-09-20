@@ -1,7 +1,6 @@
 import 'package:bagisto_app_demo/screens/gdpr/bloc/gdpr_bloc.dart';
 import 'package:bagisto_app_demo/screens/gdpr/bloc/gdpr_event.dart';
 import 'package:bagisto_app_demo/screens/review/utils/index.dart';
-import 'package:flutter/material.dart';
 
 enum GdprRequestType {
   DELETE,

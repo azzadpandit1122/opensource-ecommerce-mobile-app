@@ -9,9 +9,7 @@
  *  @link https://store.webkul.com/license.html
  *
  */
-import 'package:bagisto_app_demo/screens/home_page/data_model/new_product_data.dart';
 import 'package:bagisto_app_demo/utils/extension.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 import '../../utils/index.dart';

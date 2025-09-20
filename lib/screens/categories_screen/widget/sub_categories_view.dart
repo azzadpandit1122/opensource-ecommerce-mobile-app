@@ -8,9 +8,7 @@
  *   @link https://store.webkul.com/license.html
  */
 
-import 'package:bagisto_app_demo/screens/cart_screen/utils/cart_index.dart';
 import 'package:bagisto_app_demo/screens/categories_screen/utils/index.dart';
-import 'package:bagisto_app_demo/screens/drawer/utils/index.dart';
 
 //ignore: must_be_immutable
 class SubCategoriesView extends StatefulWidget {

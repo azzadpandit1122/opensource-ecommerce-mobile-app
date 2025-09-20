@@ -19,7 +19,6 @@ import '../../../../utils/string_constants.dart';
 import '../../../../widgets/common_widgets.dart';
 import '../../bloc/add_review_event.dart';
 import '../../bloc/add_review_bloc.dart';
-import 'package:http/http.dart' as http;
 
 class AddImageView extends StatefulWidget {
   final AddReviewBloc? addReviewBloc;

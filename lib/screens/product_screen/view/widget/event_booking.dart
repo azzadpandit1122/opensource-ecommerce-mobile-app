@@ -1,6 +1,5 @@
 import 'package:bagisto_app_demo/utils/extension.dart';
 import 'package:bagisto_app_demo/utils/index.dart';
-import 'package:flutter/material.dart';
 import '../../../home_page/data_model/new_product_data.dart';
 
 class EventScreen extends StatefulWidget {

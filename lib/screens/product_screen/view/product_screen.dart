@@ -15,7 +15,6 @@ import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../data_model/download_sample_model.dart';
-import 'dart:developer';
 
 class ProductScreen extends StatefulWidget {
   final int? productId;

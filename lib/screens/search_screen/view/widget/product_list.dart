@@ -11,8 +11,6 @@
 import 'package:bagisto_app_demo/screens/order_detail/utils/index.dart';
 import 'package:bagisto_app_demo/screens/search_screen/utils/index.dart';
 
-import '../../../../utils/prefetching_helper.dart';
-
 class ProductList extends StatelessWidget {
   final NewProductsModel? model;
   const ProductList({super.key, required this.model});
