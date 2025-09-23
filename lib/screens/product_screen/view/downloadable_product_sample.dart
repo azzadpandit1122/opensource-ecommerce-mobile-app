@@ -8,20 +8,16 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'dart:io';
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:open_file/open_file.dart';
-
 
 class DownloadProductSample extends StatefulWidget {
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
-  final  List<DownloadableSamples>? samples;
+  final List<DownloadableSamples>? samples;
 
-  const DownloadProductSample({Key? key, this.samples, this.scaffoldMessengerKey})
-      : super(key: key);
+  const DownloadProductSample(
+      {super.key, this.samples, this.scaffoldMessengerKey});
 
   @override
   State<StatefulWidget> createState() {
@@ -34,24 +30,24 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
   ProductScreenBLoc? productScreenBLoc;
   var loadData = 0.0;
   bool showLoader = false;
-  final StreamController<double> _downloadProgressController = StreamController<double>.broadcast();
-
+  final StreamController<double> _downloadProgressController =
+      StreamController<double>.broadcast();
 
   @override
   void initState() {
     super.initState();
-    productScreenBLoc  = context.read<ProductScreenBLoc>();
+    productScreenBLoc = context.read<ProductScreenBLoc>();
   }
 
   @override
   Widget build(BuildContext context) {
     return (widget.samples?.length ?? 0) > 0
         ? Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
                     StringConstants.samples.localized(),
                     style: Theme.of(context).textTheme.titleLarge,
@@ -68,19 +64,22 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
                             padding: const EdgeInsets.only(top: 4, bottom: 4),
                             child: InkWell(
                               onTap: () {
-                                  // DownloadFile().downloadPersonalData(
-                                  //     widget.samples?[i].type == "file" ? (widget.samples?[i].fileUrl ?? "") : widget.samples?[i].url ?? "",
-                                  //     widget.samples?[i].fileName ?? "sample$i.jpg",
-                                  //     widget.samples?[i].type ?? "",
-                                  //     context,
-                                  //     widget.scaffoldMessengerKey);
+                                // DownloadFile().downloadPersonalData(
+                                //     widget.samples?[i].type == "file" ? (widget.samples?[i].fileUrl ?? "") : widget.samples?[i].url ?? "",
+                                //     widget.samples?[i].fileName ?? "sample$i.jpg",
+                                //     widget.samples?[i].type ?? "",
+                                //     context,
+                                //     widget.scaffoldMessengerKey);
 
-                                  // downloadFile(
-                                  //   widget.samples?[i].type == "file" ? (widget.samples?[i].fileUrl ?? "") : widget.samples?[i].url ?? "",
-                                  //   widget.samples?[i].fileName ?? "sample$i.jpg");
+                                // downloadFile(
+                                //   widget.samples?[i].type == "file" ? (widget.samples?[i].fileUrl ?? "") : widget.samples?[i].url ?? "",
+                                //   widget.samples?[i].fileName ?? "sample$i.jpg");
 
-
-                                productScreenBLoc?.add(DownloadProductSampleEvent("file", widget.samples?[i].id,widget.samples?[i].fileName ));
+                                productScreenBLoc?.add(
+                                    DownloadProductSampleEvent(
+                                        "file",
+                                        widget.samples?[i].id,
+                                        widget.samples?[i].fileName));
                               },
                               child: Text(
                                 widget.samples?[i].translations
@@ -92,7 +91,7 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
                             ));
                       })
                 ]),
-        )
+          )
         : const SizedBox();
   }
 
@@ -122,18 +121,14 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
       }
       if (hasStoragePermission) {
         try {
-
           final directory = Platform.isIOS
               ? await getApplicationDocumentsDirectory()
               : await getTemporaryDirectory();
           final savedDir = directory.path;
 
-
           Dio dio = Dio();
-          String savePath = "$savedDir/${DateTime
-              .now()
-              .microsecondsSinceEpoch
-              .toString()}_${filename ?? 'downloaded_file'}";
+          String savePath =
+              "$savedDir/${DateTime.now().microsecondsSinceEpoch.toString()}_${filename ?? 'downloaded_file'}";
           await dio.download(
             url,
             savePath,
@@ -147,7 +142,8 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
               }
             },
           );
-          _showSnackbar('${StringConstants.downloadComplete.localized()}!', savePath);
+          _showSnackbar(
+              '${StringConstants.downloadComplete.localized()}!', savePath);
           setState(() {
             loadData = 1;
             showLoader = false;
@@ -171,7 +167,8 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             double progress = snapshot.data!;
-            return Text('${StringConstants.downloadProgress.localized()}: ${(progress * 100).toStringAsFixed(0)}%');
+            return Text(
+                '${StringConstants.downloadProgress.localized()}: ${(progress * 100).toStringAsFixed(0)}%');
           } else {
             return Text(message);
           }
@@ -180,12 +177,12 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
       duration: const Duration(days: 1),
       action: filePath != null
           ? SnackBarAction(
-        label: StringConstants.open.localized(),
-        textColor: Theme.of(context).scaffoldBackgroundColor,
-        onPressed: () {
-          openDownloadedFile(filePath);
-        },
-      )
+              label: StringConstants.open.localized(),
+              textColor: Theme.of(context).scaffoldBackgroundColor,
+              onPressed: () {
+                openDownloadedFile(filePath);
+              },
+            )
           : null,
     );
 
@@ -199,5 +196,4 @@ class _DownloadProductSampleState extends State<DownloadProductSample> {
       }
     });
   }
-
 }

@@ -43,17 +43,17 @@ plugins {
 android {
 
     ndkVersion = "27.0.12077973"
-    signingConfigs {
-        release {
-            storeFile file('/Users/afzal/AndroidStudioProjects/bagisto_2_flutter_mobile_app/Bagisto.jks')
-            storePassword 'admin123'
-            keyAlias 'bagisto'
-            keyPassword 'admin123'
-        }
-    }
+    // signingConfigs {
+    //     release {
+    //         storeFile file('/Users/afzal/AndroidStudioProjects/bagisto_2_flutter_mobile_app/Bagisto.jks')
+    //         storePassword 'admin123'
+    //         keyAlias 'bagisto'
+    //         keyPassword 'admin123'
+    //     }
+    // }
 
-    namespace 'webkul.bagisto_app_demo'
-    namespace "com.example.bagisto_app_demo"
+    // namespace 'webkul.bagisto_app_demo'
+    namespace "com.webkul.bagisto.mobikul"
     compileSdkVersion 35
 //    ndkVersion flutter.ndkVersion
 
@@ -68,6 +68,7 @@ android {
     }
 
     buildFeatures {
+        viewBinding true
         dataBinding = true
     }
 
@@ -79,7 +80,7 @@ android {
         applicationId "com.webkul.bagisto.mobikul"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 22
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion 35
         versionCode 232
         versionName "2.3.2"
@@ -88,10 +89,10 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-            signingConfig signingConfigs.debug
+           // signingConfig signingConfigs.debug
         }
         release {
-            signingConfig signingConfigs.release
+         //   signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

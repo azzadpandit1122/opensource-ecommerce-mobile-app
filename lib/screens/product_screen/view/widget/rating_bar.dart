@@ -21,15 +21,14 @@ class RatingBar extends StatefulWidget {
   final double? size;
   final bool isCenter;
 
-
-   RatingBar(
+  RatingBar(
       {this.starCount = 5,
-        this.rating = .0,
-        this.isCenter = true,
-        this.onRatingChanged,
-        this.color,
-        Key? key, this.size})
-      : super(key: key);
+      this.rating = .0,
+      this.isCenter = true,
+      this.onRatingChanged,
+      this.color,
+      super.key,
+      this.size});
 
   @override
   State<RatingBar> createState() => _RatingBarState();
@@ -48,7 +47,7 @@ class _RatingBarState extends State<RatingBar> {
       icon = Icon(
         Icons.star_half,
         color: widget.color ?? Theme.of(context).primaryColor,
-        size:widget.size ?? 20,
+        size: widget.size ?? 20,
       );
     } else {
       icon = Icon(
@@ -61,20 +60,20 @@ class _RatingBarState extends State<RatingBar> {
       onTap: widget.onRatingChanged == null
           ? null
           : () => setState(() {
-        widget.rating = index + 1.0;
-        widget.onRatingChanged!(index + 1.0);
-      }),
+                widget.rating = index + 1.0;
+                widget.onRatingChanged!(index + 1.0);
+              }),
       child: icon,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
-         mainAxisAlignment: widget.isCenter ?  MainAxisAlignment.center :MainAxisAlignment.start ,
+        mainAxisAlignment: widget.isCenter
+            ? MainAxisAlignment.center
+            : MainAxisAlignment.start,
         children: List.generate(
-            widget.starCount, (index) => buildStar(context, index))
-    );
+            widget.starCount, (index) => buildStar(context, index)));
   }
 }

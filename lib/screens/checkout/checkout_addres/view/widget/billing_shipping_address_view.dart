@@ -8,19 +8,19 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
-enum AddressType {billing, shipping, both}
+enum AddressType { billing, shipping, both }
 
 //ignore: must_be_immutable
 class BillingAndShippingAddressView extends StatefulWidget {
-   AddressData? address;
-   AddressData? shippingAddress;
-   AddressData? billingAddress;
+  AddressData? address;
+  AddressData? shippingAddress;
+  AddressData? billingAddress;
   final String? title;
   final AddressModel? addressModel;
-  Function(AddressData? billingAddress, AddressData? shippingAddress) addressSetCallback;
+  Function(AddressData? billingAddress, AddressData? shippingAddress)
+      addressSetCallback;
   bool isShippingSame;
 
   Function(
@@ -43,17 +43,21 @@ class BillingAndShippingAddressView extends StatefulWidget {
       String? shippingState,
       String? shippingCity,
       String? shippingPostCode,
-      String? shippingPhone, int billingId, int shippingId, AddressType addressType,
+      String? shippingPhone,
+      int billingId,
+      int shippingId,
+      AddressType addressType,
       bool isShippingSame)? callBack;
   BillingAndShippingAddressView(
-      {Key? key,
+      {super.key,
       this.address,
       this.addressModel,
       this.title,
       this.callBack,
       this.shippingAddress,
-      this.billingAddress, required this.addressSetCallback, this.isShippingSame = false})
-      : super(key: key);
+      this.billingAddress,
+      required this.addressSetCallback,
+      this.isShippingSame = false});
 
   @override
   State<BillingAndShippingAddressView> createState() =>
@@ -75,7 +79,8 @@ class _BillingAndShippingAddressViewState
               height: AppSizes.spacingNormal,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSizes.spacingMedium),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppSizes.spacingMedium),
               child: Text((widget.title ?? "").localized(),
                   style: Theme.of(context).textTheme.labelLarge),
             ),
@@ -113,18 +118,21 @@ class _BillingAndShippingAddressViewState
                           .then((value) {
                         if (value is AddressData) {
                           widget.address = value;
-                          if(widget.isShippingSame){
+                          if (widget.isShippingSame) {
                             widget.addressSetCallback(value, value);
                             setState(() {
                               widget.shippingAddress = value;
                             });
-                          }
-                          else {
+                          } else {
                             widget.addressSetCallback(
-                                widget.title == StringConstants.billingAddress ? value : null,
-                                widget.title != StringConstants.billingAddress ? value : null);
+                                widget.title == StringConstants.billingAddress
+                                    ? value
+                                    : null,
+                                widget.title != StringConstants.billingAddress
+                                    ? value
+                                    : null);
                           }
-                          if(widget.isShippingSame){
+                          if (widget.isShippingSame) {
                             setState(() {
                               widget.shippingAddress = value;
                             });
@@ -141,45 +149,50 @@ class _BillingAndShippingAddressViewState
 
                           if (widget.callBack != null) {
                             widget.callBack!(
-                              widget.billingAddress?.companyName,
-                              widget.billingAddress?.firstName,
-                              widget.billingAddress?.lastName,
-                              widget.billingAddress?.address1,
-                              widget.billingAddress?.address1,
-                              widget.billingAddress?.country ?? widget.billingAddress?.countryName,
-                              widget.billingAddress?.state ?? widget.billingAddress?.stateName,
-                              widget.billingAddress?.city,
-                              widget.billingAddress?.postcode,
-                              widget.billingAddress?.phone,
-                              widget.shippingAddress?.companyName,
-                              widget.shippingAddress?.firstName,
-                              widget.shippingAddress?.lastName,
-                              widget.shippingAddress?.address1,
-                              widget.shippingAddress?.address1,
-                              widget.shippingAddress?.country ?? widget.shippingAddress?.countryName,
-                              widget.shippingAddress?.state ?? widget.shippingAddress?.stateName,
-                              widget.shippingAddress?.city,
-                              widget.shippingAddress?.postcode,
-                              widget.shippingAddress?.phone,
-                              int.parse(widget.billingAddress?.id ?? "0"),
-                              int.parse(widget.shippingAddress?.id ?? "0"),
-                                widget.isShippingSame ? AddressType.both :
-                                (widget.title == StringConstants.billingAddress) ? AddressType.billing : AddressType.shipping,
-                              widget.isShippingSame
-                            );
+                                widget.billingAddress?.companyName,
+                                widget.billingAddress?.firstName,
+                                widget.billingAddress?.lastName,
+                                widget.billingAddress?.address1,
+                                widget.billingAddress?.address1,
+                                widget.billingAddress?.country ??
+                                    widget.billingAddress?.countryName,
+                                widget.billingAddress?.state ??
+                                    widget.billingAddress?.stateName,
+                                widget.billingAddress?.city,
+                                widget.billingAddress?.postcode,
+                                widget.billingAddress?.phone,
+                                widget.shippingAddress?.companyName,
+                                widget.shippingAddress?.firstName,
+                                widget.shippingAddress?.lastName,
+                                widget.shippingAddress?.address1,
+                                widget.shippingAddress?.address1,
+                                widget.shippingAddress?.country ??
+                                    widget.shippingAddress?.countryName,
+                                widget.shippingAddress?.state ??
+                                    widget.shippingAddress?.stateName,
+                                widget.shippingAddress?.city,
+                                widget.shippingAddress?.postcode,
+                                widget.shippingAddress?.phone,
+                                int.parse(widget.billingAddress?.id ?? "0"),
+                                int.parse(widget.shippingAddress?.id ?? "0"),
+                                widget.isShippingSame
+                                    ? AddressType.both
+                                    : (widget.title ==
+                                            StringConstants.billingAddress)
+                                        ? AddressType.billing
+                                        : AddressType.shipping,
+                                widget.isShippingSame);
                           }
                         }
                       });
                     },
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.add,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                            size: AppSizes.spacingWide
-                        ),
-                        Text(StringConstants.add.localized()
-                              .toUpperCase(),
+                        Icon(Icons.add,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            size: AppSizes.spacingWide),
+                        Text(
+                          StringConstants.add.localized().toUpperCase(),
                           style: Theme.of(context).textTheme.bodyMedium,
                         )
                       ],
@@ -206,23 +219,28 @@ class _BillingAndShippingAddressViewState
                                 if (value is AddressData) {
                                   widget.address = value;
 
-                                  if(widget.isShippingSame){
+                                  if (widget.isShippingSame) {
                                     widget.addressSetCallback(value, value);
                                     setState(() {
                                       widget.shippingAddress = value;
                                     });
-                                  }
-                                  else {
+                                  } else {
                                     widget.addressSetCallback(
-                                        widget.title == StringConstants.billingAddress ? value : null,
-                                        widget.title != StringConstants.billingAddress ? value : null);
+                                        widget.title ==
+                                                StringConstants.billingAddress
+                                            ? value
+                                            : null,
+                                        widget.title !=
+                                                StringConstants.billingAddress
+                                            ? value
+                                            : null);
                                   }
-                                  if (widget.title == StringConstants.billingAddress) {
+                                  if (widget.title ==
+                                      StringConstants.billingAddress) {
                                     setState(() {
                                       widget.billingAddress = value;
                                     });
-                                  }
-                                  else {
+                                  } else {
                                     setState(() {
                                       widget.shippingAddress = value;
                                     });
@@ -230,32 +248,42 @@ class _BillingAndShippingAddressViewState
 
                                   if (widget.callBack != null) {
                                     widget.callBack!(
-                                      widget.billingAddress?.companyName,
-                                      widget.billingAddress?.firstName,
-                                      widget.billingAddress?.lastName,
-                                      widget.billingAddress?.address1,
-                                      widget.billingAddress?.address1,
-                                      widget.billingAddress?.country ?? widget.billingAddress?.countryName,
-                                      widget.billingAddress?.state ?? widget.billingAddress?.stateName,
-                                      widget.billingAddress?.city,
-                                      widget.billingAddress?.postcode,
-                                      widget.billingAddress?.phone,
-                                      widget.shippingAddress?.companyName,
-                                      widget.shippingAddress?.firstName,
-                                      widget.shippingAddress?.lastName,
-                                      widget.shippingAddress?.address1,
-                                      widget.shippingAddress?.address1,
-                                      widget.shippingAddress?.country ?? widget.shippingAddress?.countryName,
-                                      widget.shippingAddress?.state ?? widget.shippingAddress?.stateName,
-                                      widget.shippingAddress?.city,
-                                      widget.shippingAddress?.postcode,
-                                      widget.shippingAddress?.phone,
-                                      int.parse(widget.billingAddress?.id ?? "0"),
-                                      int.parse(widget.shippingAddress?.id ?? "0"),
-                                      widget.isShippingSame ? AddressType.both :
-                                      (widget.title == StringConstants.billingAddress) ? AddressType.billing : AddressType.shipping,
-                                      widget.isShippingSame
-                                    );
+                                        widget.billingAddress?.companyName,
+                                        widget.billingAddress?.firstName,
+                                        widget.billingAddress?.lastName,
+                                        widget.billingAddress?.address1,
+                                        widget.billingAddress?.address1,
+                                        widget.billingAddress?.country ??
+                                            widget.billingAddress?.countryName,
+                                        widget.billingAddress?.state ??
+                                            widget.billingAddress?.stateName,
+                                        widget.billingAddress?.city,
+                                        widget.billingAddress?.postcode,
+                                        widget.billingAddress?.phone,
+                                        widget.shippingAddress?.companyName,
+                                        widget.shippingAddress?.firstName,
+                                        widget.shippingAddress?.lastName,
+                                        widget.shippingAddress?.address1,
+                                        widget.shippingAddress?.address1,
+                                        widget.shippingAddress?.country ??
+                                            widget.shippingAddress?.countryName,
+                                        widget.shippingAddress?.state ??
+                                            widget.shippingAddress?.stateName,
+                                        widget.shippingAddress?.city,
+                                        widget.shippingAddress?.postcode,
+                                        widget.shippingAddress?.phone,
+                                        int.parse(
+                                            widget.billingAddress?.id ?? "0"),
+                                        int.parse(
+                                            widget.shippingAddress?.id ?? "0"),
+                                        widget.isShippingSame
+                                            ? AddressType.both
+                                            : (widget.title ==
+                                                    StringConstants
+                                                        .billingAddress)
+                                                ? AddressType.billing
+                                                : AddressType.shipping,
+                                        widget.isShippingSame);
                                   }
                                 }
                               });
@@ -266,12 +294,12 @@ class _BillingAndShippingAddressViewState
                               children: [
                                 Icon(
                                   Icons.add,
-                                size: AppSizes.spacingWide,
+                                  size: AppSizes.spacingWide,
                                   color:
                                       Theme.of(context).colorScheme.onPrimary,
                                 ),
-                                Text(StringConstants.add.localized()
-                                      .localized(),
+                                Text(
+                                  StringConstants.add.localized().localized(),
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 )
                               ],
@@ -297,19 +325,25 @@ class _BillingAndShippingAddressViewState
                                 if (value is AddressData) {
                                   widget.address = value;
 
-                                  if(widget.isShippingSame){
+                                  if (widget.isShippingSame) {
                                     widget.addressSetCallback(value, value);
                                     setState(() {
                                       widget.shippingAddress = value;
                                     });
-                                  }
-                                  else {
+                                  } else {
                                     widget.addressSetCallback(
-                                        widget.title == StringConstants.billingAddress ? value : widget.billingAddress,
-                                        widget.title != StringConstants.billingAddress ? value : widget.shippingAddress);
+                                        widget.title ==
+                                                StringConstants.billingAddress
+                                            ? value
+                                            : widget.billingAddress,
+                                        widget.title !=
+                                                StringConstants.billingAddress
+                                            ? value
+                                            : widget.shippingAddress);
                                   }
 
-                                  if (widget.title == StringConstants.billingAddress) {
+                                  if (widget.title ==
+                                      StringConstants.billingAddress) {
                                     setState(() {
                                       widget.billingAddress = value;
                                     });
@@ -321,33 +355,38 @@ class _BillingAndShippingAddressViewState
 
                                   if (widget.callBack != null) {
                                     widget.callBack!(
-                                      widget.billingAddress?.companyName,
-                                      widget.billingAddress?.firstName,
-                                      widget.billingAddress?.lastName,
-                                      widget.billingAddress?.address1,
-
-                                      widget.billingAddress?.address1,
-                                      widget.billingAddress?.country,
-                                      widget.billingAddress?.state,
-                                      widget.billingAddress?.city,
-                                      widget.billingAddress?.postcode,
-                                      widget.billingAddress?.phone,
-                                      widget.shippingAddress?.companyName,
-                                      widget.shippingAddress?.firstName,
-                                      widget.shippingAddress?.lastName,
-                                      widget.shippingAddress?.address1,
-                                      widget.shippingAddress?.address1,
-                                      widget.shippingAddress?.country,
-                                      widget.shippingAddress?.state,
-                                      widget.shippingAddress?.city,
-                                      widget.shippingAddress?.postcode,
-                                      widget.shippingAddress?.phone,
-                                      int.parse(widget.billingAddress?.id ?? "0"),
-                                      int.parse(widget.shippingAddress?.id ?? "0"),
-                                        widget.isShippingSame ? AddressType.both :
-                                        (widget.title == StringConstants.billingAddress) ? AddressType.billing : AddressType.shipping,
+                                        widget.billingAddress?.companyName,
+                                        widget.billingAddress?.firstName,
+                                        widget.billingAddress?.lastName,
+                                        widget.billingAddress?.address1,
+                                        widget.billingAddress?.address1,
+                                        widget.billingAddress?.country,
+                                        widget.billingAddress?.state,
+                                        widget.billingAddress?.city,
+                                        widget.billingAddress?.postcode,
+                                        widget.billingAddress?.phone,
+                                        widget.shippingAddress?.companyName,
+                                        widget.shippingAddress?.firstName,
+                                        widget.shippingAddress?.lastName,
+                                        widget.shippingAddress?.address1,
+                                        widget.shippingAddress?.address1,
+                                        widget.shippingAddress?.country,
+                                        widget.shippingAddress?.state,
+                                        widget.shippingAddress?.city,
+                                        widget.shippingAddress?.postcode,
+                                        widget.shippingAddress?.phone,
+                                        int.parse(
+                                            widget.billingAddress?.id ?? "0"),
+                                        int.parse(
+                                            widget.shippingAddress?.id ?? "0"),
                                         widget.isShippingSame
-                                    );
+                                            ? AddressType.both
+                                            : (widget.title ==
+                                                    StringConstants
+                                                        .billingAddress)
+                                                ? AddressType.billing
+                                                : AddressType.shipping,
+                                        widget.isShippingSame);
                                   }
                                 }
                               });
@@ -361,13 +400,14 @@ class _BillingAndShippingAddressViewState
                                       Theme.of(context).colorScheme.onPrimary,
                                       BlendMode.srcIn,
                                     ),
-                                    child: Image.asset(AssetConstants.changeIcon,
+                                    child: Image.asset(
+                                      AssetConstants.changeIcon,
                                       height: AppSizes.spacingWide,
                                       width: AppSizes.spacingWide,
                                     )),
                                 Text(StringConstants.change.localized(),
-                                  style:Theme.of(context).textTheme.bodyMedium),
-
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
                               ],
                             ),
                           ),

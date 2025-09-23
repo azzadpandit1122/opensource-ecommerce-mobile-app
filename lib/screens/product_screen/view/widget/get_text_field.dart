@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -12,15 +11,21 @@
 import '../../../../data_model/product_model/product_screen_model.dart';
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
 
-
 class GetTextField extends StatefulWidget {
   final Attributes? variation;
-  final int  index;
+  final int index;
   final List optionArray;
   final Function(List, String)? callback;
   final List<Attributes>? customOptions;
   final NewProducts? productData;
-  const GetTextField({Key? key, this.variation, required this.index, required this.optionArray,this.callback,this.productData,this.customOptions}) : super(key: key);
+  const GetTextField(
+      {super.key,
+      this.variation,
+      required this.index,
+      required this.optionArray,
+      this.callback,
+      this.productData,
+      this.customOptions});
 
   @override
   State<GetTextField> createState() => _GetTextFieldState();
@@ -41,20 +46,22 @@ class _GetTextFieldState extends State<GetTextField> {
                   setState(() {
                     var firstAdd = true;
                     Map<String, dynamic> optionData = {};
-                    optionData["attributeId"] = widget.variation?.id?.toString() ?? '';
+                    optionData["attributeId"] =
+                        widget.variation?.id?.toString() ?? '';
                     optionData["attributeOptionId"] = id;
                     if (widget.optionArray.isNotEmpty) {
                       for (var optionArrayKey = 0;
-                      optionArrayKey < widget.optionArray.length;
-                      optionArrayKey++) {
+                          optionArrayKey < widget.optionArray.length;
+                          optionArrayKey++) {
                         if (widget.optionArray[optionArrayKey]["attributeId"]
-                            .toString() ==
+                                .toString() ==
                             optionData["attributeId"].toString()) {
-                          if (widget.optionArray[optionArrayKey]["attributeOptionId"]
-                              .toString() !=
+                          if (widget.optionArray[optionArrayKey]
+                                      ["attributeOptionId"]
+                                  .toString() !=
                               id.toString()) {
-                            widget.optionArray[optionArrayKey]["attributeOptionId"] =
-                                id;
+                            widget.optionArray[optionArrayKey]
+                                ["attributeOptionId"] = id;
                             firstAdd = false;
                             break;
                           } else {
@@ -97,7 +104,7 @@ class _GetTextFieldState extends State<GetTextField> {
         return options?.toList() ?? [];
       } else {
         var codeList =
-        widget.customOptions?[index].options?.map((e) => e.id).toList();
+            widget.customOptions?[index].options?.map((e) => e.id).toList();
         var options = widget.customOptions?[index].options
             ?.where((element) => codeList?.contains(element.id) ?? false);
         return options?.toList() ?? [];
@@ -110,24 +117,25 @@ class _GetTextFieldState extends State<GetTextField> {
     String selectedProductAttributeId = "";
     var mappedKey = true;
     for (var optionArrayKey = 0;
-    optionArrayKey < widget.optionArray.length;
-    optionArrayKey++) {
+        optionArrayKey < widget.optionArray.length;
+        optionArrayKey++) {
       if (mappedKey) {
         loopIndexes:
         for (var index1 = 0;
-        index1 < (widget.productData?.configurableData?.index?.length ?? 0);
-        index1++) {
+            index1 < (widget.productData?.configurableData?.index?.length ?? 0);
+            index1++) {
           for (var indexData = optionArrayKey;
-          indexData <
-              (widget.productData?.configurableData?.index?[index1]
-                  .attributeOptionIds?.length ??
-                  0);
-          indexData++) {
+              indexData <
+                  (widget.productData?.configurableData?.index?[index1]
+                          .attributeOptionIds?.length ??
+                      0);
+              indexData++) {
             if (widget.optionArray[optionArrayKey]['attributeId'].toString() ==
-                widget.productData?.configurableData?.index?[index1]
-                    .attributeOptionIds?[indexData].attributeId
-                    .toString() &&
-                widget.optionArray[optionArrayKey]['attributeOptionId'].toString() ==
+                    widget.productData?.configurableData?.index?[index1]
+                        .attributeOptionIds?[indexData].attributeId
+                        .toString() &&
+                widget.optionArray[optionArrayKey]['attributeOptionId']
+                        .toString() ==
                     widget.productData?.configurableData?.index?[index1]
                         .attributeOptionIds?[indexData].attributeOptionId
                         .toString()) {

@@ -18,11 +18,10 @@ class WishlistItemList extends StatefulWidget {
   final WishListBloc? wishListBloc;
 
   const WishlistItemList(
-      {Key? key,
+      {super.key,
       required this.model,
       required this.isLoading,
-      this.wishListBloc})
-      : super(key: key);
+      this.wishListBloc});
 
   @override
   State<WishlistItemList> createState() => _WishlistItemListState();
@@ -161,10 +160,10 @@ class _WishlistItemListState extends State<WishlistItemList> {
                                                   StringConstants.simple ||
                                               item?.product?.type ==
                                                   StringConstants.virtual) &&
-                                          ((item?.product?.customizableOptions ??
-                                                      [])
-                                                  .length ==
-                                              0)) {
+                                          ((item?.product
+                                                      ?.customizableOptions ??
+                                                  [])
+                                              .isEmpty)) {
                                         widget.wishListBloc?.add(
                                             OnClickWishListLoaderEvent(
                                                 isReqToShowLoader: true));

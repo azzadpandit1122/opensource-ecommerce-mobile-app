@@ -22,9 +22,14 @@ class EmptyDataView extends StatelessWidget {
   final double width;
   final bool showDescription;
   final String description;
-  const EmptyDataView({Key? key, this.assetPath = AssetConstants.emptyOrders,
-  this.message = StringConstants.emptyPageGenericLabel, this.height=200, this.width=200, this.showDescription=false,
-  this.description = StringConstants.emptyCartPageMsg}) : super(key: key);
+  const EmptyDataView(
+      {super.key,
+      this.assetPath = AssetConstants.emptyOrders,
+      this.message = StringConstants.emptyPageGenericLabel,
+      this.height = 200,
+      this.width = 200,
+      this.showDescription = false,
+      this.description = StringConstants.emptyCartPageMsg});
 
   @override
   Widget build(BuildContext context) {
@@ -34,33 +39,37 @@ class EmptyDataView extends StatelessWidget {
         children: [
           ColorFiltered(
             colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.onBackground,
+              Theme.of(context).colorScheme.onSurface,
               BlendMode.srcIn,
             ),
-            child: LottieBuilder.asset(assetPath,
+            child: LottieBuilder.asset(
+              assetPath,
               width: width,
               height: height,
               fit: BoxFit.fill,
             ),
           ),
-          if(showDescription==false) const SizedBox(
-            height: AppSizes.spacingWide,
-          ),
+          if (showDescription == false)
+            const SizedBox(
+              height: AppSizes.spacingWide,
+            ),
           Text(
             message.localized(),
             softWrap: true,
           ),
-          if(showDescription) const SizedBox(
-            height: 20,
-          ),
-          if(showDescription) Text(
-            description.localized(),
-            softWrap: true,
-            style: const TextStyle(
-              // fontWeight: FontWeight.bold,
-              fontSize: 18,
+          if (showDescription)
+            const SizedBox(
+              height: 20,
             ),
-          )
+          if (showDescription)
+            Text(
+              description.localized(),
+              softWrap: true,
+              style: const TextStyle(
+                // fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            )
         ],
       ),
     );

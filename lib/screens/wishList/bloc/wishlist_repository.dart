@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/wishList/utils/index.dart';
 
 import '../../cart_screen/cart_model/cart_data_model.dart';
@@ -35,29 +34,27 @@ class WishListRepositoryImp implements WishListRepository {
   }
 
   @override
-  Future<AddToCartModel?> callWishListDeleteItem(
-      var wishListProductId) async {
+  Future<AddToCartModel?> callWishListDeleteItem(var wishListProductId) async {
     AddToCartModel? removeFromWishlist;
     try {
       removeFromWishlist =
           await ApiClient().removeFromWishlist(wishListProductId);
     } catch (error, stacktrace) {
       debugPrint("Error -->${error.toString()}");
-      debugPrint("StackTrace -->${stacktrace}");
+      debugPrint("StackTrace -->$stacktrace");
     }
     return removeFromWishlist;
   }
 
   @override
-  Future<AddToCartModel?> callAddToCartAPi(int productId, String quantity) async {
+  Future<AddToCartModel?> callAddToCartAPi(
+      int productId, String quantity) async {
     AddToCartModel? baseModel;
     try {
-      baseModel = await ApiClient().moveFromWishlistToCart(
-        productId, quantity
-      );
+      baseModel = await ApiClient().moveFromWishlistToCart(productId, quantity);
     } catch (error, stacktrace) {
       debugPrint("Error -->${error.toString()}");
-      debugPrint("StackTrace -->${stacktrace}");
+      debugPrint("StackTrace -->$stacktrace");
     }
     return baseModel;
   }

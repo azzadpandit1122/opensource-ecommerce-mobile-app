@@ -11,7 +11,7 @@
 import 'package:bagisto_app_demo/screens/forget_password/utils/index.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({Key? key}) : super(key: key);
+  const ForgetPasswordScreen({super.key});
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
@@ -42,7 +42,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
           title: Text(StringConstants.forgetPassword.localized()),
           centerTitle: false,
         ),
-        body:_forgetPasswordBloc(context),
+        body: _forgetPasswordBloc(context),
       ),
     );
   }
@@ -53,17 +53,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
       listener: (BuildContext context, ForgetPasswordBaseState state) {
         if (state is ForgetPasswordFetchState) {
           if (state.status == ForgetPasswordStatus.fail) {
-            ShowMessage.errorNotification( state.error ?? "",context);
+            ShowMessage.errorNotification(state.error ?? "", context);
             Future.delayed(const Duration(seconds: 3)).then((value) {
-
               Navigator.of(context).pop();
             });
           } else if (state.status == ForgetPasswordStatus.success) {
             BaseModel? baseModel = state.baseModel;
-            (baseModel?.error != null || baseModel?.status==false)
-                ? ShowMessage.errorNotification(state.error ?? "",context)
+            (baseModel?.error != null || baseModel?.status == false)
+                ? ShowMessage.errorNotification(state.error ?? "", context)
                 : ShowMessage.successNotification(
-                    state.baseModel?.message ?? "",context);
+                    state.baseModel?.message ?? "", context);
             Future.delayed(const Duration(seconds: 2)).then((value) {
               Navigator.of(context).pop();
             });
@@ -99,8 +98,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.symmetric(
-            vertical: AppSizes.spacingSmall,
-            horizontal: AppSizes.spacingWide),
+            vertical: AppSizes.spacingSmall, horizontal: AppSizes.spacingWide),
         child: Form(
           key: _forgetPasswordKey,
           autovalidateMode: _autoValidate
@@ -109,15 +107,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CommonWidgets().priceText(StringConstants.forgetPasswordTitle.localized(),context),
+              CommonWidgets().priceText(
+                  StringConstants.forgetPasswordTitle.localized(), context),
               const SizedBox(height: AppSizes.spacingWide),
-              CommonWidgets().getTextField(
-                  context,
-                  emailController,
+              CommonWidgets().getTextField(context, emailController,
                   StringConstants.signInEmailHint.localized(),
                   label: StringConstants.signInEmailLabel.localized(),
-                  isRequired: true,
-                  validator: (email) {
+                  isRequired: true, validator: (email) {
                 if (email!.isEmpty) {
                   return StringConstants.pleaseFillLabel.localized() +
                       StringConstants.signInEmailLabel.localized();
@@ -131,8 +127,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
               const SizedBox(height: AppSizes.spacingWide),
               MaterialButton(
                 shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
                 elevation: 0.0,
                 height: AppSizes.buttonHeight,
                 minWidth: MediaQuery.of(context).size.width,
@@ -142,10 +138,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>
                   _onPressButton();
                 },
                 child: Text(
-                  StringConstants.forgetPasswordButton.localized().toUpperCase(),
+                  StringConstants.forgetPasswordButton
+                      .localized()
+                      .toUpperCase(),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.background
-                  ),
+                      color: Theme.of(context).colorScheme.background),
                 ),
               ),
             ],

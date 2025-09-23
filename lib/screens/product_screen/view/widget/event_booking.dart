@@ -1,6 +1,5 @@
 import 'package:bagisto_app_demo/utils/extension.dart';
 import 'package:bagisto_app_demo/utils/index.dart';
-import 'package:flutter/material.dart';
 import '../../../home_page/data_model/new_product_data.dart';
 
 class EventScreen extends StatefulWidget {
@@ -59,7 +58,7 @@ class _EventScreenState extends State<EventScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(StringConstants.eventOn.localized() + ":",
+                Text("${StringConstants.eventOn.localized()}:",
                     style: Theme.of(context).textTheme.titleSmall),
                 Text(
                   "${widget.bookingOptions?.availableFrom ?? ''} - ${widget.bookingOptions?.availableTo ?? ''}",

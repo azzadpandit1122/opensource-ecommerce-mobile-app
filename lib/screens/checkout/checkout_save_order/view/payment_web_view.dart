@@ -24,8 +24,7 @@ class PaymentWebView extends StatefulWidget {
   Function(String) callBack;
 
   PaymentWebView(
-      {Key? key, this.dataModel, this.redirectUrl, required this.callBack})
-      : super(key: key);
+      {super.key, this.dataModel, this.redirectUrl, required this.callBack});
 
   @override
   State<StatefulWidget> createState() {

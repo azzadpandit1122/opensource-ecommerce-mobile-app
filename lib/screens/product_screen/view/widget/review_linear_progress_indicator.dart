@@ -8,12 +8,11 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
 
 class ReviewLinearProgressIndicator extends StatelessWidget {
- final dynamic percentage;
-  const ReviewLinearProgressIndicator({Key? key, this.percentage}) : super(key: key);
+  final dynamic percentage;
+  const ReviewLinearProgressIndicator({super.key, this.percentage});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                       children: [
                         Text(
                           '5Star'.localized(),
-                          style:  TextStyle(
+                          style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.w500),
@@ -41,7 +40,9 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         Flexible(
                             child: LinearProgressIndicator(
                           backgroundColor: Colors.grey,
-                          valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary,),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Theme.of(context).colorScheme.onPrimary,
+                          ),
                           value: (percentage[0] / 100 ?? 0).toDouble(),
                         )),
                         if ((percentage ?? []).isNotEmpty)
@@ -72,8 +73,9 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         Flexible(
                             child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
-                                valueColor:  AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).colorScheme.onPrimary,),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).colorScheme.onPrimary,
+                                ),
                                 value: (percentage[1] / 100 ?? 0 / 100)
                                     .toDouble())),
                         SizedBox(
@@ -103,7 +105,9 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         Flexible(
                             child: LinearProgressIndicator(
                           backgroundColor: Colors.grey,
-                          valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary,),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Theme.of(context).colorScheme.onPrimary,
+                          ),
                           value: (percentage[2] / 100 ?? 0 / 100).toDouble(),
                         )),
                         SizedBox(
@@ -111,7 +115,7 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         ),
                         Text(
                           '(${percentage[2] ?? 0}%)',
-                          style:  TextStyle(
+                          style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.w500),
@@ -122,7 +126,7 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                       children: [
                         Text(
                           '2Star'.localized(),
-                          style:  TextStyle(
+                          style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.w500),
@@ -133,14 +137,16 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         Flexible(
                             child: LinearProgressIndicator(
                           backgroundColor: Colors.grey,
-                          valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary,),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Theme.of(context).colorScheme.onPrimary,
+                          ),
                           value: (percentage[3] / 100 ?? 0 / 100).toDouble(),
                         )),
                         SizedBox(
                           width: percentage[3] > 0 ? 8 : 18,
                         ),
                         Text('(${percentage[3] ?? 0}%)',
-                            style:  TextStyle(
+                            style: TextStyle(
                                 fontSize: 12,
                                 color: Theme.of(context).colorScheme.onPrimary,
                                 fontWeight: FontWeight.w500))
@@ -150,7 +156,7 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                       children: [
                         Text(
                           '1Star'.localized(),
-                          style:  TextStyle(
+                          style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.w500),
@@ -161,8 +167,9 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         Flexible(
                             child: LinearProgressIndicator(
                                 backgroundColor: Colors.grey,
-                                valueColor:  AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).colorScheme.onPrimary,),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).colorScheme.onPrimary,
+                                ),
                                 value: (percentage[4] / 100 ?? 0 / 100)
                                     .toDouble())),
                         SizedBox(
@@ -170,7 +177,7 @@ class ReviewLinearProgressIndicator extends StatelessWidget {
                         ),
                         Text(
                           '(${percentage[4] ?? 0}%)',
-                          style:  TextStyle(
+                          style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).colorScheme.onPrimary,
                               fontWeight: FontWeight.w500),

@@ -12,14 +12,13 @@ import 'package:flutter/material.dart';
 import '../utils/app_constants.dart';
 import '../utils/assets_constants.dart';
 
-Widget wishlistIcon(BuildContext context, bool? isInWishlist){
+Widget wishlistIcon(BuildContext context, bool? isInWishlist) {
   return Container(
     padding: const EdgeInsets.all(AppSizes.spacingNormal),
     decoration: BoxDecoration(
-      color: Theme.of(context)
-          .colorScheme.onBackground,
-      borderRadius: const BorderRadius.all(
-          Radius.circular(AppSizes.spacingSmall)),
+      color: Theme.of(context).colorScheme.onSurface,
+      borderRadius:
+          const BorderRadius.all(Radius.circular(AppSizes.spacingSmall)),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.4),
@@ -29,36 +28,28 @@ Widget wishlistIcon(BuildContext context, bool? isInWishlist){
         ),
       ],
     ),
-    child:
-    isInWishlist ??
-        false
+    child: isInWishlist ?? false
         ? Icon(
-      Icons.favorite,
-      color: Theme.of(context)
-          .colorScheme
-          .secondaryContainer,
-      size: 16,
-    )
+            Icons.favorite,
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            size: 16,
+          )
         : Icon(
-      Icons.favorite_border,
-      size: 16,
-      color: Theme.of(context)
-          .colorScheme
-          .secondaryContainer,
-    ),
+            Icons.favorite_border,
+            size: 16,
+            color: Theme.of(context).colorScheme.secondaryContainer,
+          ),
   );
 }
 
-Widget compareIcon(BuildContext context){
+Widget compareIcon(BuildContext context) {
   return Container(
     padding: const EdgeInsets.all(AppSizes.spacingNormal),
     margin: const EdgeInsets.only(top: AppSizes.spacingNormal),
     decoration: BoxDecoration(
-      color: Theme.of(context)
-          .colorScheme
-          .onBackground,
-      borderRadius: const BorderRadius.all(
-          Radius.circular(AppSizes.spacingSmall)),
+      color: Theme.of(context).colorScheme.onSurface,
+      borderRadius:
+          const BorderRadius.all(Radius.circular(AppSizes.spacingSmall)),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.4),
@@ -68,7 +59,8 @@ Widget compareIcon(BuildContext context){
         ),
       ],
     ),
-    child: Image.asset(AssetConstants.compareIcon,
+    child: Image.asset(
+      AssetConstants.compareIcon,
       height: 18,
       width: 18,
       color: Theme.of(context).colorScheme.secondaryContainer,

@@ -8,16 +8,14 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
-import  'package:bagisto_app_demo/screens/review/utils/index.dart';
+import 'package:bagisto_app_demo/screens/review/utils/index.dart';
 
 //ignore: must_be_immutable
 class ReviewsList extends StatefulWidget {
   ReviewData? reviewData;
   ReviewsBloc? reviewsBloc;
 
-  ReviewsList({Key? key, this.reviewData, this.reviewsBloc}) : super(key: key);
+  ReviewsList({super.key, this.reviewData, this.reviewsBloc});
 
   @override
   State<ReviewsList> createState() => _ReviewsListState();
@@ -134,7 +132,7 @@ class _ReviewsListState extends State<ReviewsList> {
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left:4.0),
+                            padding: const EdgeInsets.only(left: 4.0),
                             child: Text(widget.reviewData?.customer?.name ?? "",
                                 style: const TextStyle(
                                   fontSize: 14,

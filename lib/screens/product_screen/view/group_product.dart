@@ -11,11 +11,10 @@
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
 
 class GroupProduct extends StatefulWidget {
- final List<GroupedProducts>? groupedProducts;
- final  Function(List)? callBack;
+  final List<GroupedProducts>? groupedProducts;
+  final Function(List)? callBack;
 
-  const GroupProduct({Key? key, this.groupedProducts, this.callBack})
-      : super(key: key);
+  const GroupProduct({super.key, this.groupedProducts, this.callBack});
 
   @override
   State<StatefulWidget> createState() {

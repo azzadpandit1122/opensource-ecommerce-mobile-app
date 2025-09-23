@@ -9,12 +9,11 @@
  */
 
 import 'dart:async';
-import 'dart:io';
 import 'package:bagisto_app_demo/screens/home_page/utils/index.dart';
 import 'data_model/theme_customization.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -240,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (state is FetchHomeCustomDataState) {
       callPreCache = true;
       if (state.status == Status.success) {
-        GlobalData.allProducts?.clear();
+        GlobalData.allProducts.clear();
         customHomeData = state.homepageSliders;
         getHomePageData(customHomeData);
       } else if (state.status == Status.fail) {}

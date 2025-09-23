@@ -16,11 +16,10 @@ class CompareView extends StatelessWidget {
   final ScrollController? scrollController;
 
   const CompareView(
-      {Key? key,
+      {super.key,
       required this.compareScreenModel,
       this.compareScreenBloc,
-      required this.scrollController})
-      : super(key: key);
+      required this.scrollController});
 
   @override
   Widget build(BuildContext context) {

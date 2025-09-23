@@ -24,8 +24,7 @@ class OrderDetailTile extends StatelessWidget with OrderStatusBGColorHelper {
       this.orderId,
       this.orderDetailBloc,
       this.isLoading,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {

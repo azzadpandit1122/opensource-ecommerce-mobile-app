@@ -8,21 +8,16 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/checkout/data_model/save_payment_model.dart';
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
 class OrderSummary extends StatelessWidget {
   final SavePayment savePaymentModel;
 
-  const OrderSummary({Key? key, required this.savePaymentModel})
-      : super(key: key);
+  const OrderSummary({super.key, required this.savePaymentModel});
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       padding: const EdgeInsets.fromLTRB(
           0, AppSizes.spacingNormal, 0, AppSizes.spacingNormal),
@@ -62,7 +57,8 @@ class OrderSummary extends StatelessWidget {
                       flex: 1,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            vertical: AppSizes.spacingSmall, horizontal: AppSizes.spacingNormal),
+                            vertical: AppSizes.spacingSmall,
+                            horizontal: AppSizes.spacingNormal),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,

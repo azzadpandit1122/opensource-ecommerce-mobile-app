@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -13,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import '../utils/index.dart';
 
 class ChangeEmailAndPassword extends StatefulWidget {
-  const ChangeEmailAndPassword({Key? key}) : super(key: key);
+  const ChangeEmailAndPassword({super.key});
 
   @override
   State<ChangeEmailAndPassword> createState() => _ChangeEmailAndPasswordState();
@@ -214,7 +213,8 @@ class _ChangeEmailAndPasswordState extends State<ChangeEmailAndPassword>
               : const Center(),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(AppSizes.spacingNormal, 0.0, AppSizes.spacingNormal, AppSizes.spacingNormal),
+          padding: const EdgeInsets.fromLTRB(AppSizes.spacingNormal, 0.0,
+              AppSizes.spacingNormal, AppSizes.spacingNormal),
           child: GestureDetector(
             onTap: () {
               _onPressDeleteAccount();

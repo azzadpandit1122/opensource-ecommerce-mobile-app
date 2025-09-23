@@ -15,7 +15,7 @@ import '../data_model/download_product_Image_model.dart';
 import 'widgets/downloadable_order_filter.dart';
 
 class DownLoadableScreen extends StatefulWidget {
-  const DownLoadableScreen({Key? key}) : super(key: key);
+  const DownLoadableScreen({super.key});
 
   @override
   State<DownLoadableScreen> createState() => _DownLoadableScreenState();
@@ -32,7 +32,7 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
   DownloadableLinkPurchases? linkPurchases;
   DownloadableProductsBloc? downloadableProductsBloc;
   DownloadableFiltersInput? appliedFilters;
-  ScrollController scrollController =  ScrollController();
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -45,14 +45,14 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
 
   _setItemScrollListener() {
     if (scrollController.hasClients &&
-        scrollController.position.maxScrollExtent ==
-            scrollController.offset) {
+        scrollController.position.maxScrollExtent == scrollController.offset) {
       if (hasMoreData()) {
         page += 1;
         downloadableProductsBloc?.add(DownloadableProductsCustomerEvent(
             page, limit,
             status: appliedFilters?.status?.toUpperCase(),
-            title: appliedFilters?.title, orderDateTo: appliedFilters?.orderDateTo,
+            title: appliedFilters?.title,
+            orderDateTo: appliedFilters?.orderDateTo,
             orderDateFrom: appliedFilters?.orderDateFrom,
             orderId: appliedFilters?.orderId));
       }
@@ -61,7 +61,8 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
 
   hasMoreData() {
     var total = productsList?.paginatorInfo?.total ?? 0;
-    return (total > (productsList?.downloadableLinkPurchases?.length ?? 0) && !isLoading);
+    return (total > (productsList?.downloadableLinkPurchases?.length ?? 0) &&
+        !isLoading);
   }
 
   @override
@@ -75,27 +76,29 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
               onPressed: () {
                 showModalBottomSheet(
                     context: context,
-                    builder: (context) => DownloadableOrderFilters(appliedFilters: appliedFilters)).then((value){
-                  if(value != null){
+                    builder: (context) => DownloadableOrderFilters(
+                        appliedFilters: appliedFilters)).then((value) {
+                  if (value != null) {
                     appliedFilters = value as DownloadableFiltersInput?;
                     page = 1;
-                    downloadableProductsBloc?.add(DownloadableProductsCustomerEvent(
-                        page, limit,
-                        status: appliedFilters?.status?.toUpperCase(),
-                        title: appliedFilters?.title, orderDateTo: appliedFilters?.orderDateTo,
-                        orderDateFrom: appliedFilters?.orderDateFrom,
-                        orderId: appliedFilters?.orderId));
-                  }
-                  else {
+                    downloadableProductsBloc?.add(
+                        DownloadableProductsCustomerEvent(page, limit,
+                            status: appliedFilters?.status?.toUpperCase(),
+                            title: appliedFilters?.title,
+                            orderDateTo: appliedFilters?.orderDateTo,
+                            orderDateFrom: appliedFilters?.orderDateFrom,
+                            orderId: appliedFilters?.orderId));
+                  } else {
                     appliedFilters = null;
                     page = 1;
-                    downloadableProductsBloc?.add(DownloadableProductsCustomerEvent(page, limit));
+                    downloadableProductsBloc
+                        ?.add(DownloadableProductsCustomerEvent(page, limit));
                   }
                 });
               },
               icon: const Icon(
                 Icons.filter_alt,
-                size: AppSizes.spacingLarge*2,
+                size: AppSizes.spacingLarge * 2,
               ))
         ],
       ),
@@ -117,13 +120,13 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
         if (state is DownloadBase64ProductState) {
           isLoading = false;
           downloadBaseLinkData = state.downloadLinkProduct;
-          if(state.status == DownloadableProductsStatus.success) {
-            DownloadFile().saveBase64String(downloadBaseLinkData?.string ??'',
-                downloadBaseLinkData?.download?.fileName??'');
-          }
-          else{
+          if (state.status == DownloadableProductsStatus.success) {
+            DownloadFile().saveBase64String(downloadBaseLinkData?.string ?? '',
+                downloadBaseLinkData?.download?.fileName ?? '');
+          } else {
             ShowMessage.errorNotification(
-                state.error ?? downloadBaseLinkData?.graphqlErrors ?? "", context);
+                state.error ?? downloadBaseLinkData?.graphqlErrors ?? "",
+                context);
           }
         }
       },
@@ -150,16 +153,18 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
         ),
       );
     }
-    if(state is ShowLoaderState){
+    if (state is ShowLoaderState) {
       isLoading = true;
     }
     if (state is DownloadProductState) {
       downloadLink = state.downloadLink;
-      downloadableProductsBloc?.add(DownloadBase64ProductEvent(int.parse(downloadLink?.id.toString() ?? "0")));
+      downloadableProductsBloc?.add(DownloadBase64ProductEvent(
+          int.parse(downloadLink?.id.toString() ?? "0")));
     }
     if (state is DownloadableProductsCustomerDataState) {
       if (page > 1) {
-        productsList?.downloadableLinkPurchases?.addAll(state.productsList?.downloadableLinkPurchases ?? []);
+        productsList?.downloadableLinkPurchases
+            ?.addAll(state.productsList?.downloadableLinkPurchases ?? []);
         productsList?.paginatorInfo = state.productsList?.paginatorInfo;
       } else {
         productsList = state.productsList;
@@ -190,9 +195,7 @@ class _DownLoadableScreenState extends State<DownLoadableScreen> {
                   product: data?[index],
                 );
               }),
-          Visibility(
-              visible: isLoading,
-              child: const Loader())
+          Visibility(visible: isLoading, child: const Loader())
         ],
       );
     } else {

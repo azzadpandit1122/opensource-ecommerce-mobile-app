@@ -17,13 +17,12 @@ class CheckoutHeaderView extends StatefulWidget {
   final BuildContext? context;
   final bool isDownloadable;
   const CheckoutHeaderView(
-      {Key? key,
+      {super.key,
       this.curStep = 1,
       this.didSelect,
       this.total,
       this.context,
-      this.isDownloadable = false})
-      : super(key: key);
+      this.isDownloadable = false});
   @override
   State<StatefulWidget> createState() {
     return _CheckoutHeaderViewState();

@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/downloadable_products/utils/index.dart';
 
 class DownloadButton extends StatelessWidget {
@@ -17,11 +16,10 @@ class DownloadButton extends StatelessWidget {
   final DownloadableLinkPurchases? linkPurchases;
 
   const DownloadButton(
-      {Key? key,
+      {super.key,
       required this.available,
       this.downloadableProductsBloc,
-      this.linkPurchases})
-      : super(key: key);
+      this.linkPurchases});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,8 @@ class DownloadButton extends StatelessWidget {
         ),
       ),
       onPressed: (available != 0 &&
-              (linkPurchases?.order?.status?.toLowerCase() == StringConstants.completed.toLowerCase()))
+              (linkPurchases?.order?.status?.toLowerCase() ==
+                  StringConstants.completed.toLowerCase()))
           ? () {
               if ((linkPurchases != null)) {
                 int id = int.tryParse(linkPurchases?.id ?? "0") ?? 0;

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bagisto_app_demo/data_model/product_model/booking_slots_modal.dart';
 import 'package:bagisto_app_demo/screens/location/view/location_screen.dart';
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
@@ -115,7 +113,7 @@ class _BookingOptionViewState extends State<BookingOptionView> {
         widget.productScreenBLoc?.add(GetSlotEvent(
             int.parse(bookingOptions?.id ?? ""),
             DateFormat('yyyy-MM-dd').format(date).toString()));
-        slotsForDate = widget?.bookingSlotsData?.data ?? [];
+        slotsForDate = widget.bookingSlotsData?.data ?? [];
       }
     }
     if (bookingOptions?.appointmentSlot != null) {
@@ -123,7 +121,7 @@ class _BookingOptionViewState extends State<BookingOptionView> {
         widget.productScreenBLoc?.add(GetSlotEvent(
             int.parse(bookingOptions?.id ?? ""),
             DateFormat('yyyy-MM-dd').format(date).toString()));
-        slotsForDate = widget?.bookingSlotsData?.data ?? [];
+        slotsForDate = widget.bookingSlotsData?.data ?? [];
       }
     }
     if (bookingOptions?.tableSlot != null) {
@@ -131,10 +129,10 @@ class _BookingOptionViewState extends State<BookingOptionView> {
         widget.productScreenBLoc?.add(GetSlotEvent(
             int.parse(bookingOptions?.id ?? ""),
             DateFormat('yyyy-MM-dd').format(date).toString()));
-        slotsForDate = widget?.bookingSlotsData?.data ?? [];
+        slotsForDate = widget.bookingSlotsData?.data ?? [];
       }
     }
-    return widget?.bookingSlotsData?.data ?? [];
+    return widget.bookingSlotsData?.data ?? [];
   }
 
   @override
@@ -905,8 +903,8 @@ class _BookingOptionViewState extends State<BookingOptionView> {
                   DropdownButtonFormField<String>(
                     value: widget.bookingSlotsData?.data?.any((slot) =>
                                 jsonEncode({
-                                  "from": slot?.timestamp?.split("-")[0] ?? "",
-                                  "to": slot?.timestamp?.split("-")[1] ?? ""
+                                  "from": slot.timestamp?.split("-")[0] ?? "",
+                                  "to": slot.timestamp?.split("-")[1] ?? ""
                                 }) ==
                                 jsonEncode(selectedBooking["slot"])) ==
                             true
@@ -926,8 +924,8 @@ class _BookingOptionViewState extends State<BookingOptionView> {
                       final slotLabel = "$from - $to";
                       return DropdownMenuItem<String>(
                         value: jsonEncode({
-                          "from": slot?.timestamp?.split("-")[0] ?? "",
-                          "to": slot?.timestamp?.split("-")[1] ?? "",
+                          "from": slot.timestamp?.split("-")[0] ?? "",
+                          "to": slot.timestamp?.split("-")[1] ?? "",
                         }),
                         child: Text(slotLabel),
                       );

@@ -8,8 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-import 'dart:developer';
-
 import 'package:bagisto_app_demo/data_model/product_model/booking_slots_modal.dart';
 import 'package:bagisto_app_demo/screens/product_screen/utils/index.dart';
 import 'package:bagisto_app_demo/screens/product_screen/view/widget/customizable_option_view.dart';
@@ -41,7 +39,7 @@ class ProductTypeView extends StatefulWidget {
   dynamic configurableProductId;
 
   ProductTypeView({
-    Key? key,
+    super.key,
     this.productScreenBLoc,
     this.productData,
     this.price,
@@ -52,7 +50,7 @@ class ProductTypeView extends StatefulWidget {
     required this.isLoggedIn,
     this.callback,
     required this.bookingSlotsData,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductTypeView> createState() => _ProductTypeViewState();
@@ -294,11 +292,11 @@ class _ProductTypeViewState extends State<ProductTypeView> {
               },
             ),
           ),
-        if ((widget.productData?.customizableOptions ?? []).length > 0)
+        if ((widget.productData?.customizableOptions ?? []).isNotEmpty)
           const SizedBox(
             height: 8,
           ),
-        if ((widget.productData?.customizableOptions ?? []).length > 0)
+        if ((widget.productData?.customizableOptions ?? []).isNotEmpty)
           Card(
             elevation: 2,
             child: CustomizableOptionView(
@@ -340,7 +338,7 @@ class _ProductTypeViewState extends State<ProductTypeView> {
                 if (data['type'] == "default") {
                   bookingParams = {
                     "date": '"${data["date"]}"',
-                    "slot": data["slot"] != null ? data["slot"] : null,
+                    "slot": data["slot"],
                     "note": '"Booking Table"'
                   };
                 }
@@ -355,7 +353,7 @@ class _ProductTypeViewState extends State<ProductTypeView> {
                   } else {
                     bookingParams = {
                       "date": '"${data["date"]}"',
-                      "slot": data["slot"] != null ? data["slot"] : null,
+                      "slot": data["slot"],
                       "rentingType": '${data["rentingType"]?.toUpperCase()}',
                       "note": '"Booking Table"'
                     };
@@ -364,14 +362,14 @@ class _ProductTypeViewState extends State<ProductTypeView> {
                 if (data['type'] == "appointment") {
                   bookingParams = {
                     "date": '"${data["date"]}"',
-                    "slot": data["slot"] != null ? data["slot"] : null,
+                    "slot": data["slot"],
                     "note": '"Booking Table"'
                   };
                 }
                 if (data['type'] == "table") {
                   bookingParams = {
                     "date": '"${data["date"]}"',
-                    "slot": data["slot"] != null ? data["slot"] : null,
+                    "slot": data["slot"],
                     "note": '"${data["note"]}"'
                   };
                 }
@@ -472,7 +470,7 @@ class _ProductTypeViewState extends State<ProductTypeView> {
         final Set<int> selectedIds =
             (value['priceOptionIds'] as Set<int>? ?? {});
         for (final id in selectedIds) {
-          var priceOption;
+          CustomizableOptionPrices? priceOption;
           try {
             priceOption =
                 option.customizableOptionPrices?.firstWhere((p) => p.id == id);
@@ -486,7 +484,7 @@ class _ProductTypeViewState extends State<ProductTypeView> {
       } else if (option.type == 'radio' || option.type == 'select') {
         final int? selectedId = value['priceOptionId'] as int?;
         if (selectedId != null) {
-          var priceOption;
+          CustomizableOptionPrices? priceOption;
           try {
             priceOption = option.customizableOptionPrices
                 ?.firstWhere((p) => p.id == selectedId);

@@ -30,8 +30,8 @@ class HomePageView extends StatefulWidget {
     this.isLogin,
     this.homePageBloc,
     this.callPreCache, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<HomePageView> createState() => _HomePageViewState();
@@ -167,7 +167,7 @@ class _HomePageViewState extends State<HomePageView> {
               const SizedBox(
                 height: AppSizes.spacingNormal,
               ),
-              if (GlobalData.allProducts?.isNotEmpty == true)
+              if (GlobalData.allProducts.isNotEmpty == true)
                 buildReachBottomView(context, _scrollController)
             ],
           ));
@@ -209,7 +209,8 @@ class _HomePageViewState extends State<HomePageView> {
             homeWidgets.add(SizedBox(
                 height: (MediaQuery.of(context).size.width / 1.5) + 220,
                 child: NewProductView(
-                  title: element.translations?.firstOrNull?.options?.title ?? "",
+                  title:
+                      element.translations?.firstOrNull?.options?.title ?? "",
                   isLogin: widget.isLogin,
                   model: productsModel?.data,
                   callPreCache: widget.callPreCache,

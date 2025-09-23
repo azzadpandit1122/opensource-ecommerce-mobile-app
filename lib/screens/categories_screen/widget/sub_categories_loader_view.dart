@@ -8,12 +8,10 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/categories_screen/utils/index.dart';
 
-
 class SubCategoriesLoader extends StatelessWidget {
-  const SubCategoriesLoader({Key? key}) : super(key: key);
+  const SubCategoriesLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class SubCategoriesLoader extends StatelessWidget {
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
               builder: Padding(
-                padding:  const EdgeInsets.fromLTRB(8,8,8,0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                 child: Container(
                   height: 400,
                   color: Colors.red,
@@ -34,19 +32,26 @@ class SubCategoriesLoader extends StatelessWidget {
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
               builder: Padding(
-                padding:  const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Container(
                   height: 60,
                   color: Colors.red,
                 ),
               )),
           Padding(
-            padding: const EdgeInsets.fromLTRB(8.0,0,8,0),
+            padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
             child: SkeletonGridLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
               items: 10,
-              builder:const Card(color: Colors.red,margin: EdgeInsets.zero,),childAspectRatio:0.5,mainAxisSpacing: 4,crossAxisSpacing: 4,),
+              builder: const Card(
+                color: Colors.red,
+                margin: EdgeInsets.zero,
+              ),
+              childAspectRatio: 0.5,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+            ),
           )
         ],
       ),

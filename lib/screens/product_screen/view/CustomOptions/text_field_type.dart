@@ -13,15 +13,14 @@
 import 'package:bagisto_app_demo/utils/index.dart';
 import '../../../../data_model/product_model/product_screen_model.dart';
 
-
 class DropDownType extends StatefulWidget {
   List<Options?> options;
   Attributes? variation;
 
   final Function(int)? callback;
 
-  DropDownType({Key? key, this.variation, required this.options, this.callback})
-      : super(key: key);
+  DropDownType(
+      {super.key, this.variation, required this.options, this.callback});
 
   @override
   State<StatefulWidget> createState() => _DropDownTypeState();

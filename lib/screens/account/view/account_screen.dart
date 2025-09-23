@@ -12,7 +12,7 @@ import 'package:bagisto_app_demo/data_model/account_models/account_update_model.
 import 'package:bagisto_app_demo/screens/account/utils/index.dart';
 
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   State<AccountScreen> createState() => _AccountScreenState();
@@ -198,9 +198,10 @@ class _AccountScreenState extends State<AccountScreen>
           setState(() {
             subscribeNewsletter = value; // Update local state
           });
-        }, onDelete: (bool delete) {
+        },
+        onDelete: (bool delete) {
           isDelete = delete;
-      },
+        },
       ),
     );
   }

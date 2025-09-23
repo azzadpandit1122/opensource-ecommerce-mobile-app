@@ -1,7 +1,6 @@
 import 'package:bagisto_app_demo/screens/gdpr/bloc/gdpr_bloc.dart';
 import 'package:bagisto_app_demo/screens/gdpr/bloc/gdpr_event.dart';
 import 'package:bagisto_app_demo/screens/review/utils/index.dart';
-import 'package:flutter/material.dart';
 
 enum GdprRequestType {
   DELETE,
@@ -19,11 +18,11 @@ class CreateRequestModal extends StatelessWidget {
   Widget build(BuildContext context) {
     Enum selectedType = GdprRequestType.UPDATE;
     String message = "";
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController messageController = TextEditingController();
 
     Future<void> createGdprRequest() async {
-      if (!_formKey.currentState!.validate()) {
+      if (!formKey.currentState!.validate()) {
         // If the form is not valid, do not proceed
       } else {
         if (gdprBloc != null) {
@@ -65,7 +64,7 @@ class CreateRequestModal extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 Form(
-                    key: _formKey,
+                    key: formKey,
                     child: Column(
                       children: [
                         DropdownButtonFormField<Enum>(
@@ -84,7 +83,7 @@ class CreateRequestModal extends StatelessWidget {
                                 borderSide: BorderSide(
                                     width: 1, color: MobiKulTheme.greyColor)),
                           ),
-                          value: selectedType,
+                          initialValue: selectedType,
                           hint: Text(StringConstants.selectType.localized()),
                           dropdownColor: Theme.of(context).primaryColorLight,
                           items: [

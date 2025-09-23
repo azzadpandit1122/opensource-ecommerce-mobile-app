@@ -8,13 +8,12 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
 class CheckoutAddressList extends StatefulWidget {
-  final  AddressModel addressModel;
+  final AddressModel addressModel;
 
-  const CheckoutAddressList({Key? key, required this.addressModel}) : super(key: key);
+  const CheckoutAddressList({super.key, required this.addressModel});
 
   @override
   State<CheckoutAddressList> createState() => _CheckoutAddressListState();
@@ -46,14 +45,15 @@ class _CheckoutAddressListState extends State<CheckoutAddressList> {
   }
 
   _getAddressList() {
-    return BlocBuilder<CheckOutBloc, CheckOutBaseState>(builder: (context, state){
-      if(state is CheckOutLoaderState){
+    return BlocBuilder<CheckOutBloc, CheckOutBaseState>(
+        builder: (context, state) {
+      if (state is CheckOutLoaderState) {
         loading = true;
       }
 
-      if(state is CheckOutAddressState){
+      if (state is CheckOutAddressState) {
         loading = false;
-        if(state.addressModel != null){
+        if (state.addressModel != null) {
           address = state.addressModel!;
         }
       }
@@ -67,7 +67,8 @@ class _CheckoutAddressListState extends State<CheckoutAddressList> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          Navigator.of(context).pop(address.addressData?[index]);
+                          Navigator.of(context)
+                              .pop(address.addressData?[index]);
                         },
                         child: Card(
                           elevation: 2,
@@ -94,13 +95,14 @@ class _CheckoutAddressListState extends State<CheckoutAddressList> {
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: ("Mobile: "),
-                                          style: TextStyle(color: Colors.grey[600])),
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
                                       TextSpan(
                                           text: (address
-                                              .addressData![index].phone ??
+                                                  .addressData![index].phone ??
                                               ""),
-                                          style:
-                                          const TextStyle(fontWeight: FontWeight.bold)),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold)),
                                     ],
                                   ),
                                 ),
@@ -126,7 +128,7 @@ class _CheckoutAddressListState extends State<CheckoutAddressList> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(AppSizes.spacingMedium, 0, 0, 0),
       child: Text(
-        "${addressModel.addressData?[index].firstName} ${addressModel.addressData?[index].lastName}\n\n${addressModel.addressData![index].address1!.replaceAll("[", "").replaceAll("]", "")},${addressModel.addressData![index].city!},${addressModel.addressData![index].stateName ?? ""}${addressModel.addressData![index].countryName??''},${addressModel.addressData![index].postcode!}",
+        "${addressModel.addressData?[index].firstName} ${addressModel.addressData?[index].lastName}\n\n${addressModel.addressData![index].address1!.replaceAll("[", "").replaceAll("]", "")},${addressModel.addressData![index].city!},${addressModel.addressData![index].stateName ?? ""}${addressModel.addressData![index].countryName ?? ''},${addressModel.addressData![index].postcode!}",
         style: const TextStyle(fontSize: AppSizes.spacingLarge),
       ),
     );

@@ -8,13 +8,12 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/sign_in/utils/index.dart';
 
 import '../../../utils/server_configuration.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -24,8 +23,7 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
   SignInModel? _signInModel;
   final _signInFormKey = GlobalKey<FormState>();
   final bool _autoValidate = false;
-  final passwordController = TextEditingController(
-      text: demoPassword);
+  final passwordController = TextEditingController(text: demoPassword);
   final emailController = TextEditingController(text: demoEmail);
   String passwordValue = "";
   String emailValue = "";
@@ -79,12 +77,16 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
               Future.delayed(const Duration(seconds: 3)).then((value) async {
                 appStoragePref.setCustomerLoggedIn(true);
                 appStoragePref.setCustomerName(_signInModel?.data?.name ?? "");
-                appStoragePref.setCustomerEmail(_signInModel?.data?.email ?? "");
-                appStoragePref.setCustomerToken("${_signInModel?.tokenType} ${_signInModel?.token}");
-                appStoragePref.setCustomerId(int.parse(_signInModel?.data?.id ?? ""));
-                appStoragePref.setCustomerImage(_signInModel?.data?.imageUrl ?? "");
+                appStoragePref
+                    .setCustomerEmail(_signInModel?.data?.email ?? "");
+                appStoragePref.setCustomerToken(
+                    "${_signInModel?.tokenType} ${_signInModel?.token}");
+                appStoragePref
+                    .setCustomerId(int.parse(_signInModel?.data?.id ?? ""));
+                appStoragePref
+                    .setCustomerImage(_signInModel?.data?.imageUrl ?? "");
                 checkFingerprint(fingerPrint: state.fingerPrint);
-                if(context.mounted){
+                if (context.mounted) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       home, (Route<dynamic> route) => false);
                 }
@@ -104,13 +106,16 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
               Future.delayed(const Duration(seconds: 3)).then((value) async {
                 await appStoragePref.setCustomerLoggedIn(true);
                 appStoragePref.setCustomerName(_signInModel?.data?.name ?? "");
-                appStoragePref.setCustomerEmail(
-                    _signInModel?.data?.email ?? "");
-                appStoragePref.setCustomerToken("${_signInModel?.tokenType} ${_signInModel?.token}");
-                appStoragePref.setCustomerId(int.parse(_signInModel?.data?.id ?? ""));
+                appStoragePref
+                    .setCustomerEmail(_signInModel?.data?.email ?? "");
+                appStoragePref.setCustomerToken(
+                    "${_signInModel?.tokenType} ${_signInModel?.token}");
+                appStoragePref
+                    .setCustomerId(int.parse(_signInModel?.data?.id ?? ""));
                 checkFingerprint();
-                if(context.mounted){
-                  Navigator.of(context).pushNamedAndRemoveUntil(home, (Route<dynamic> route) => false);
+                if (context.mounted) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      home, (Route<dynamic> route) => false);
                 }
               });
             } else {
@@ -130,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
     if (state is FetchSignInState) {
       if (state.status == SignInStatus.success) {
         _signInModel = state.signInModel;
-        if(_signInModel?.data != null) {}
+        if (_signInModel?.data != null) {}
       }
       if (state.status == SignInStatus.fail) {}
     } else if (state is SocialLoginState) {
@@ -152,7 +157,8 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
       child: Center(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.spacingWide),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppSizes.spacingWide),
             child: Form(
               key: _signInFormKey,
               autovalidateMode: _autoValidate
@@ -161,8 +167,8 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CommonWidgets().getTextField(
-                      context, emailController, StringConstants.signInEmailHint.localized(),
+                  CommonWidgets().getTextField(context, emailController,
+                      StringConstants.signInEmailHint.localized(),
                       label: StringConstants.signInEmailLabel.localized(),
                       isRequired: true, validator: (email) {
                     if (email!.isEmpty) {
@@ -188,7 +194,8 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
                     }
                     return null;
                   },
-                      validLabel: StringConstants.validPasswordLabel.localized(),
+                      validLabel:
+                          StringConstants.validPasswordLabel.localized(),
                       emailValue: passwordValue,
                       showPassword: showPassword,
                       suffixIcon: IconButton(
@@ -210,7 +217,8 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
                     },
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-                      child: Text("${StringConstants.forgetPassword.localized()}?",
+                      child: Text(
+                          "${StringConstants.forgetPassword.localized()}?",
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge
@@ -230,7 +238,12 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
                     },
                     child: Text(
                         StringConstants.signIn.localized().toUpperCase(),
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(color:  Theme.of(context).colorScheme.secondaryContainer,)),
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
+                                )),
                   ),
                   const SizedBox(height: AppSizes.spacingMedium),
                   MaterialButton(
@@ -248,8 +261,16 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
                       Navigator.pushNamed(context, signUp, arguments: false);
                     },
                     child: Text(
-                        StringConstants.createAnAccount.localized().toUpperCase(),
-                        style: Theme.of(context).textTheme.labelMedium?.copyWith(color:Theme.of(context).colorScheme.onBackground)),
+                        StringConstants.createAnAccount
+                            .localized()
+                            .toUpperCase(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground)),
                   ),
                   const SizedBox(height: AppSizes.spacingWide),
                   if ((appStoragePref.getFingerPrintUser()).isNotEmpty)
@@ -280,7 +301,9 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
     if (_signInFormKey.currentState!.validate()) {
       showLoadingDialog();
       signInBloc?.add(FetchSignInEvent(
-          email: emailController.text, password: passwordController.text, fingerPrint: false));
+          email: emailController.text,
+          password: passwordController.text,
+          fingerPrint: false));
     }
   }
 
@@ -327,7 +350,8 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
   final LocalAuthentication auth = LocalAuthentication(); //----Initialization
   void checkFingerprint({bool fingerPrint = false}) {
     auth.isDeviceSupported().then((value) {
-      if ((value) && !fingerPrint &&
+      if ((value) &&
+          !fingerPrint &&
           ((appStoragePref.getFingerPrintUser()).isEmpty ||
               (emailController.text).toString() !=
                   (appStoragePref.getFingerPrintUser()))) {
@@ -386,44 +410,43 @@ class _SignInScreenState extends State<SignInScreen> with EmailValidator {
   void startAuthentication(bool alreadyLogin) async {
     auth.isDeviceSupported().then((value) async {
       if (value) {
-        try{
+        try {
           bool didAuthenticate = await auth.authenticate(
               localizedReason: StringConstants.fingerPrintLogin.localized(),
-              options: const AuthenticationOptions(biometricOnly: true)
-          );
+              options: const AuthenticationOptions(biometricOnly: true));
           if (didAuthenticate) {
             if (alreadyLogin) {
               appStoragePref.setFingerPrintUser(emailController.text);
               appStoragePref.setFingerPrintPassword(passwordController.text);
-              if(mounted){
+              if (mounted) {
                 _signInModel?.data != null
                     ? ShowMessage.successNotification(
-                    _signInModel?.message ?? "", context)
-                    : ShowMessage.successNotification(successMsg ?? "", context);
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil(home, (Route<dynamic> route) => false);
+                        _signInModel?.message ?? "", context)
+                    : ShowMessage.successNotification(
+                        successMsg ?? "", context);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    home, (Route<dynamic> route) => false);
               }
-
             } else {
               signInBloc?.add(FetchSignInEvent(
                   email: appStoragePref.getFingerPrintUser(),
-                  password: appStoragePref.getFingerPrintPassword() ?? "", fingerPrint: true));
+                  password: appStoragePref.getFingerPrintPassword() ?? "",
+                  fingerPrint: true));
               showLoadingDialog();
             }
           } else {
-            if(mounted) {
+            if (mounted) {
               ShowMessage.errorNotification(
                   StringConstants.authenticationFailed.localized(), context);
             }
           }
-        }
-        catch(e,stackTrace) {
+        } catch (e, stackTrace) {
           debugPrint("error --> ${e.toString()}");
           debugPrint("StackTrace --> $stackTrace");
         }
       } else {
-          ShowMessage.errorNotification(
-              StringConstants.authenticationFailed.localized(), context);
+        ShowMessage.errorNotification(
+            StringConstants.authenticationFailed.localized(), context);
       }
     });
   }

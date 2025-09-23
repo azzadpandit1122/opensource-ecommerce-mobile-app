@@ -18,7 +18,7 @@ export 'package:location/location.dart';
 class LocationScreen extends StatefulWidget {
   final String? address;
 
-  const LocationScreen({Key? key, this.address}) : super(key: key);
+  const LocationScreen({super.key, this.address});
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
@@ -218,13 +218,13 @@ class _LocationScreenState extends State<LocationScreen> {
     try {
       List<geocoding.Location> locations = await locationFromAddress(address);
       if (locations.isNotEmpty) {
-        var location = locations?.firstOrNull;
+        var location = locations.firstOrNull;
         latitude = location?.latitude;
         longitude = location?.longitude;
       } else {
         location = await currentLocation.getLocation();
-        latitude = location?.latitude;
-        longitude = location?.longitude;
+        latitude = location.latitude;
+        longitude = location.longitude;
       }
     } catch (e) {
       if (!mounted) return;

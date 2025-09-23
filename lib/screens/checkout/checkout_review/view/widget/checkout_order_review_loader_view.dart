@@ -8,11 +8,10 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
 class CheckoutOrderReviewLoaderView extends StatelessWidget {
-  const CheckoutOrderReviewLoaderView({Key? key}) : super(key: key);
+  const CheckoutOrderReviewLoaderView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,6 @@ class CheckoutOrderReviewLoaderView extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               items: 3,
               builder: const SizedBox(
                   height: 160,
@@ -38,7 +36,6 @@ class CheckoutOrderReviewLoaderView extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               builder: const SizedBox(
                   height: 125,
                   child: Card(

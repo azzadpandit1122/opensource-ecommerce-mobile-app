@@ -1,9 +1,6 @@
 import 'package:bagisto_app_demo/utils/index.dart';
 import 'package:bagisto_app_demo/utils/shared_preference_keys.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import '../utils/app_constants.dart';
-import 'dart:developer';
 
 class GdprWebView extends StatefulWidget {
   final String? redirectUrl;
@@ -30,7 +27,7 @@ class GdprWebViewState extends State<GdprWebView> {
   Future<void> _prepareCookies() async {
     final defaultCookies = appStoragePref.getCookieGet();
     final authToken =
-        appStoragePref.getCustomerToken()?.replaceFirst('Bearer ', '') ?? '';
+        appStoragePref.getCustomerToken().replaceFirst('Bearer ', '') ?? '';
     String? bagistoSession;
     for (var cookie in defaultCookies.split(';')) {
       var parts = cookie.trim().split('=');
@@ -129,11 +126,12 @@ class GdprWebViewState extends State<GdprWebView> {
                     });
                   },
                   onReceivedError: (controller, request, error) {
-                    debugPrint('Page finished loading with error : ${error.description}');
+                    debugPrint(
+                        'Page finished loading with error : ${error.description}');
                   },
                   shouldOverrideUrlLoading:
                       (controller, navigationAction) async {
-                        debugPrint('allowing navigation to $navigationAction');
+                    debugPrint('allowing navigation to $navigationAction');
                     return NavigationActionPolicy.ALLOW;
                   },
                 ),

@@ -15,7 +15,6 @@ import '../../../data_model/app_route_arguments.dart';
 import '../../../utils/app_global_data.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/check_internet_connection.dart';
-import '../../../utils/prefetching_helper.dart';
 import '../../../utils/route_constants.dart';
 import '../../../utils/string_constants.dart';
 import '../../../widgets/common_widgets.dart';
@@ -76,7 +75,7 @@ class _NewProductViewState extends State<NewProductView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: AppSizes.screenWidth / 1.5,
                 child: Text(
                   widget.title,
@@ -347,9 +346,8 @@ class _NewProductViewState extends State<NewProductView> {
                                                             StringConstants
                                                                 .virtual) &&
                                                     ((val?.customizableOptions ??
-                                                                [])
-                                                            .length ==
-                                                        0)) {
+                                                            [])
+                                                        .isEmpty)) {
                                                   homepageEvent(
                                                       val,
                                                       HomePageAction.addToCart,

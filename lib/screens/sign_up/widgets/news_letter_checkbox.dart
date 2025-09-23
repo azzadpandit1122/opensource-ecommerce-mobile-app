@@ -1,7 +1,6 @@
 import 'package:bagisto_app_demo/screens/account/utils/index.dart';
 import 'package:flutter/material.dart';
 
-
 class NewsLetterCheckbox extends StatefulWidget {
   final Function(bool) isCheckboxSelected;
   final String? title;
@@ -11,14 +10,14 @@ class NewsLetterCheckbox extends StatefulWidget {
   final String errorText;
 
   const NewsLetterCheckbox(
-      this.isCheckboxSelected,
-      this.title,
-      this.isFromSignUp,
-      this.initialSelection, {
-        this.showError = false,
-        this.errorText = '',
-        Key? key,
-      }) : super(key: key);
+    this.isCheckboxSelected,
+    this.title,
+    this.isFromSignUp,
+    this.initialSelection, {
+    this.showError = false,
+    this.errorText = '',
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -83,4 +82,3 @@ class _checkboxState extends State<NewsLetterCheckbox> {
     );
   }
 }
-

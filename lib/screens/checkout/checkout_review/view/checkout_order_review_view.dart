@@ -8,29 +8,24 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 import 'package:bagisto_app_demo/screens/checkout/data_model/save_payment_model.dart';
 
 //ignore: must_be_immutable
 class CheckoutOrderReviewView extends StatefulWidget {
-  final  String? paymentId;
-  final Function(
-    String, CartModel?
-  )? callBack;
+  final String? paymentId;
+  final Function(String, CartModel?)? callBack;
 
   final CartScreenBloc? cartScreenBloc;
 
-   CartModel? cartDetailsModel;
+  CartModel? cartDetailsModel;
 
-   CheckoutOrderReviewView(
-      {Key? key,
+  CheckoutOrderReviewView(
+      {super.key,
       this.paymentId,
       this.callBack,
       this.cartDetailsModel,
-      this.cartScreenBloc})
-      : super(key: key);
+      this.cartScreenBloc});
 
   @override
   State<CheckoutOrderReviewView> createState() =>
@@ -43,10 +38,10 @@ class _CheckoutOrderReviewViewState extends State<CheckoutOrderReviewView> {
   @override
   void initState() {
     checkOutReviewBloc = context.read<CheckOutReviewBloc>();
-    checkOutReviewBloc?.add(CheckOutReviewSavePaymentEvent(paymentMethod: widget.paymentId));
+    checkOutReviewBloc
+        ?.add(CheckOutReviewSavePaymentEvent(paymentMethod: widget.paymentId));
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,20 +64,22 @@ class _CheckoutOrderReviewViewState extends State<CheckoutOrderReviewView> {
       if (state.status == CheckOutReviewStatus.success) {
         if (widget.callBack != null) {
           widget.cartDetailsModel = state.savePaymentModel?.cart;
-          widget.callBack!(state
-                  .savePaymentModel?.cart?.formattedPrice?.grandTotal
-                  .toString() ??
-              "", state.savePaymentModel?.cart);
+          widget.callBack!(
+              state.savePaymentModel?.cart?.formattedPrice?.grandTotal
+                      .toString() ??
+                  "",
+              state.savePaymentModel?.cart);
         }
 
         return _reviewOrder(state.savePaymentModel!);
       }
       if (state.status == CheckOutReviewStatus.fail) {
-        return ErrorMessage.errorMsg(StringConstants.somethingWrong.localized());
+        return ErrorMessage.errorMsg(
+            StringConstants.somethingWrong.localized());
       }
     }
     if (state is CheckOutReviewInitialState) {
-      return  const CheckoutOrderReviewLoaderView();
+      return const CheckoutOrderReviewLoaderView();
     }
 
     return const SizedBox();
@@ -99,8 +96,8 @@ class _CheckoutOrderReviewViewState extends State<CheckoutOrderReviewView> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.fromLTRB(0,
-                    AppSizes.spacingNormal, 0, AppSizes.spacingNormal),
+                padding: const EdgeInsets.fromLTRB(
+                    0, AppSizes.spacingNormal, 0, AppSizes.spacingNormal),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -109,22 +106,31 @@ class _CheckoutOrderReviewViewState extends State<CheckoutOrderReviewView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          StringConstants.billingAddress.localized().toUpperCase(),
+                          StringConstants.billingAddress
+                              .localized()
+                              .toUpperCase(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: AppSizes.spacingLarge,
                           ),
                         ),
                         CommonWidgets().divider(),
-                        savePaymentModel.cart?.billingAddress != null ?_getFormattedBillingAddress(savePaymentModel): const Text('N/A'),
-                        savePaymentModel.cart?.billingAddress != null ?const SizedBox(height: AppSizes.spacingSmall): const SizedBox.shrink(),
-                        savePaymentModel.cart?.billingAddress != null ?Text(
-                          StringConstants.contact.localized() +
-                              (savePaymentModel.cart?.billingAddress?.phone ??
-                                  ""),
-                          style: const TextStyle(
-                              fontSize: AppSizes.spacingLarge),
-                        ): const SizedBox.shrink(),
+                        savePaymentModel.cart?.billingAddress != null
+                            ? _getFormattedBillingAddress(savePaymentModel)
+                            : const Text('N/A'),
+                        savePaymentModel.cart?.billingAddress != null
+                            ? const SizedBox(height: AppSizes.spacingSmall)
+                            : const SizedBox.shrink(),
+                        savePaymentModel.cart?.billingAddress != null
+                            ? Text(
+                                StringConstants.contact.localized() +
+                                    (savePaymentModel
+                                            .cart?.billingAddress?.phone ??
+                                        ""),
+                                style: const TextStyle(
+                                    fontSize: AppSizes.spacingLarge),
+                              )
+                            : const SizedBox.shrink(),
                       ],
                     ),
                     const SizedBox(height: AppSizes.spacingLarge),
@@ -140,49 +146,64 @@ class _CheckoutOrderReviewViewState extends State<CheckoutOrderReviewView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        savePaymentModel.cart?.shippingAddress != null ?_getFormattedShippingAddress(savePaymentModel): const Text('N/A'),
-                        savePaymentModel.cart?.shippingAddress != null ?const SizedBox(height: AppSizes.spacingSmall): const SizedBox.shrink(),
-                        savePaymentModel.cart?.shippingAddress != null ?Text(
-                          StringConstants.contact.localized() +
-                              (savePaymentModel.cart?.shippingAddress?.phone ??
-                                  ""),
-                          style: const TextStyle(
-                              fontSize: AppSizes.spacingLarge),
-                        ): const SizedBox.shrink(),
+                        savePaymentModel.cart?.shippingAddress != null
+                            ? _getFormattedShippingAddress(savePaymentModel)
+                            : const Text('N/A'),
+                        savePaymentModel.cart?.shippingAddress != null
+                            ? const SizedBox(height: AppSizes.spacingSmall)
+                            : const SizedBox.shrink(),
+                        savePaymentModel.cart?.shippingAddress != null
+                            ? Text(
+                                StringConstants.contact.localized() +
+                                    (savePaymentModel
+                                            .cart?.shippingAddress?.phone ??
+                                        ""),
+                                style: const TextStyle(
+                                    fontSize: AppSizes.spacingLarge),
+                              )
+                            : const SizedBox.shrink(),
                       ],
                     ),
                     const SizedBox(height: AppSizes.spacingLarge),
-                    savePaymentModel
-                        .cart?.selectedShippingRate?.methodTitle != ""?Text(
-                      StringConstants.shippingMethods.localized().toUpperCase(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppSizes.spacingLarge,
-                      ),
-                    ):const SizedBox.shrink(),
-                    savePaymentModel
-                        .cart?.selectedShippingRate != null?const SizedBox(height: AppSizes.spacingSmall):const SizedBox.shrink(),
-                    savePaymentModel
-                        .cart?.selectedShippingRate != null?const Divider(
-                      height: 1,
-                      thickness: 1,
-                    ):const SizedBox.shrink(),
-                    savePaymentModel
-                        .cart?.selectedShippingRate != null?const SizedBox(height: AppSizes.spacingSmall):const SizedBox.shrink(),
-                    savePaymentModel
-                        .cart?.selectedShippingRate != null?Wrap(
-                      children: [
-                        Text(
-                          savePaymentModel
-                                  .cart?.selectedShippingRate?.methodTitle ??
-                              "",
-                          style: const TextStyle(
-                            fontSize: 16,
-                            // color: Colors.grey,
-                          ),
-                        )
-                      ],
-                    ):const SizedBox.shrink(),
+                    savePaymentModel.cart?.selectedShippingRate?.methodTitle !=
+                            ""
+                        ? Text(
+                            StringConstants.shippingMethods
+                                .localized()
+                                .toUpperCase(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppSizes.spacingLarge,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    savePaymentModel.cart?.selectedShippingRate != null
+                        ? const SizedBox(height: AppSizes.spacingSmall)
+                        : const SizedBox.shrink(),
+                    savePaymentModel.cart?.selectedShippingRate != null
+                        ? const Divider(
+                            height: 1,
+                            thickness: 1,
+                          )
+                        : const SizedBox.shrink(),
+                    savePaymentModel.cart?.selectedShippingRate != null
+                        ? const SizedBox(height: AppSizes.spacingSmall)
+                        : const SizedBox.shrink(),
+                    savePaymentModel.cart?.selectedShippingRate != null
+                        ? Wrap(
+                            children: [
+                              Text(
+                                savePaymentModel.cart?.selectedShippingRate
+                                        ?.methodTitle ??
+                                    "",
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  // color: Colors.grey,
+                                ),
+                              )
+                            ],
+                          )
+                        : const SizedBox.shrink(),
                     const SizedBox(height: AppSizes.spacingLarge),
                     Text(
                       StringConstants.paymentMethods.localized().toUpperCase(),
@@ -228,8 +249,9 @@ class _CheckoutOrderReviewViewState extends State<CheckoutOrderReviewView> {
     );
   }
 
-  reload(){
-    checkOutReviewBloc?.add(CheckOutReviewSavePaymentEvent(paymentMethod: widget.paymentId));
+  reload() {
+    checkOutReviewBloc
+        ?.add(CheckOutReviewSavePaymentEvent(paymentMethod: widget.paymentId));
   }
 
   _getFormattedBillingAddress(SavePayment savePaymentModel) {

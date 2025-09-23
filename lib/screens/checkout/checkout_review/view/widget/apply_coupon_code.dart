@@ -1,5 +1,3 @@
-
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -10,19 +8,20 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import '../../../data_model/save_payment_model.dart';
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
-
 
 class ApplyCouponCode extends StatefulWidget {
   final SavePayment savePaymentModel;
   final CartScreenBloc? cartScreenBloc;
   final CartModel? cartDetailsModel;
   final Function? callback;
-  const ApplyCouponCode({Key? key, required this.savePaymentModel, this.cartScreenBloc, this.cartDetailsModel,
-  this.callback}) : super(key: key);
+  const ApplyCouponCode(
+      {super.key,
+      required this.savePaymentModel,
+      this.cartScreenBloc,
+      this.cartDetailsModel,
+      this.callback});
 
   @override
   State<ApplyCouponCode> createState() => _ApplyCouponCodeState();
@@ -32,7 +31,7 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
   final _discountCouponFormKey = GlobalKey<FormState>();
   final bool _autoValidate = false;
   final _discountController = TextEditingController();
-  bool  showButton = false;
+  bool showButton = false;
 
   @override
   void initState() {
@@ -42,10 +41,10 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         Theme(
-          data:Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
             tilePadding: EdgeInsets.zero,
             initiallyExpanded: true,
@@ -72,7 +71,8 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                       child: CommonWidgets().getTextField(
                         context,
                         _discountController,
-                        StringConstants.cartPageEnterDiscountCodeLabel.localized(),
+                        StringConstants.cartPageEnterDiscountCodeLabel
+                            .localized(),
                         validLabel: "",
                         validator: (discountCode) {
                           if ((discountCode?.trim() ?? "").isEmpty) {
@@ -91,56 +91,58 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                     child: Padding(
                       padding: EdgeInsets.only(
                           left: AppSizes.spacingNormal,
-                          bottom: showButton
-                              ? AppSizes.spacingWide
-                              : 0,
+                          bottom: showButton ? AppSizes.spacingWide : 0,
                           right: 3),
                       child: MaterialButton(
-                        height: AppSizes.buttonHeight+5,
+                        height: AppSizes.buttonHeight + 5,
                         color: Theme.of(context).colorScheme.onBackground,
                         elevation: 0.0,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppSizes.spacingSmall),
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.spacingSmall),
                         ),
                         onPressed: () {
-                          if (_discountCouponFormKey.currentState!
-                              .validate()) {
+                          if (_discountCouponFormKey.currentState!.validate()) {
                             setState(() {
                               showButton = false;
                             });
-                            if (widget.cartDetailsModel?.couponCode ==
-                                null) {
-                              widget.cartScreenBloc?.add(AddCouponCartEvent(
-                                  _discountController.text));
-                            } else {
+                            if (widget.cartDetailsModel?.couponCode == null) {
                               widget.cartScreenBloc?.add(
-                                  RemoveCouponCartEvent(
-                                      widget.cartDetailsModel));
+                                  AddCouponCartEvent(_discountController.text));
+                            } else {
+                              widget.cartScreenBloc?.add(RemoveCouponCartEvent(
+                                  widget.cartDetailsModel));
                               _discountController.text = "";
                             }
 
-                            Future.delayed(const Duration(seconds: 1)).then((value) {
-                              if(widget.callback != null){
+                            Future.delayed(const Duration(seconds: 1))
+                                .then((value) {
+                              if (widget.callback != null) {
                                 widget.callback!();
                               }
                             });
                           }
-
                         },
-                        child: widget.cartDetailsModel?.couponCode ==
-                            null ||
-                            widget.cartDetailsModel?.couponCode == ''
+                        child: widget.cartDetailsModel?.couponCode == null ||
+                                widget.cartDetailsModel?.couponCode == ''
                             ? Text(
-                          StringConstants.apply.localized().toUpperCase(),
-                          style:  TextStyle(
-                              fontSize: AppSizes.spacingLarge,
-                              fontWeight: FontWeight.w500,
-                          color: Theme.of(context).colorScheme.secondaryContainer),
-                        )
-                            : Text(StringConstants.remove.localized(),  style:  TextStyle(
-                            fontSize: AppSizes.spacingLarge,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).colorScheme.secondaryContainer),),
+                                StringConstants.apply.localized().toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: AppSizes.spacingLarge,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer),
+                              )
+                            : Text(
+                                StringConstants.remove.localized(),
+                                style: TextStyle(
+                                    fontSize: AppSizes.spacingLarge,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer),
+                              ),
                       ),
                     ),
                   )
@@ -151,7 +153,7 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
         ),
         const SizedBox(height: AppSizes.spacingNormal),
         Theme(
-          data:Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
               initiallyExpanded: true,
               tilePadding: EdgeInsets.zero,
@@ -167,43 +169,43 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          StringConstants.subTotal.localized(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          widget.savePaymentModel.cart?.formattedPrice?.subTotal
-                              .toString() ??
-                              "",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold),
-                        )
-                    ],
-                  ),
-                ),
-                widget.savePaymentModel.cart?.selectedShippingRate!=null?Container(
-                  padding: const EdgeInsets.all(AppSizes.spacingSmall),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        StringConstants.shippingHandling.localized(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500),
+                        StringConstants.subTotal.localized(),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        widget.savePaymentModel.cart?.selectedShippingRate
-                            ?.formattedPrice?.price ??
+                        widget.savePaymentModel.cart?.formattedPrice?.subTotal
+                                .toString() ??
                             "",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
-                ): const SizedBox.shrink(),
+                ),
+                widget.savePaymentModel.cart?.selectedShippingRate != null
+                    ? Container(
+                        padding: const EdgeInsets.all(AppSizes.spacingSmall),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              StringConstants.shippingHandling.localized(),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              widget.savePaymentModel.cart?.selectedShippingRate
+                                      ?.formattedPrice?.price ??
+                                  "",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      )
+                    : const SizedBox.shrink(),
                 Container(
                   padding: const EdgeInsets.all(AppSizes.spacingSmall),
                   child: Row(
@@ -212,14 +214,17 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                     children: [
                       Text(
                         StringConstants.discount.localized(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
-
-                      Text( widget.savePaymentModel.cart?.formattedPrice?.discountAmount !=null?
-                      widget.savePaymentModel.cart?.formattedPrice?.discountAmount
-                          .toString() ??
-                          "":"${GlobalData.currencySymbol }0.0",
+                      Text(
+                        widget.savePaymentModel.cart?.formattedPrice
+                                    ?.discountAmount !=
+                                null
+                            ? widget.savePaymentModel.cart?.formattedPrice
+                                    ?.discountAmount
+                                    .toString() ??
+                                ""
+                            : "${GlobalData.currencySymbol}0.0",
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -229,17 +234,21 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                   height: AppSizes.spacingMedium,
                 ),
                 Container(
-                 // margin:const EdgeInsets.symmetric(horizontal: AppSizes.spacingMedium, vertical: 0),
+                  // margin:const EdgeInsets.symmetric(horizontal: AppSizes.spacingMedium, vertical: 0),
                   decoration: BoxDecoration(
                     //color: Colors.red,
                     border: Border(
-                      top: BorderSide(color: Colors.grey.shade300, width: 1), // Left border
-                      bottom: BorderSide(color:  Colors.grey.shade300, width: 1), // Right border
+                      top: BorderSide(
+                          color: Colors.grey.shade300, width: 1), // Left border
+                      bottom: BorderSide(
+                          color: Colors.grey.shade300,
+                          width: 1), // Right border
                     ),
                   ),
                   child: ExpansionTile(
                     iconColor: Colors.grey,
-                    tilePadding: const EdgeInsets.symmetric(horizontal:AppSizes.spacingSmall, vertical: 0),
+                    tilePadding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.spacingSmall, vertical: 0),
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,38 +258,45 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                           style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "${widget.savePaymentModel.cart?.formattedPrice?.taxTotal?.toString() ?? ""}",
+                          widget.savePaymentModel.cart?.formattedPrice?.taxTotal
+                                  ?.toString() ??
+                              "",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     children: [
                       Container(
-                         padding: const EdgeInsets.fromLTRB(AppSizes.spacingSmall, 0, AppSizes.spacingSmall, 0),
+                        padding: const EdgeInsets.fromLTRB(
+                            AppSizes.spacingSmall, 0, AppSizes.spacingSmall, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ...?widget.savePaymentModel.cart?.appliedTaxRates?.map((taxRate) {
+                            ...?widget.savePaymentModel.cart?.appliedTaxRates
+                                ?.map((taxRate) {
                               return Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "${taxRate.taxName.trim()}",
-                                        style: const TextStyle(fontWeight: FontWeight.normal),
+                                        taxRate.taxName.trim(),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal),
                                       ),
                                       Text(
-                                        "${taxRate.totalAmount}",
-                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                        taxRate.totalAmount,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
-
                                 ],
                               );
-                            }).toList(),
+                            }),
                           ],
                         ),
                       ),
@@ -298,15 +314,13 @@ class _ApplyCouponCodeState extends State<ApplyCouponCode> {
                     children: [
                       Text(
                         StringConstants.grandTotal.localized(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                       Text(
                         widget.savePaymentModel.cart?.formattedPrice?.grandTotal
-                            .toString() ??
+                                .toString() ??
                             "",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
                   ),

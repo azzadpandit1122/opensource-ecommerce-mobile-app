@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -9,13 +8,13 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/recent_product/utils/index.dart';
 import 'package:hive/hive.dart';
+
 class RecentView extends StatefulWidget {
   final bool? isLogin;
 
-  const RecentView({Key? key, this.isLogin}) : super(key: key);
+  const RecentView({super.key, this.isLogin});
 
   @override
   State<RecentView> createState() => _RecentViewState();
@@ -63,7 +62,7 @@ class _RecentViewState extends State<RecentView> {
   Widget build(BuildContext context) {
     return ((_recentProductList ?? []).isNotEmpty)
         ? SizedBox(
-                height: (MediaQuery.of(context).size.width / 1.5) + 220,
+            height: (MediaQuery.of(context).size.width / 1.5) + 220,
             child: NewProductView(
                 title: StringConstants.recentProducts.localized(),
                 isLogin: widget.isLogin,

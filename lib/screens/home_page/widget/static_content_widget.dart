@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bagisto_app_demo/utils/extension.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import '../data_model/theme_customization.dart';
 import '../utils/index.dart';
 
@@ -13,11 +12,11 @@ class StaticContentWidget extends StatefulWidget {
   final List<LinkModel>? links;
 
   const StaticContentWidget({
-    Key? key,
+    super.key,
     required this.html,
     this.css,
     this.links,
-  }) : super(key: key);
+  });
 
   @override
   State<StaticContentWidget> createState() => _StaticContentWidgetState();
@@ -151,7 +150,7 @@ class _StaticContentWidgetState extends State<StaticContentWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    log("Building StaticContentWidget with HTML: ${_fullHtml}");
+    log("Building StaticContentWidget with HTML: $_fullHtml");
 
     return Column(
       children: [

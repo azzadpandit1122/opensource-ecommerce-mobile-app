@@ -14,8 +14,7 @@ class CmsContent extends StatefulWidget {
   final String? title;
   final int? index;
   final int? id;
-  const CmsContent({Key? key, this.title, this.id, this.index})
-      : super(key: key);
+  const CmsContent({super.key, this.title, this.id, this.index});
   @override
   State<CmsContent> createState() => _CmsContentState();
 }

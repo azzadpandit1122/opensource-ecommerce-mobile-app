@@ -14,24 +14,23 @@ import 'package:flutter/material.dart';
 
 class BadgeIcon extends StatelessWidget {
   const BadgeIcon(
-      {Key? key,
-        this.icon,
-        this.height=15,
-        this.width=15,
-        this.badgeCount = 0,
-        this.showIfZero = false,
-        this.badgeColor = Colors.red,
-        TextStyle? badgeTextStyle})
+      {super.key,
+      this.icon,
+      this.height = 15,
+      this.width = 15,
+      this.badgeCount = 0,
+      this.showIfZero = false,
+      this.badgeColor = Colors.red,
+      TextStyle? badgeTextStyle})
       : badgeTextStyle = badgeTextStyle ??
-      const TextStyle(
-        color: Colors.white,
-        fontSize: 8,
-      ),
-        super(key: key);
+            const TextStyle(
+              color: Colors.white,
+              fontSize: 8,
+            );
   final Widget? icon;
   final int badgeCount;
-  final double  height;
-  final double  width;
+  final double height;
+  final double width;
   final bool showIfZero;
   final Color badgeColor;
   final TextStyle badgeTextStyle;
@@ -45,26 +44,26 @@ class BadgeIcon extends StatelessWidget {
   }
 
   Widget badge(int count) => Positioned(
-    right: 10,
-    top: 6,
-    child: new Container(
-      padding: const EdgeInsets.all(1),
-      decoration: new BoxDecoration(
-        color: badgeColor,
-        borderRadius: BorderRadius.circular(8.5),
-      ),
-      constraints:  BoxConstraints(
-        minWidth: width,
-        minHeight: height,
-      ),
-      child: Text(
-        count.toString(),
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 10,
+        right: 10,
+        top: 6,
+        child: new Container(
+          padding: const EdgeInsets.all(1),
+          decoration: new BoxDecoration(
+            color: badgeColor,
+            borderRadius: BorderRadius.circular(8.5),
+          ),
+          constraints: BoxConstraints(
+            minWidth: width,
+            minHeight: height,
+          ),
+          child: Text(
+            count.toString(),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
-        textAlign: TextAlign.center,
-      ),
-    ),
-  );
+      );
 }

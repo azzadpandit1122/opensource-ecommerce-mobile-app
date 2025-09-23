@@ -8,10 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
-
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 import '../../data_model/checkout_save_shipping_model.dart';
 export 'package:bagisto_app_demo/screens/checkout/data_model/checkout_save_shipping_model.dart';
@@ -23,13 +19,13 @@ class CheckoutPaymentView extends StatefulWidget {
   final String? total;
   PaymentMethods? paymentMethods;
 
-   CheckoutPaymentView(
-      {Key? key,
+  CheckoutPaymentView(
+      {super.key,
       this.total,
       this.shippingId,
       this.callBack,
-      this.priceCallback, this.paymentMethods})
-      : super(key: key);
+      this.priceCallback,
+      this.paymentMethods});
 
   @override
   State<CheckoutPaymentView> createState() => _CheckoutPaymentViewState();
@@ -45,14 +41,15 @@ class _CheckoutPaymentViewState extends State<CheckoutPaymentView> {
   _paymentBloc(BuildContext context) {
     CheckOutPaymentBloc checkOutPaymentBloc =
         context.read<CheckOutPaymentBloc>();
-    if((widget.paymentMethods?.paymentMethods ?? []).isEmpty){
+    if ((widget.paymentMethods?.paymentMethods ?? []).isEmpty) {
       checkOutPaymentBloc
           .add(CheckOutPaymentEvent(shippingMethod: widget.shippingId));
     }
     return BlocConsumer<CheckOutPaymentBloc, CheckOutPaymentBaseState>(
       listener: (BuildContext context, CheckOutPaymentBaseState state) {},
       builder: (BuildContext context, CheckOutPaymentBaseState state) {
-        return (widget.paymentMethods?.paymentMethods ?? []).isNotEmpty ? _paymentMethods(widget.paymentMethods!)
+        return (widget.paymentMethods?.paymentMethods ?? []).isNotEmpty
+            ? _paymentMethods(widget.paymentMethods!)
             : buildUI(context, state);
       },
     );
@@ -65,7 +62,8 @@ class _CheckoutPaymentViewState extends State<CheckoutPaymentView> {
         return _paymentMethods(state.checkOutShipping!);
       }
       if (state.status == CheckOutPaymentStatus.fail) {
-        return ErrorMessage.errorMsg(StringConstants.somethingWrong.localized());
+        return ErrorMessage.errorMsg(
+            StringConstants.somethingWrong.localized());
       }
     }
     if (state is CheckOutPaymentInitialState) {
@@ -102,7 +100,8 @@ class _CheckoutPaymentViewState extends State<CheckoutPaymentView> {
           ),
           Card(
             elevation: 2,
-            margin: const EdgeInsets.fromLTRB(0, AppSizes.spacingNormal, 0, AppSizes.spacingSmall),
+            margin: const EdgeInsets.fromLTRB(
+                0, AppSizes.spacingNormal, 0, AppSizes.spacingSmall),
             child: Container(
               padding: const EdgeInsets.all(AppSizes.spacingNormal),
               child: RadioButtonGroup(

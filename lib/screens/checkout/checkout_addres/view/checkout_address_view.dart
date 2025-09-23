@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
 class CheckoutAddressView extends StatefulWidget {
@@ -32,11 +31,13 @@ class CheckoutAddressView extends StatefulWidget {
       String? shippingState,
       String? shippingCity,
       String? shippingPostCode,
-      String? shippingPhone, int billingAddressId, int shippingAddressId,
-      AddressType addressType, bool isShippingSame
-      )? callBack;
+      String? shippingPhone,
+      int billingAddressId,
+      int shippingAddressId,
+      AddressType addressType,
+      bool isShippingSame)? callBack;
 
-  const CheckoutAddressView({Key? key, this.callBack}) : super(key: key);
+  const CheckoutAddressView({super.key, this.callBack});
 
   @override
   State<CheckoutAddressView> createState() => _CheckoutAddressViewState();
@@ -75,8 +76,10 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
         if (state is CheckOutAddressState) {
           if (state.status == CheckOutStatus.success) {
             _addressModel = state.addressModel;
-            billingAddress ??= _addressModel?.addressData?.firstWhereOrNull((element) => element.isDefault ?? false);
-            shippingAddress ??= _addressModel?.addressData?.firstWhereOrNull((element) => element.isDefault ?? false);
+            billingAddress ??= _addressModel?.addressData
+                ?.firstWhereOrNull((element) => element.isDefault ?? false);
+            shippingAddress ??= _addressModel?.addressData
+                ?.firstWhereOrNull((element) => element.isDefault ?? false);
             if (billingAddress == null &&
                 (_addressModel?.addressData?.isNotEmpty ?? false)) {
               billingAddress = _addressModel?.addressData?.first;
@@ -87,7 +90,6 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
             }
 
             callAddressCallback();
-
           }
         }
       },
@@ -102,8 +104,10 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
     if (state is CheckOutAddressState) {
       if (state.status == CheckOutStatus.success) {
         _addressModel = state.addressModel;
-        billingAddress ??= _addressModel?.addressData?.firstWhereOrNull((element) => element.isDefault ?? false);
-        shippingAddress ??= _addressModel?.addressData?.firstWhereOrNull((element) => element.isDefault ?? false);
+        billingAddress ??= _addressModel?.addressData
+            ?.firstWhereOrNull((element) => element.isDefault ?? false);
+        shippingAddress ??= _addressModel?.addressData
+            ?.firstWhereOrNull((element) => element.isDefault ?? false);
         if (billingAddress == null &&
             (_addressModel?.addressData?.isNotEmpty ?? false)) {
           billingAddress = _addressModel?.addressData?.first;
@@ -136,20 +140,20 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
         children: [
           const SizedBox(height: AppSizes.spacingNormal),
           BillingAndShippingAddressView(
-              title: StringConstants.billingAddress,
-              address: billingAddress,
-              billingAddress: billingAddress,
-              shippingAddress: shippingAddress,
-              addressModel: _addressModel,
-              callBack: widget.callBack,
-              isShippingSame: isShippingSame,
-            addressSetCallback: (billing, shipping){
+            title: StringConstants.billingAddress,
+            address: billingAddress,
+            billingAddress: billingAddress,
+            shippingAddress: shippingAddress,
+            addressModel: _addressModel,
+            callBack: widget.callBack,
+            isShippingSame: isShippingSame,
+            addressSetCallback: (billing, shipping) {
               setState(() {
-                if(shipping != null){
+                if (shipping != null) {
                   type = AddressType.shipping;
                   shippingAddress = shipping;
                 }
-                if(billing != null){
+                if (billing != null) {
                   type = AddressType.billing;
                   billingAddress = billing;
                 }
@@ -164,9 +168,9 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
                   onChanged: (bool? value) {
                     setState(() {
                       isShippingSame = value ?? false;
-                      if(isShippingSame){
+                      if (isShippingSame) {
                         type = AddressType.both;
-                        if(billingAddress != null){
+                        if (billingAddress != null) {
                           shippingAddress = billingAddress;
                         }
                         callAddressCallback();
@@ -176,29 +180,30 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
               Text(StringConstants.sameAsBilling.localized()),
             ],
           ),
+
           ///shipping address
-          if(!isShippingSame)
-          BillingAndShippingAddressView(
+          if (!isShippingSame)
+            BillingAndShippingAddressView(
               title: StringConstants.shippingAddress,
               address: shippingAddress,
               shippingAddress: shippingAddress,
               billingAddress: billingAddress,
               addressModel: _addressModel,
               callBack: widget.callBack,
-            isShippingSame: isShippingSame,
-            addressSetCallback: (billing, shipping){
-              setState(() {
-                if(shipping != null){
-                  type = AddressType.shipping;
-                  shippingAddress = shipping;
-                }
-                if(billing != null){
-                  type = AddressType.billing;
-                  billingAddress = billing;
-                }
-              });
-            },
-          ),
+              isShippingSame: isShippingSame,
+              addressSetCallback: (billing, shipping) {
+                setState(() {
+                  if (shipping != null) {
+                    type = AddressType.shipping;
+                    shippingAddress = shipping;
+                  }
+                  if (billing != null) {
+                    type = AddressType.billing;
+                    billingAddress = billing;
+                  }
+                });
+              },
+            ),
         ],
       ),
     );
@@ -230,8 +235,7 @@ class _CheckoutAddressViewState extends State<CheckoutAddressView> {
           int.parse(billingAddress?.id ?? "0"),
           int.parse(shippingAddress?.id ?? "0"),
           type,
-          isShippingSame
-      );
+          isShippingSame);
     }
   }
 }

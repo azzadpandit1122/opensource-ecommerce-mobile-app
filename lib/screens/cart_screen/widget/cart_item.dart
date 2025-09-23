@@ -20,12 +20,11 @@ class CartListItem extends StatelessWidget {
   final Function(bool quantityChanged)? callBack;
 
   const CartListItem(
-      {Key? key,
+      {super.key,
       required this.cartDetailsModel,
       this.cartScreenBloc,
       required this.selectedItems,
-      this.callBack})
-      : super(key: key);
+      this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -149,51 +148,77 @@ class CartListItem extends StatelessWidget {
                                         0,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      final attribute = getAttributesValueFromAdditional(cartDetailsModel.items?[itemIndex].additional)?[index];
-                                      final attributeType = attribute?['attribute_type'];
-                                      final optionLabel = attribute?['option_label'] ?? '';
-                                      final attributeName = attribute?['attribute_name'] ?? '';
-                                      if (attributeType == 'file' && optionLabel.isNotEmpty) {
-                                        final fileUrl = '$baseDomain/storage/$optionLabel';
-                                        final fileName = optionLabel.split('/').last;
+                                      final attribute =
+                                          getAttributesValueFromAdditional(
+                                              cartDetailsModel.items?[itemIndex]
+                                                  .additional)?[index];
+                                      final attributeType =
+                                          attribute?['attribute_type'];
+                                      final optionLabel =
+                                          attribute?['option_label'] ?? '';
+                                      final attributeName =
+                                          attribute?['attribute_name'] ?? '';
+                                      if (attributeType == 'file' &&
+                                          optionLabel.isNotEmpty) {
+                                        final fileUrl =
+                                            '$baseDomain/storage/$optionLabel';
+                                        final fileName =
+                                            optionLabel.split('/').last;
                                         return Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Container(
                                               decoration: BoxDecoration(
-                                                border: Border.all(color: Colors.grey, width: 1),
-                                                borderRadius: BorderRadius.circular(1),
+                                                border: Border.all(
+                                                    color: Colors.grey,
+                                                    width: 1),
+                                                borderRadius:
+                                                    BorderRadius.circular(1),
                                               ),
                                               child: Image.network(
                                                 fileUrl,
                                                 height: 60,
                                                 width: 60,
                                                 fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.insert_drive_file, size: 60),
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
+                                                    const Icon(
+                                                        Icons.insert_drive_file,
+                                                        size: 60),
                                               ),
                                             ),
                                             const SizedBox(height: 8),
                                             Text(
-                                              "${attributeName} - ${fileName}",
+                                              "$attributeName - $fileName",
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey),
                                             ),
-                                            const SizedBox(height: AppSizes.spacingSmall),
+                                            const SizedBox(
+                                                height: AppSizes.spacingSmall),
                                           ],
                                         );
                                       } else {
                                         return Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${attributeName}  - ${optionLabel}",
+                                              "$attributeName  - $optionLabel",
                                               maxLines: 2,
-                                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey),
                                             ),
-                                            const SizedBox(height: AppSizes.spacingSmall),
+                                            const SizedBox(
+                                                height: AppSizes.spacingSmall),
                                           ],
                                         );
                                       }

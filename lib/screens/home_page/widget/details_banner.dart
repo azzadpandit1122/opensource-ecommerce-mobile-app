@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -17,7 +16,7 @@ import '../../../widgets/image_view.dart';
 class DetailsBannerView extends StatelessWidget {
   final String? title;
   final String? imgUrl;
-  const DetailsBannerView({Key? key, this.title, this.imgUrl}) : super(key: key);
+  const DetailsBannerView({super.key, this.title, this.imgUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,8 @@ class DetailsBannerView extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSizes.spacingWide/2),
+          padding:
+              const EdgeInsets.symmetric(vertical: AppSizes.spacingWide / 2),
           child: HtmlWidget(
             title ?? "",
           ),

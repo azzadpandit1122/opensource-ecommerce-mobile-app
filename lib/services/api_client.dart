@@ -9,7 +9,6 @@
  */
 
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:bagisto_app_demo/data_model/account_models/account_update_model.dart';
 import 'package:bagisto_app_demo/data_model/gdpr_models/gdpr_pdf_model.dart';
@@ -87,7 +86,7 @@ class ApiClient {
       data.putIfAbsent(
           "graphqlErrors",
           () =>
-              (result!.exception!.graphqlErrors!.isNotEmpty
+              (result.exception!.graphqlErrors.isNotEmpty
                   ? result.exception?.graphqlErrors.first.message
                   : null) ??
               "Some this went wrong connecting to server!");

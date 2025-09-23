@@ -16,12 +16,11 @@ class SortBottomSheet extends StatefulWidget {
   final List<Map<String, dynamic>> filters;
 
   const SortBottomSheet(
-      {Key? key,
+      {super.key,
       this.categorySlug,
       this.page,
       this.subCategoryBloc,
-      required this.filters})
-      : super(key: key);
+      required this.filters});
 
   final String? categorySlug;
 

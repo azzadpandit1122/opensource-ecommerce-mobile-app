@@ -15,8 +15,7 @@ class CompareList extends StatelessWidget {
   final CompareScreenBloc? compareScreenBloc;
 
   const CompareList(
-      {Key? key, this.compareScreenBloc, required this.compareScreenModel})
-      : super(key: key);
+      {super.key, this.compareScreenBloc, required this.compareScreenModel});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +31,10 @@ class CompareList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: compareScreenModel.data?.length ?? 0,
           itemBuilder: (context, index) {
-            int ? rating;
-            if (compareScreenModel.data?[index].product?.averageRating != null) {
-               rating = (double.parse(compareScreenModel
+            int? rating;
+            if (compareScreenModel.data?[index].product?.averageRating !=
+                null) {
+              rating = (double.parse(compareScreenModel
                           .data?[index].product?.averageRating
                           .toString() ??
                       "")
@@ -190,42 +190,46 @@ class CompareList extends StatelessWidget {
                         ),
                       ),
                     ),
-                    compareScreenModel
-                        .data?[index].product?.averageRating != null ?
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                          AppSizes.spacingNormal, AppSizes.spacingNormal, 0, 0),
-                      child: Container(
-                        width: 60,
-                        padding: const EdgeInsets.fromLTRB(
-                            AppSizes.spacingNormal,
-                            AppSizes.spacingSmall,
-                            AppSizes.spacingNormal,
-                            AppSizes.spacingSmall),
-                        color: ReviewColorHelper.getColor(double.parse(
-                            compareScreenModel
-                                    .data?[index].product?.averageRating
-                                    .toString() ??
-                                "")),
-                        child: Row(
-                          children: [
-                            Text(
-                              rating.toString(),
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 12),
+                    compareScreenModel.data?[index].product?.averageRating !=
+                            null
+                        ? Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                AppSizes.spacingNormal,
+                                AppSizes.spacingNormal,
+                                0,
+                                0),
+                            child: Container(
+                              width: 60,
+                              padding: const EdgeInsets.fromLTRB(
+                                  AppSizes.spacingNormal,
+                                  AppSizes.spacingSmall,
+                                  AppSizes.spacingNormal,
+                                  AppSizes.spacingSmall),
+                              color: ReviewColorHelper.getColor(double.parse(
+                                  compareScreenModel
+                                          .data?[index].product?.averageRating
+                                          .toString() ??
+                                      "")),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    rating.toString(),
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
+                                  const SizedBox(
+                                    width: AppSizes.spacingSmall,
+                                  ),
+                                  const Icon(
+                                    Icons.star,
+                                    size: AppSizes.spacingLarge,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
                             ),
-                            const SizedBox(
-                              width: AppSizes.spacingSmall,
-                            ),
-                            const Icon(
-                              Icons.star,
-                              size: AppSizes.spacingLarge,
-                              color: Colors.white,
-                            )
-                          ],
-                        ),
-                      ),
-                    ):Container(),
+                          )
+                        : Container(),
                     Opacity(
                       opacity: (compareScreenModel
                                   .data?[index].product?.isSaleable ??
@@ -247,13 +251,18 @@ class CompareList extends StatelessWidget {
                                     compareScreenBloc?.add(
                                         OnClickCompareLoaderEvent(
                                             isReqToShowLoader: true));
-                                    if ((compareScreenModel
-                                                .data?[index].product?.type ==
-                                            StringConstants.simple ||
-                                        compareScreenModel
-                                                .data?[index].product?.type ==
-                                            StringConstants.virtual)&& ((compareScreenModel
-                                        .data?[index].product?.customizableOptions??[]).length ==0)) {
+                                    if ((compareScreenModel.data?[index].product
+                                                    ?.type ==
+                                                StringConstants.simple ||
+                                            compareScreenModel.data?[index]
+                                                    .product?.type ==
+                                                StringConstants.virtual) &&
+                                        ((compareScreenModel
+                                                    .data?[index]
+                                                    .product
+                                                    ?.customizableOptions ??
+                                                [])
+                                            .isEmpty)) {
                                       compareScreenBloc?.add(
                                           AddToCartCompareEvent(
                                               (compareScreenModel.data?[index]
@@ -268,15 +277,24 @@ class CompareList extends StatelessWidget {
                                           "",
                                           Colors.yellow,
                                           const Icon(Icons.warning_amber));
-                                      Navigator.pushNamed(context, productScreen,
+                                      Navigator.pushNamed(
+                                          context, productScreen,
                                           arguments: PassProductData(
-                                              title:
-                                              compareScreenModel.data?[index].product?.name ?? "",
-                                              urlKey:
-                                              compareScreenModel.data?[index].product?.urlKey ??
+                                              title: compareScreenModel
+                                                      .data?[index]
+                                                      .product
+                                                      ?.name ??
+                                                  "",
+                                              urlKey: compareScreenModel
+                                                      .data?[index]
+                                                      .product
+                                                      ?.urlKey ??
                                                   "",
                                               productId: int.parse(
-                                                  compareScreenModel.data?[index].product?.id ??
+                                                  compareScreenModel
+                                                          .data?[index]
+                                                          .product
+                                                          ?.id ??
                                                       "")));
                                       compareScreenBloc?.add(
                                           OnClickCompareLoaderEvent(

@@ -8,17 +8,15 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/data_model/account_models/account_info_details.dart';
 import 'package:bagisto_app_demo/screens/drawer/utils/index.dart';
-
 
 // ignore: must_be_immutable
 class LogoutButton extends StatefulWidget {
   AccountInfoModel? customerDetails;
   final dynamic fetchSharedPreferenceData;
-  LogoutButton({Key? key, this.customerDetails, this.fetchSharedPreferenceData})
-      : super(key: key);
+  LogoutButton(
+      {super.key, this.customerDetails, this.fetchSharedPreferenceData});
 
   @override
   State<LogoutButton> createState() => _LogoutButtonState();
@@ -42,15 +40,16 @@ class _LogoutButtonState extends State<LogoutButton> {
             if (value) {
               _onPressedLogout();
             } else {
-              ShowMessage.errorNotification(StringConstants.internetIssue.localized(), context);
+              ShowMessage.errorNotification(
+                  StringConstants.internetIssue.localized(), context);
             }
           });
         },
         child: Text(
           StringConstants.logOutTitle.localized().toUpperCase(),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-          ),
+                color: Theme.of(context).colorScheme.secondaryContainer,
+              ),
         ),
       ),
     );
@@ -78,7 +77,7 @@ class _LogoutButtonState extends State<LogoutButton> {
                 Navigator.of(context, rootNavigator: true).pop();
               },
               child: Text(
-              StringConstants.no.localized(),
+                StringConstants.no.localized(),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -88,7 +87,7 @@ class _LogoutButtonState extends State<LogoutButton> {
                   _onPressConfirmLogout();
                 },
                 child: Text(StringConstants.yes.localized(),
-                  style: Theme.of(context).textTheme.bodyMedium)),
+                    style: Theme.of(context).textTheme.bodyMedium)),
           ],
         );
       },
@@ -109,18 +108,19 @@ class _LogoutButtonState extends State<LogoutButton> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height:AppSizes.spacingMedium),
+                  const SizedBox(height: AppSizes.spacingMedium),
                   const Loader(),
-                  const SizedBox(height:AppSizes.spacingWide),
+                  const SizedBox(height: AppSizes.spacingWide),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2.5,
                     child: Center(
-                      child: Text(StringConstants.processWaitingMsg.localized(),
+                      child: Text(
+                        StringConstants.processWaitingMsg.localized(),
                         softWrap: true,
                       ),
                     ),
                   ),
-                  const SizedBox(height:AppSizes.spacingMedium),
+                  const SizedBox(height: AppSizes.spacingMedium),
                 ],
               ),
             ),

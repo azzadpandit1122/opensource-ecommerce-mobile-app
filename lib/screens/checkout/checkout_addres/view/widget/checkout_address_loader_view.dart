@@ -8,12 +8,10 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
-
 import 'package:bagisto_app_demo/screens/checkout/utils/index.dart';
 
 class CheckoutAddressLoaderView extends StatelessWidget {
-  const CheckoutAddressLoaderView({Key? key}) : super(key: key);
+  const CheckoutAddressLoaderView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +23,15 @@ class CheckoutAddressLoaderView extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-              items:3,
+              items: 3,
               builder: const Padding(
-                padding: EdgeInsets.fromLTRB(0,12.0,0,0),
+                padding: EdgeInsets.fromLTRB(0, 12.0, 0, 0),
                 child: SizedBox(
                   height: 225,
-                  child: Card(color: Colors.red,margin: EdgeInsets.zero,),
+                  child: Card(
+                    color: Colors.red,
+                    margin: EdgeInsets.zero,
+                  ),
                 ),
               )),
           const SizedBox(height: 16),

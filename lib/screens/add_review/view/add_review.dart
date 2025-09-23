@@ -18,8 +18,7 @@ class AddReview extends StatefulWidget {
   final String? productId;
   final String? productName;
 
-  const AddReview({Key? key, this.imageUrl, this.productId, this.productName})
-      : super(key: key);
+  const AddReview({super.key, this.imageUrl, this.productId, this.productName});
 
   @override
   State<AddReview> createState() => _AddReviewState();
@@ -102,7 +101,7 @@ class _AddReviewState extends State<AddReview> {
       pickedImages = state.pickedFile;
       images.clear();
 
-      for(int i=0; i<(pickedImages ?? []).length; i++){
+      for (int i = 0; i < (pickedImages ?? []).length; i++) {
         var image = pickedImages?[i];
         if (image != null) {
           getMultipartFile(image.path, i);
@@ -231,7 +230,8 @@ class _AddReviewState extends State<AddReview> {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: AppSizes.spacingMedium * 2),
-                    AddImageView(addReviewBloc: addReviewBloc, images: pickedImages),
+                    AddImageView(
+                        addReviewBloc: addReviewBloc, images: pickedImages),
                     const SizedBox(height: AppSizes.spacingWide),
                     MaterialButton(
                       shape: const RoundedRectangleBorder(

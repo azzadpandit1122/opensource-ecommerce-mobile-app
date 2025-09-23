@@ -1,4 +1,3 @@
-
 /*
  *   Webkul Software.
  *   @package Mobikul Application Code.
@@ -19,11 +18,10 @@ class ProceedView extends StatelessWidget {
   final CartScreenBloc? cartScreenBloc;
 
   const ProceedView(
-      {Key? key,
+      {super.key,
       required this.cartDetailsModel,
       required this.quantityChanged,
-      this.cartScreenBloc})
-      : super(key: key);
+      this.cartScreenBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,8 @@ class ProceedView extends StatelessWidget {
       elevation: AppSizes.spacingNormal,
       child: Container(
         padding: const EdgeInsets.symmetric(
-            vertical: AppSizes.spacingNormal, horizontal: AppSizes.spacingNormal),
+            vertical: AppSizes.spacingNormal,
+            horizontal: AppSizes.spacingNormal),
         margin: const EdgeInsets.fromLTRB(0, AppSizes.spacingSmall, 0, 0),
         child: Row(
           children: [
@@ -49,7 +48,8 @@ class ProceedView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    cartDetailsModel.formattedPrice?.grandTotal.toString() ?? "",
+                    cartDetailsModel.formattedPrice?.grandTotal.toString() ??
+                        "",
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                 ],
@@ -64,42 +64,44 @@ class ProceedView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSizes.spacingSmall),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: AppSizes.spacingMedium),
+                padding: const EdgeInsets.symmetric(
+                    vertical: AppSizes.spacingMedium),
                 onPressed: () async {
                   var isUser = appStoragePref.getCustomerLoggedIn();
                   if (quantityChanged) {
-                    if(context.mounted){
+                    if (context.mounted) {
                       ShowMessage.warningNotification(
-                          StringConstants.updateCartWarning.localized(),context);
+                          StringConstants.updateCartWarning.localized(),
+                          context);
                     }
                   } else if (isUser) {
-                    if(context.mounted) {
+                    if (context.mounted) {
                       Navigator.pushNamed(context, checkoutScreen,
-                        arguments: CartNavigationData(
-                            total: cartDetailsModel
-                                .formattedPrice?.grandTotal
-                                .toString() ?? "0",
-                            cartDetailsModel: cartDetailsModel,
-                            cartScreenBloc: cartScreenBloc,
-                            isDownloadable: checkVirtualDownloadable(cartDetailsModel.items)));
+                          arguments: CartNavigationData(
+                              total: cartDetailsModel.formattedPrice?.grandTotal
+                                      .toString() ??
+                                  "0",
+                              cartDetailsModel: cartDetailsModel,
+                              cartScreenBloc: cartScreenBloc,
+                              isDownloadable: checkVirtualDownloadable(
+                                  cartDetailsModel.items)));
                     }
                   } else {
-                    if(context.mounted){
+                    if (context.mounted) {
                       showModalBottomSheet(
                           backgroundColor: Theme.of(context).cardColor,
                           context: context,
                           builder: (ctx) => GuestCheckoutView(
-                            cartDetailsModel: cartDetailsModel,
-                            cartScreenBloc: cartScreenBloc,
-                          ));
+                                cartDetailsModel: cartDetailsModel,
+                                cartScreenBloc: cartScreenBloc,
+                              ));
                     }
                   }
                 },
                 child: Text(
                   StringConstants.proceed.localized().toUpperCase(),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.secondaryContainer
-                  ),
+                      color: Theme.of(context).colorScheme.secondaryContainer),
                 ),
               ),
             ),

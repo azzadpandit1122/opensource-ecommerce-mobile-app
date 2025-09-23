@@ -32,7 +32,7 @@ class SaveAddressButton extends StatefulWidget {
   final AddEditAddressBloc? addEditAddressBloc;
   bool isDefault;
   SaveAddressButton(
-      {Key? key,
+      {super.key,
       required this.firstNameController,
       required this.lastNameController,
       required this.companyController,
@@ -51,8 +51,7 @@ class SaveAddressButton extends StatefulWidget {
       required this.isDefault,
       required this.cityController,
       required this.stateNameController,
-        required this.emailController})
-      : super(key: key);
+      required this.emailController});
 
   @override
   State<SaveAddressButton> createState() => _SaveAddressButtonState();
@@ -161,8 +160,7 @@ class _SaveAddressButtonState extends State<SaveAddressButton> {
               firstName: widget.firstNameController.text,
               lastName: widget.lastNameController.text,
               vatId: widget.vatIdController.text,
-              email: widget.emailController.text
-            ))
+              email: widget.emailController.text))
           : widget.addEditAddressBloc?.add(FetchAddAddressEvent(
               address: widget.street1Controller.text,
               city: widget.cityController.text,
@@ -176,8 +174,7 @@ class _SaveAddressButtonState extends State<SaveAddressButton> {
               lastName: widget.lastNameController.text,
               isDefault: widget.isDefault,
               vatId: widget.vatIdController.text,
-              email: widget.emailController.text
-            ));
+              email: widget.emailController.text));
     }
   }
 }

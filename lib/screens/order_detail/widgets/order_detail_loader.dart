@@ -10,10 +10,8 @@
 
 import 'package:bagisto_app_demo/screens/order_detail/utils/index.dart';
 
-
-
 class OrderDetailLoader extends StatelessWidget {
-  const OrderDetailLoader({Key? key}) : super(key: key);
+  const OrderDetailLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,6 @@ class OrderDetailLoader extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               builder: Container(
                 margin: const EdgeInsets.only(bottom: 1),
                 color: Colors.red,
@@ -32,7 +29,6 @@ class OrderDetailLoader extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               builder: Container(
                 margin: const EdgeInsets.only(bottom: 1),
                 color: Colors.red,
@@ -41,7 +37,6 @@ class OrderDetailLoader extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               builder: Container(
                 margin: const EdgeInsets.only(bottom: 1),
                 color: Colors.red,
@@ -58,7 +53,6 @@ class OrderDetailLoader extends StatelessWidget {
           SkeletonLoader(
               highlightColor: Theme.of(context).highlightColor,
               baseColor: Theme.of(context).scaffoldBackgroundColor,
-
               builder: Container(
                 margin: const EdgeInsets.only(bottom: 1),
                 color: Colors.red,

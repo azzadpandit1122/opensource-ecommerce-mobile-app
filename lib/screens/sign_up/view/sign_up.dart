@@ -8,7 +8,6 @@
  *   @link https://store.webkul.com/license.html
  */
 
-
 import 'package:bagisto_app_demo/screens/sign_up/utils/index.dart';
 
 import '../widgets/news_letter_checkbox.dart';
@@ -16,7 +15,7 @@ import '../widgets/news_letter_checkbox.dart';
 class SignUpScreen extends StatefulWidget {
   final bool? addShopSlug;
 
-  const SignUpScreen({Key? key, this.addShopSlug}) : super(key: key);
+  const SignUpScreen({super.key, this.addShopSlug});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -24,7 +23,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-  GlobalKey<ScaffoldMessengerState>();
+      GlobalKey<ScaffoldMessengerState>();
   final _signUpFormKey = GlobalKey<FormState>();
   SignInModel? _signUpModel;
   SignUpBloc? signUpBloc;
@@ -35,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   String trueCallerEmail = "";
-  String? phone,firstName,lastName;
+  String? phone, firstName, lastName;
   final bool _autoValidate = false;
   bool showPassword = false;
   bool showConfirmPassword = false;
@@ -45,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
 
   @override
   void initState() {
-  //  GlobalData.subscribeNewsLetter = false;
+    //  GlobalData.subscribeNewsLetter = false;
     signUpBloc = context.read<SignUpBloc>();
     super.initState();
   }
@@ -56,7 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
       key: scaffoldMessengerKey,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(StringConstants.createAnAccount.localized(),),
+          title: Text(
+            StringConstants.createAnAccount.localized(),
+          ),
           centerTitle: false,
           scrolledUnderElevation: 0.0,
           elevation: 2.0,
@@ -238,24 +239,22 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
                         });
                       },
                     )),
+                NewsLetterCheckbox((value) {
+                  isNewsLetterSelected = value;
+                }, StringConstants.subscribeToNewsletter.localized(), true,
+                    false),
                 NewsLetterCheckbox(
-                      (value) {
-                        isNewsLetterSelected = value;
-                  }, StringConstants.subscribeToNewsletter.localized(),
+                  (value) {
+                    agreement = value;
+                    if (showAgreementError && agreement) {
+                      setState(() {
+                        showAgreementError = false;
+                      });
+                    }
+                  },
+                  StringConstants.agreeTerms.localized(),
                   true,
-                  false
-                ),
-                NewsLetterCheckbox(
-                        (value) {
-                          agreement = value;
-                          if (showAgreementError && agreement) {
-                            setState(() {
-                              showAgreementError = false;
-                            });
-                          }
-                    }, StringConstants.agreeTerms.localized(),
-                    true,
-                    false,
+                  false,
                   showError: showAgreementError,
                   errorText: StringConstants.agreementFieldRequired.localized(),
                 ),
@@ -290,10 +289,12 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
                     _onPressCreateAccount();
                   },
                   child: Text(
-                    StringConstants.createAccountLabel.localized().toUpperCase(),
+                    StringConstants.createAccountLabel
+                        .localized()
+                        .toUpperCase(),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.secondaryContainer
-                    ),
+                        color:
+                            Theme.of(context).colorScheme.secondaryContainer),
                   ),
                 ),
               ],
@@ -345,14 +346,13 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
           });
 
       signUpBloc?.add(FetchSignUpEvent(
-        email: emailController.text,
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        password: passwordController.text,
-        confirmPassword: confirmPasswordController.text,
-        newsLetter: isNewsLetterSelected,
-        agreement: agreement
-      ));
+          email: emailController.text,
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
+          password: passwordController.text,
+          confirmPassword: confirmPasswordController.text,
+          newsLetter: isNewsLetterSelected,
+          agreement: agreement));
     }
   }
 
@@ -361,7 +361,8 @@ class _SignUpScreenState extends State<SignUpScreen> with EmailValidator {
     appStoragePref.setCustomerLoggedIn(true);
     appStoragePref.setCustomerName(signInModel?.data?.name ?? "");
     appStoragePref.setCustomerEmail(signInModel?.data?.email ?? "");
-    appStoragePref.setCustomerToken("${signInModel?.tokenType} ${signInModel?.token}");
+    appStoragePref
+        .setCustomerToken("${signInModel?.tokenType} ${signInModel?.token}");
     appStoragePref.setCustomerId(int.parse(signInModel?.data?.id ?? "2"));
     return true;
   }

@@ -32,12 +32,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bagisto_app_demo.R
-import com.example.bagisto_app_demo.databinding.ActivityCameraSearchBinding
+//import com.example.bagisto_app_demo.R
+//import com.example.bagisto_app_demo.databinding.ActivityCameraSearchBinding
 import com.google.android.gms.common.annotation.KeepName
 import com.google.mlkit.vision.label.ImageLabel
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.google.mlkit.vision.text.Text
+import com.webkul.bagisto.mobikul.R
+import com.webkul.bagisto.mobikul.databinding.ActivityCameraSearchBinding
 import  webkul.bagisto_app_demo.mlkit.adapters.CameraSearchResultAdapter
 import  webkul.bagisto_app_demo.mlkit.customviews.CameraSource
 import  webkul.bagisto_app_demo.mlkit.labeldetector.LabelDetectorProcessor
