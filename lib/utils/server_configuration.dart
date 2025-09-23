@@ -13,7 +13,7 @@ import 'dart:ui';
 
 const int defaultSplashDelay = 3;
 
-const String baseDomain = "";
+const String baseDomain = "https://www.oyemeet.com";
 
 ///base url for the application
 const String baseUrl = "$baseDomain/graphql";
