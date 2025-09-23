@@ -28,8 +28,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.bagisto_app_demo.databinding.ActivityArBinding
-import com.example.bagisto_app_demo.R
+//import com.example.bagisto_app_demo.databinding.ActivityArBinding
+//import com.example.bagisto_app_demo.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
@@ -39,6 +39,8 @@ import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
+import com.webkul.bagisto.mobikul.R
+import com.webkul.bagisto.mobikul.databinding.ActivityArBinding
 import java.util.concurrent.CompletableFuture
 
 
