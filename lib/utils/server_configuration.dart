@@ -16,7 +16,7 @@ const int defaultSplashDelay = 3;
 const String baseDomain = "https://www.oyemeet.com";
 
 ///base url for the application
-const String baseUrl = "$baseDomain/graphql";
+const String baseUrl = "$baseDomain/graphql/";
 
 ///default channel id
 const String defaultChannelId = "1";
